@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interpolation</title>
+</head>
+<body>
+    <div id="app">
+        <h1>String: {{ name }}</h1>
+        <h1>Sum: {{10 + 60}}</h1>
+        <h1>Method {{sayHello()}}</h1> <!-- Not methods.sayHello -->
+        <h1>If statement: {{ isOk ? 'I am ok' : 'Not OK'}}</h1>
+        <h1>Reversed string: {{ myTestString.split('').reverse().join("") }}</h1>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        new Vue ({
+            el: "#app",
+            data: {
+                name: "Stas",
+                isOk: false,
+                myTestString: "My test string goes here"
+            },
+            methods: {
+                sayHello: function(){
+                    return "I am function";
+                }
+            }
+        })
+    </script>
+</body>
+</html>

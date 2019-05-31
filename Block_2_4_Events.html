@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Events</title>
+</head>
+<body>
+    <div id="VueAppEvents">
+        <h2>Counter value = {{counter}}</h2>
+        <button v-on:click="increaseCounter">Increase counter's value</button>
+        <button v-on:click="resetCounter">Reset counter</button>
+
+        <hr>
+        <h2 v-on:mouseover="onHover" v-on:mouseout="onMouseLeave" >Counter #2 value = {{counter2}}</h2>
+        <button v-on:click="counter2++">Increase counter's value </button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <script>
+        new Vue({
+            el: "#VueAppEvents",
+            data: {
+                    counter: 0,
+                    counter2: 0
+                },
+            methods: {
+                increaseCounter: function()
+                {
+                    this.counter++
+                },
+                resetCounter: function()
+                {
+                    this.counter = 0
+                },
+                onHover: function(event)
+                {
+                    event.target.style.color = "red";
+                },
+                onMouseLeave: function(event)
+                {
+                    event.target.style.color = "black";
+                }
+            }
+        })
+    </script>
+</body>
+</html>

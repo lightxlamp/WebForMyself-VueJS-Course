@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic Attributes</title>
+</head>
+
+<body>
+    <div id="app">
+        <h2>
+            <a v-bind:href="url">Jira - {{url}}</a>
+        </h2>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        new Vue ({
+            el: "#app",
+            data: {
+                url: 'http://jira.local.incentient.net:8888/secure/Dashboard.jspa'
+            }
+        })
+    </script>
+</body>
+</html>
