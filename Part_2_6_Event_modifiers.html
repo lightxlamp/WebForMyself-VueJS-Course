@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event modifiers</title>
+</head>
+<body>
+    <div id="app">
+        <a href="https://google.com" target="_blank" v-on:click="preventOpening">Google</a>
+        <hr>
+        <a href="https://google.com" target="_blank" v-on:click.prevent="">Google</a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        new Vue({
+            el: "#app",
+            methods: {
+                preventOpening: function (event) {
+                    event.preventDefault();
+                }
+            }
+        })
+    </script>
+</body>
+</html>
