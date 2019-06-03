@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Keyboard Event Modifiers</title>
+
+</head>
+<body>
+    <div id="app">
+        <p>Handled with an old way of coding. <br> Type some letters and press "Enter"</p>
+        <input type="text" v-on:keyup="alertValueAfterPressingEnter">
+        <p>Handled with a new way of coding <br> Type some letters and press "Enter" or "Space" </p>
+        <input type="text" v-on:keyup.enter.space="alertValue"> <!-- https://ru.vuejs.org/v2/guide/events.html -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            methods: {
+                alertValueAfterPressingEnter: function(event){
+                    if(event.keyCode === 13) { // If a pressed key was "Enter". Old way
+                        alert(event.target.value)
+                    }
+                },
+                alertValue: function(event){
+                    alert(event.target.value)
+
+                }
+            }
+        })
+    </script>
+    <style>
+        body{
+            background-color: black;
+        }
+        p{
+            color: greenyellow;
+        }
+    </style>
+</body>
+</html>

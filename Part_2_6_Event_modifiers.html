@@ -9,17 +9,55 @@
         <a href="https://google.com" target="_blank" v-on:click="preventOpening">Google</a>
         <hr>
         <a href="https://google.com" target="_blank" v-on:click.prevent="">Google</a>
+
+        <h2 v-on:mousemove="assignMouseCoordinatesToVariables">
+            x: {{x}}
+            <br>
+            y: {{y}}
+            <span v-on:mousemove.stop>Do not change X/Y</span> <!-- Event.stopPropagation() -->
+        </h2>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script>
         new Vue({
             el: "#app",
+            data: {
+                x:0,
+                y:0
+            },
             methods: {
                 preventOpening: function (event) {
                     event.preventDefault();
+                },
+                assignMouseCoordinatesToVariables: function(event) {
+                    this.x = event.clientX;
+                    this.y = event.clientY;
+                    // Seems like a ";" symbol after event.clientY is mandatory now, comparing to example in lesson
+                    // found example at https://codepen.io/mannuelf/pen/wJwMjX
                 }
             }
         })
     </script>
 </body>
+<style>
+    h2
+    {
+        color: yellow;
+        border: 2px solid red;
+        background-color: black;
+    }
+    a
+    {
+        color:red;
+    }
+    body
+    {
+        background-color: powderblue;
+    }
+    span
+    {
+        border: 2px solid red;
+        background-color: gray;
+    }
+</style>
 </html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Working with forms</title>
+</head>
+<body>
+    <div id="app">
+        <p>
+            Old way  : <input type="text" @input="inputValue = $event.target.value" :value="inputValue">
+        </p>
+        <p>
+            New way: <input type="text" v-model="inputValue">
+        </p>
+        </p>
+        <p>
+            New way. v-model lazy: <input type="text" v-model.lazy="inputValue">
+        </p>
+        <h2>{{inputValue}}</h2>
+        <!-- two way binding -->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data:
+                {
+                    inputValue: 'Input Value'
+                }
+        })
+    </script>
+</body>
+</html>

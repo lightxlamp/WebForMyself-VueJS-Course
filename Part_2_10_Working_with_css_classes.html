@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Work with CSS classes</title>
+</head>
+<body>
+    <style>
+        .circle
+        {
+            width: 100px;
+            height: 100px;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+            border: 1px solid black;
+            display: inline-block;
+            margin: 40px;
+        }
+
+        .red {background-color: darkred;}
+        .blue {background-color: cornflowerblue;}
+        .green {background-color: greenyellow;}
+    </style>
+
+    <div id="app">
+        <div class="circle"
+        @click="isActive = !isActive"
+        :class="{'red': isActive, 'green' : !isActive}"
+        ></div>
+
+        <div class="circle"
+             @click="isActive = !isActive"
+             :class="getCssClass"
+        ></div>
+
+        <div class="circle" :class="color"></div>
+        <div class="circle" :class="[color, {'red': isActive}]"></div>
+        <input type="text"  v-model="color">
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                isActive: false,
+                color: 'blue'
+            },
+            computed:
+                {
+                    getCssClass:function()
+                    {
+                        return{
+                            'red': this.isActive,
+                            'green': !this.isActive
+                        }
+                    }
+                },
+            methods:
+                {
+
+                }
+        })
+    </script>
+</body>
+</html>
