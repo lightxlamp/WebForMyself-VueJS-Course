@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic styles</title>
+</head>
+<body>
+<style>
+    .circle
+    {
+        width: 100px;
+        height: 100px;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        border: 1px solid black;
+        display: inline-block;
+        margin: 40px;
+    }
+
+    .red {background-color: darkred;}
+    .blue {background-color: cornflowerblue;}
+    .green {background-color: greenyellow;}
+</style>
+
+<div id="app">
+    <p>You can type a hex color code here as well now. Or html color name</p>
+    <input type="text"  v-model="color">
+    <input type="text"  v-model="height">
+    <br>
+    <div class="circle" :style="{'background': color, 'height': height + 'px'}"></div>
+    <div class="circle"></div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            isActive: false,
+            color: 'blue',
+            height: 100
+        },
+        computed:
+            {
+                getCssClass:function()
+                {
+                    return{
+                        'red': this.isActive,
+                        'green': !this.isActive
+                    }
+                }
+            },
+        methods:
+            {
+                // it is better to move getCssClass from here to "Computed" section
+                // Methods are called frequently, this reduce speed of an app
+            }
+    })
+</script>
+</body>
+</html>
