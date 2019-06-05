@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Accessing the DOM</title>
+</head>
+<body>
+    <div id="app">
+        <h2 ref="headingRef">{{title}}</h2>
+        <button @click="updateTitle">Update Title</button>
+        <hr ref="horLine">
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        var v = new Vue({
+            el: '#app',
+            data: {
+                title: 'Hello World'
+            },
+            methods: {
+                updateTitle: function(){
+                    this.title = 'Updated Title';
+                    this.$refs.headingRef.style.color = 'red';
+                    console.log(this.$refs);
+                    console.log(this.$refs.headingRef);
+                    console.log(this.$refs.horLine);
+                    console.log(document.querySelector('hr')); //old method
+                    //use VUE js. Because it uses virtual DOM that is more efficient and less recourse wasting
+                    //to access DOM use refs not document
+                }
+            }
+        })
+    </script>
+</body>
+</html>

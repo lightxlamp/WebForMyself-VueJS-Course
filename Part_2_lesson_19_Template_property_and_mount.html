@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Template and Mount</title>
+</head>
+<body>
+<div id="app">
+    <h2>{{title}}</h2>
+</div>
+
+<div id="app2"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+    var vue = new Vue({
+        data: {
+            title: 'Hello Vue'
+        }
+    })
+    vue.$mount('#app');
+
+    var vue2 = new Vue({
+        data: {
+            title: 'Hello Vue 2'
+        },
+        template: '<h1>{{title}}</h1>'
+    })
+    vue2.$mount('#app2');
+</script>
+</body>
+</html>
