@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Binding different apps. Vue instance</title>
+</head>
+<body>
+
+    <div id="app">
+        <h2>{{title}}</h2>
+        <button @click="title = 'Updated title'">Change title</button>
+    </div>
+
+    <br>
+    <hr>
+
+    <div id="app2">
+        <h2>{{title}}</h2>
+        <button @click="changeTitleInTheFirstVueInstance()">Change title of the VUE_1 instance</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        var vue1 = new Vue({
+            el: '#app',
+            data: {
+                title: 'Title of a VUE_1 app'
+            },
+            methods: {
+                alertFromVue1: function(){
+                    alert('I am a function from VUE_1 instance');
+                }
+            }
+        })
+
+        console.log('vue1 = ',  vue1);
+
+        new Vue({
+            el: '#app2',
+            data: {
+                title: 'Title of a VUE_2 app'
+            },
+            methods: {
+                changeTitleInTheFirstVueInstance: function(){
+                    vue1.title = "Updated from a VUE_2 app"
+                    setTimeout(function(){vue1.alertFromVue1()}, 1000)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -28,8 +28,9 @@
     <input type="text"  v-model="color">
     <input type="text"  v-model="height">
     <br>
-    <div class="circle" :style="{'background': color, 'height': height + 'px'}"></div>
-    <div class="circle"></div>
+    <div class="circle" :style="circleClass"></div>
+    <div class="circle" :style="[circleClass, {'width': height + 'px'}]"></div>
+
 
 </div>
 
@@ -50,6 +51,10 @@
                         'red': this.isActive,
                         'green': !this.isActive
                     }
+                },
+                circleClass:function()
+                {
+                    return {'background': this.color, 'height': this.height + 'px'}
                 }
             },
         methods:

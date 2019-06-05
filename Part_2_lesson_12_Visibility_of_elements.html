@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visibility of elements</title>
+</head>
+<body>
+    <div id="app">
+        <h2 v-if="isVisible">I am visible</h2>
+        <h2 v-if="!isVisible">I am invisible</h2>
+
+        <h2 v-if="isVisible">I am visible</h2>
+        <h2 v-else>I am invisible</h2>
+        <button @click="isVisible = !isVisible">Toggle</button>
+        <br>
+        <hr>
+
+        <h2 v-if="type === 'a'">A</h2>
+        <h2 v-else-if="type === 'b'">B</h2>
+        <h2 v-else-if="type === 'c'">C</h2>
+        <h2 v-else>No match</h2>
+        <input type="text" v-model="type">
+
+        <hr>
+        <br>
+        <template v-if="isVisible">
+            <h2>I am title</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aperiam consequuntur corporis cupiditate delectus dolorum error expedita,
+                explicabo illo illum impedit nam nobis nostrum nulla numquam odio officia officiis optio possimus quam
+                quos, sapiente, sed sequi unde velit vitae voluptates!</p>
+        </template>
+
+        <template v-if="!isVisible">
+            <h2 style="color: darkred">I am title</h2>
+            <p style="color: blue">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, quidem, quod! Hic ipsum magnam ut.</p>
+        </template>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                isVisible: false,
+                type: 'a'
+            }
+        })
+
+    </script>
+</body>
+</html>

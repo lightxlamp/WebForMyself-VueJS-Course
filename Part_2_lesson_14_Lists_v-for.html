@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Working with lists</title>
+</head>
+<body>
+    <div id="app">
+        <h3>-- Manually --</h3>
+        <ul>
+            <li>{{people[0]}}</li>
+            <li>{{people[1]}}</li>
+            <li>{{people[2]}}</li>
+        </ul>
+        <h3>-- V_FOR -- </h3>
+        <ul>
+            <li v-for="person in people">{{person}}</li>
+        </ul>
+
+        <h3>-- V_FOR with index-- </h3>
+        <ul>
+            <li v-for="(person, index) in people">{{index + 1}} {{person}}</li>
+        </ul>
+
+        <h3>-- V_FOR for objects-- </h3>
+        <ul>
+            <li v-for="(person, index) in peopleDetails">{{index + 1}} {{person.name}}, age = {{person.age}}</li>
+        </ul>
+
+        <h3>-- V_FOR for custom number-- </h3>
+        <ol>
+            <li v-for="num of 8">{{num}}</li>
+        </ol>
+
+        <h3>-- V_FOR for object fields-- </h3>
+        <ol>
+            <li v-for="value in Stas">{{value}}</li>
+        </ol>
+
+        <h3>-- V_FOR for object fields with a key-- </h3>
+        <ol>
+            <li v-for="(value, key) in Stas"><b>{{key}}</b> {{value}}</li>
+            <!-- I've made mistake here. And typed (key, value). Values were swapped. It seems like value goes first by default -->
+        </ol>
+
+        <h3>-- V_FOR for object fields with a key and index-- </h3>
+        <ul>
+            <li v-for="(value, key, index) in Stas"><em>{{index + 1}}</em> <b>{{key}}</b> {{value}}</li>
+            <!-- I've made mistake here. And typed (key, value). Values were swapped. It seems like value goes first by default -->
+        </ul>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            people: ['Stas', 'Elchi', 'Bob', 'Dima', 'Tilek'],
+            peopleDetails: [
+                {name: 'Stas', age: 29},
+                {name: 'Elchi', age: 30},
+                {name: 'Bob', age: 29},
+                {name: 'Dima', age: 32},
+                {name: 'Tilek', age: 31}
+            ],
+            Stas: {
+                name: 'Stas',
+                age: 29,
+                job: 'QA'
+            }
+        }
+    })
+</script>
+</body>
+</html>

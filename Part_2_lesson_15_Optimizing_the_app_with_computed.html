@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Optimizing the app with "computed"</title>
+</head>
+<body>
+<div id="app">
+    <h2>Counter: {{counter}} / {{counter2}}</h2>
+    <h4>{{condition}}</h4>
+    <button @click="add">Add</button>
+    <button @click="sub">Sub</button>
+    <button @click="counter2++">Increase Counter #2</button>
+    <hr>
+
+    <h2>Counter: {{counter}} / {{counter2}}</h2>
+    <h4>{{checkResult()}}</h4>
+    <h4>{{computedResult}}</h4>
+    <button @click="add">Add</button>
+    <button @click="sub">Sub</button>
+    <button @click="counter2++">Increase Counter #2</button>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            counter: 0,
+            counter2: 0,
+            condition: 'Less than 3'
+        },
+        methods: {
+            add: function(){
+                this.counter++
+                this.condition = this.counter > 3 ? 'More than 3' : 'Less than 3'
+            },
+            sub: function(){
+                this.counter--
+                this.condition = this.counter > 3 ? 'More than 3' : 'Less than 3'
+            },
+            checkResult: function(){
+                console.log('CheckResult was called')
+                return this.condition = this.counter > 3 ? 'More than 3' : 'Less than 3'
+                // This function also calls even when a counter2 updates only.
+                // Counter2 is not related to this function. WTF :P
+                // It was really unpredictable for me. Seriously
+            }
+        },
+        computed:{
+            computedResult: function(){
+                console.log('Computed result was called')
+                return this.condition = this.counter > 3 ? 'More than 3' : 'Less than 3'
+            }
+        }
+    })
+</script>
+</body>
+</html>

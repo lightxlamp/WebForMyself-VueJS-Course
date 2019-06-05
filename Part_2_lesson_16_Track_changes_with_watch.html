@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Track changes with "Watch"</title>
+</head>
+<body>
+
+    <div id="app">
+        <h2>{{counter}}</h2>
+        <button @click="counter++">Increase Counter #1</button>
+        <br>
+        <button @click="counter--">Decrease Counter #1</button>
+        <hr>
+
+        <h2>{{counter2}}</h2>
+        <button @click="counter2++">Increase Counter #2</button>
+        <br>
+        <button @click="counter2--">Decrease Counter #2</button>
+        <hr>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data:
+                {
+                    counter: 0,
+                    counter2: 0
+                },
+            watch: {
+                //function name should match a variable's name you want to spy for :)
+                counter: function(counter1Value){
+                    console.log("Printed within WATCH section. Counter was changed to", counter1Value)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
