@@ -7,19 +7,54 @@
     <body>
     <div id="app">
         <h1>{{title}}</h1>
-
+        <button @click="changeTitle">Change title</button>
+        <button @click="destroy">Destroy</button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
     <script>
-        new Vue ({
+        var v = new Vue ({
             el: '#app',
+            methods: {
+                changeTitle: function(){
+                    this.title = 'New title'
+                },
+                destroy: function(){
+                    this.$destroy();
+                }
+            },
+
             data: {
                 title: 'Hello Vue'
             },
             beforeCreate: function(){
                 console.log('Before Create')
+            },
+            created: function(){
+                console.log('Created')
+            },
+            beforeMount: function()
+            {
+                //VUE started to analyze template. Taking care of starting point "#app".
+                //Going to inserted compiled template to the DOM
+                console.log('Before Mount')
+            },
+            mounted: function(){
+                //HTML tree is ready and inserted to DOM
+                console.log('Mounted')
+            },
+            beforeUpdate: function(){
+                console.log('Before Update')
+            },
+            updated: function(){
+                console.log('Updated')
+            },
+            beforeDestroy: function(){
+                console.log('Before Destroy')
+            },
+            destroyed: function(){
+                console.log('Destroyed')
             }
         })
 
