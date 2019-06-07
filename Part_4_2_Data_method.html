@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data method</title>
+</head>
+<body>
+<div id="app">
+    <my-counter v-for="c of 2"></my-counter>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+
+    var dataObject = {
+        counter: 0
+    }
+    Vue.component('my-counter', {
+        template: `
+                    <div style="border: 1px solid black; padding: 10px;">
+                        <h2>Counter: {{ counter }}</h2>
+                        <button @click="increaseCounter">Increase counter</button>
+                    </div>
+                `,
+        data: function(){
+            return dataObject
+        },
+        methods: {
+            increaseCounter: function()
+            {
+                this.counter++;
+            }
+        }
+    })
+
+    new Vue({
+        el: '#app'
+    })
+</script>
+</body>
+</html>
