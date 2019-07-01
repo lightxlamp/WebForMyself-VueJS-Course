@@ -9,9 +9,16 @@
     <my-counter v-for="c of 2"></my-counter>
 </div>
 
+<hr>
+
+<h2 style="color: red;">Please see code. "My-counter" was not printed by "app2". <br/> There is no console error :( Like in a video</h2>
+<div id="app2">
+    <my-counter></my-counter>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script>
-    Vue.component('my-counter', {
+    var component = {
         template: `
                     <div style="border: 1px solid black; padding: 10px;">0
                         <h2>Counter: {{ counter }}</h2>
@@ -19,9 +26,7 @@
                     </div>
                 `,
         data: function(){
-            return {
-                counter: 0
-            }
+            return {counter: 0}
         },
         methods: {
             increaseCounter: function()
@@ -29,11 +34,17 @@
                 this.counter++;
             }
         }
-    })
+    };
+
 
     new Vue({
-        el: '#app'
-    })
+        el: '#app',
+        components: {'my-counter': component}
+    });
+
+    new Vue ({
+        el: '#app2'
+    });
 </script>
 </body>
 </html>
