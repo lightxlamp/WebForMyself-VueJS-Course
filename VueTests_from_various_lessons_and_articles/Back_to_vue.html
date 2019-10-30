@@ -1,4 +1,4 @@
-<!-- Watching this lesson: https://www.youtube.com/watch?v=b6Ac0jcqJIg -->
+<!-- Based on lesson: https://www.youtube.com/watch?v=b6Ac0jcqJIg -->
 <html>
 	<head>
 		<title> Back to Vue / Vue Review :D </title>
@@ -13,7 +13,7 @@
         <div class="sample" :title="'Nice title. We are going to change this attribute reactively' + ' + ' + title">
             <!-- we can just type :title instead of v-bind:title -->
             <h1> Remembering Vue </h1>
-            <h4>Lesson #1: </h4>
+            <h4>Lesson #1: v-model and v-if, v-else</h4>
             Type something here:
             <div class="m_input">
                 <input class="form-control" type="text" aria-label="Default"
@@ -28,7 +28,7 @@
             <hr>
 
 
-            <h4>Lesson #2: </h4>
+            <h4>Lesson #2: v-else-if and &lt;template&gt; tag </h4>
             <p>Please type "Jeff Kaplan" or "Leeroy Jenkins" in a name field located above to
                 see one of two additional articles</p>
             <template v-if="name == 'Leeroy Jenkins'">
@@ -100,14 +100,14 @@
                 </div>
             </template>
 
-            <h4>Lesson #3: </h4>
-            <input type="checkbox" id="scales" name="scales" checked v-model="isRed">
+            <h4>Lesson #3: Dynamic class</h4>
+            <input type="checkbox" id="scales" name="scales" v-model="isRed">
             <label for="scales">Add/Remove Class from the element below</label>
             <div :class="{redBackround: isRed}" id="dynamicClassDiv"></div>
             <hr>
 
-            <h4>Lesson #4: </h4>
-            <h3> Hello {{ name }} </h3>
+            <h4>Lesson #4: Visibility Scope</h4>
+            <h4> Hello {{ name }} </h4>
             <p>Pay attention to a DIV below</p>
             <p>&#8595;&#8595;&#8595;&#8595;&#8595;&#8595;&#8595;&#8595;&#8595;&#8595;&#8595;&#8595;&#8595;
                 &#8595;&#8595;&#8595;&#8595;&#8595;&#8595;&#8595;&#8595;&#8595;&#8595;&#8595;&#8595;&#8595;</p>
@@ -115,9 +115,11 @@
         </div>
 
         <div class="sample">
-            <h3> Hello {{ name }} </h3>
-            <h4>-- Vue can't print a value for "name" as it was done before. Because we are trying to do it in another
-                div with the same class name</h4>
+            <h4> Hello {{ name }} </h4>
+            <p>-- Vue can't print a value for "name" as it was done above.
+                We are trying to print {{name}} inside a div with the same class - "sample".
+                But it is another div, so vue is
+           </p>
             <hr>
         </div>
 
@@ -166,7 +168,7 @@
         </div>
 
         <div class="sample" id="axiosLesson">
-            <h4>Lesson #7: Work with Axios</h4>
+            <h4>Lesson #7: Work with "Axios" library</h4>
             <p>List of hashtags:</p>
             <ol>
                 <li v-for="hashtag in hashtags">{{hashtag}}</li>
@@ -199,7 +201,7 @@
                 }
             });
 
-            var watchLesson = new Vue({
+                var watchLesson = new Vue({
                 el: '#watchLesson',
                 data: {
                     textSearch: ''
