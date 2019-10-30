@@ -118,7 +118,7 @@
             <h4> Hello {{ name }} </h4>
             <p>-- Vue can't print a value for "name" as it was done above.
                 We are trying to print {{name}} inside a div with the same class - "sample".
-                But it is another div, so vue is
+                But it is another div, so a current vue instance can't access {{name}} here
            </p>
             <hr>
         </div>
@@ -284,8 +284,7 @@
                     }
                 }
             })
-            // 48: 38 говорит про замыкания...
-            //TODO Read about differences - Var VS Let
+            // 48: 38 author mentioning closures
         </script>
 	</body>
 	<style>
