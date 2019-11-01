@@ -8,9 +8,15 @@
 </head>
 <body>
     <div id="container">
-        <p>Numbers</p>
-        <p>Your score is {{sum()}}</p>
+        <p>=================================================</p>
+        <p>==Press the button below. Number from -5 to 5 will be generated===</p>
+        <p>=====All generated numbers are summarized after clicking=======</p>
+        <p>=====If your score after 10 clicks is more then 0 - you won!======</p>
+        <p>==================================================</p>
+        <p>*** Your score is {{sum()}} ***</p>
+        <p>--- Clicks left: {{limitForGenerateFunction}} ---</p>
         <button @click="generateNumber">Generate Number</button>
+        <p>*** List of generated numbers ***</p>
         <ul>
             <li v-for="number in numbers">{{number}}</li>
         </ul>
@@ -27,12 +33,16 @@
             el: '#container',
             data: {
                 numbers: [],
-                showHr: true
+                showHr: true,
+                limitForGenerateFunction: 10
             },
             methods: {
                 generateNumber(){
-                    let rnd = Math.floor(Math.random() * 11) - 5;
-                    this.numbers.push(rnd)
+                    if(this.limitForGenerateFunction > 0){
+                        let rnd = Math.floor(Math.random() * 11) - 5;
+                        this.numbers.push(rnd)
+                        this.checkWinOrLose();
+                    }
                 },
                 sum(){
                     console.log('Sum function is called');
@@ -41,6 +51,19 @@
                         sum += this.numbers[i];
                     }
                     return sum;
+                },
+                checkWinOrLose(){
+                    this.limitForGenerateFunction--;
+                    if(this.limitForGenerateFunction == 0)
+                    {
+                        let sum = this.sum();
+                        if(sum > 0) {
+                            alert("You won!")
+                        }
+                        else{
+                            alert("You lose! Try again")
+                        }
+                    }
                 }
             },
             computed: {
