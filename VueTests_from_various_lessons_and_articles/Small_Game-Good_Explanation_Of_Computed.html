@@ -17,8 +17,8 @@
         <p>--- Clicks left: {{limitForGenerateFunction}} ---</p>
         <button @click="generateNumber">Generate Number</button>
         <p>*** List of generated numbers ***</p>
-        <ul>
-            <li v-for="number in numbers">{{number}}</li>
+        <ul style="list-style-type:none;">
+            <li v-for="number in numbers">user rolls: {{number}}</li>
         </ul>
 
         <button @click="showHr = !showHr">{{buttonText}}</button>
@@ -57,12 +57,14 @@
                     if(this.limitForGenerateFunction == 0)
                     {
                         let sum = this.sum();
-                        if(sum > 0) {
-                            alert("You won!")
-                        }
-                        else{
-                            alert("You lose! Try again")
-                        }
+
+                        setTimeout(() => {
+                            if (sum > 0) {
+                                alert("You won!")
+                            } else {
+                                alert("You lose! Try again")
+                            }
+                        }, 100);
                     }
                 }
             },
