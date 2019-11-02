@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://unpkg.com/vue"></script>
+    <title>Components. Local and Global registration</title>
+</head>
+<body>
+<div id="app">
+    <h1>App 1</h1>
+    <my-counter></my-counter>
+</div>
+<hr>
+<div id="app2">
+    <h1>App 2</h1>
+    <p>We can't access &lt;my-counter&gt; in App 2 anymore. </p>
+    <p>Because we removed this component from Global registration</p>
+    <p>And registered it locally, for App 1 only.</p>
+    <p>Please see console for error log</p>
+    <my-counter></my-counter>
+</div>
+
+<script>
+    var component = {
+        template:
+            `
+                <div id="app" style="border: 1px solid red; padding: 15px; width: 300px; margin: 10px;
+                background-color: bisque; border-radius: 10px">
+                    <h2>Counter: {{counter}}</h2>
+                    <button @click="increaseCounter">Increase Counter</button>
+                </div>
+            `,
+        data(){
+            return {
+                counter: 0
+            }
+        },
+        methods: {
+            increaseCounter() {
+                this.counter++;
+            }
+        }
+    }
+
+    let app = new Vue({
+        el: '#app',
+        components:{
+            "my-counter": component
+        }
+    });
+
+    let app2 = new Vue({
+        el: '#app2'
+    })
+</script>
+</body>
+</html>
