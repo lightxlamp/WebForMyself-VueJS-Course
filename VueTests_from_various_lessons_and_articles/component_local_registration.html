@@ -20,6 +20,11 @@
     <my-counter></my-counter>
 </div>
 
+<div id="app3">
+    <h1>App 3. Component registered with cAmElCaSe</h1>
+    <my-counter></my-counter>
+</div>
+
 <script>
     var component = {
         template:
@@ -46,11 +51,20 @@
         el: '#app',
         components:{
             "my-counter": component
+            // Linter could advice you. Do not use '' in this case!
+            // So we use camel case below
         }
     });
 
     let app2 = new Vue({
         el: '#app2'
+    })
+
+    let app3 = new Vue({
+        el: '#app3',
+        components:{
+            myCounter: component
+        }
     })
 </script>
 </body>
