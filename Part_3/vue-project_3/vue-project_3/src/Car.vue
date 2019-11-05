@@ -1,7 +1,11 @@
 <template>
     <div class="car">
-      <h1>Car name: {{carName}} / reversed name: {{reverseCarName}} for validation lesson</h1>
+      <h3>Car component</h3>
+      <h5>Car name: {{carName}} / reversed name: {{reverseCarName}} for validation lesson</h5>
       <p>Car year: {{carYear}}</p>
+      <button @click="changeCarName">Change car name</button>
+      <button @click="changeFromParentFunc()">Change car name with a function from parent component</button>
+      <button @click="updateCounterFromCarComponent">Update counter from Car component</button>
     </div>
 </template>
 
@@ -20,6 +24,20 @@
         carYear:{
           type: Number,
           default: 1973
+        },
+        counter:{
+          type: Number,
+          default: 0
+        },
+        changeFromParentFunc: Function
+      },
+      methods:{
+        changeCarName(){
+          this.carName = "Mazda";
+          this.$emit('carNameChanged', this.carName)
+        },
+        updateCounterFromCarComponent(){
+          this.$emit('counterUpdated', this.counter + 1)
         }
       },
       computed: {
@@ -37,6 +55,6 @@
     border-radius: 10px;
     background-color: beige;
     margin: auto;
-    padding: 20px;
+    padding: 0px 20px 20px 20px;
   }
 </style>
