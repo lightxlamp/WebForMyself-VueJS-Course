@@ -6,15 +6,18 @@
 </head>
 <body>
 <div id="app">
-    <my-counter v-for="c of 2"></my-counter>
-</div>
-
-<hr>
-
-<h2 style="color: red;">Please see code. "My-counter" was not printed by "app2". <br/> There is no console error :( Like in a video</h2>
-<div id="app2">
+    <h4>App 1</h4>
     <my-counter></my-counter>
 </div>
+
+<div id="app2">
+    <h4>App 2</h4>
+    <my-counter></my-counter>
+    "Counter" is not displayed because this component is not registered for "App2"
+</div>
+
+<h3 style="color: green">Please see code. "My-counter" was not printed by "app2".</h3>
+<h3 style="color: green">There is no console error :( Like in a video</h3>
 
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script>
@@ -46,5 +49,20 @@
         el: '#app2'
     });
 </script>
+<style>
+    #app{
+        border: 1px solid green;
+        padding: 10px;
+        margin: 10px;
+    }
+    #app2{
+        border: 1px solid green;
+        padding: 10px;
+        margin: 10px;
+    }
+    h3{
+        margin: 10px;
+    }
+</style>
 </body>
 </html>

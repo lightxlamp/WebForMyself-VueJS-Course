@@ -1,8 +1,8 @@
 <template>
-    <div class="counter">
-      <h3>Counter component</h3>
-      <p>Counter {{counter}}</p>
-    </div>
+  <div class="counter">
+    <h3>Counter component</h3>
+    <p>Counter: {{counter}}</p>
+  </div>
 </template>
 
 <script>
@@ -21,5 +21,8 @@
     margin: auto;
     margin-top: 5px;
     padding: 0px 20px 0px 20px;
+  }
+  h3{
+    background-color: cadetblue;
   }
 </style>
