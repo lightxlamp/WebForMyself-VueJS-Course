@@ -3,8 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import ColorDirective from './color.js'
+import newColorDirective from './newColor'
 
 Vue.directive('colored', ColorDirective)
+Vue.directive('newColor', newColorDirective)
 
 Vue.config.productionTip = false
 

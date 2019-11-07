@@ -1,6 +1,9 @@
 <template>
   <div class="hello">
     <h1 v-colored v-if="visible">{{ msg }}</h1>
+    <h2 v-newColor:background.font.delay="'yellow'">Text for testing our custom directive with a parameter</h2>
+    <h2 v-newColor:color="'blue'">Text for testing our custom directive with a parameter</h2>
+    <h2 v-border>Text for testing our custom directive with a parameter</h2>
     <button @click="visible = !visible">Show/Hide</button>
     <br>
     <br>
@@ -94,6 +97,13 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App',
       visible: true
+    }
+  },
+  directives: {
+    border: {
+      bind(el, bindings, vnode) {
+        el.style.border = '1px solid black'
+      }
     }
   }
 }
