@@ -1,9 +1,25 @@
 import VueRouter from 'vue-router'
 import Home from './pages/Home'
-import Cars from './pages/Cars'
-import Car from './pages/Car'
+// import Cars from './pages/Cars' // We are going to lazy load this component. So.. import when needed only
+//import Car from './pages/Car'
 import CarInfo from './pages/CarInfo'
 import ErrorCmp from './pages/Error'
+
+const Cars = resolve => {
+  require.ensure(['./pages/Cars.vue'], () => {
+    resolve(
+      require('./pages/Cars.vue')
+    )
+  })
+}
+
+const Car = resolve => {
+  require.ensure(['./pages/Car.vue'], () => {
+    resolve(
+      require('./pages/Car.vue')
+    )
+  })
+}
 
 export default new VueRouter({
   routes: [
@@ -23,10 +39,9 @@ export default new VueRouter({
           path: 'info', // localhost:8080/car/4/full
           component: CarInfo,
           name: 'carInfo',
-          beforeEnter(to, from, next){
-            console.log('Before Enter')
-            next()
-          }
+          // beforeEnter(to, from, next){
+          //   console.log('Before Enter')
+          // }
         }
       ]
     },

@@ -55,6 +55,16 @@
         goBackToCars(){
           this.$router.push('/cars') // We a "pushing" to browser's history
         }
+      },
+      beforeRouteLeave(to, fromR, next){
+        console.log('beforeRouterLeave')
+
+        if(window.confirm('Are you sure you want to leave?')){
+          next()
+        }
+        else{
+          next(false)
+        }
       }
     }
 </script>
