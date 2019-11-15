@@ -6,7 +6,7 @@ import AdList from '@/components/Ads/AdList'
 import NewAd from '@/components/Ads/NewAd'
 import Login from '@/components/Auth/Login'
 import Registration from '@/components/Auth/Registration'
-import Orders from '@/components/User/Registration'
+import Orders from '@/components/User/Orders'
 
 Vue.use(Router)
 
