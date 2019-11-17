@@ -6,16 +6,15 @@
 
                 <v-card
                         class="elevation-10 mb-5"
-                        v-for="ad in ads"
+                        v-for="ad in myAds"
                         :key="ad.id"
                 >
                     <v-layout row>
                         <v-flex xs4>
-                            <v-card-media
-                                :src="require(ad.imageSrc)"
-                                height="175px"
-                            >
-                            </v-card-media>
+                            <v-img
+                                    height="200"
+                                    :src="ad.imageSrc"
+                            ></v-img>
                         </v-flex>
 
                         <v-flex xs8>
@@ -40,18 +39,9 @@
 
 <script>
     export default {
-        data () {
-            return {
-                ads: [
-                    {
-                        title: 'Third Ad',
-                        description: 'Babbles',
-                        promo: true,
-                        imageSrc: 'https://livewallpaperhd.com/wp-content/' +
-                            'uploads/2017/05/Blue-Wallpaper-For-Computer.jpg',
-                        id: '12345'
-                    }
-                ]
+        computed: {
+            myAds (){
+                return this.$store.getters.myAds
             }
         }
     }

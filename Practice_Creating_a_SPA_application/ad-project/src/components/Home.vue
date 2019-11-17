@@ -26,7 +26,7 @@
 
                     <v-carousel>
                         <v-carousel-item
-                                v-for="ad in ads"
+                                v-for="ad in promoAds"
                                 :key="ad.id"
                                 :src="ad.imageSrc"
                         >
@@ -92,6 +92,15 @@
 
 <script>
     export default {
+        computed: {
+            promoAds(){
+                return this.$store.getters.promoAds
+            },
+            ads(){
+                return this.$store.getters.ads
+            }
+        },
+
         data () {
             return {
                 colors: [
@@ -101,32 +110,32 @@
                     'red',
                     'orange',
                 ],
-                ads: [
-                    {
-                        title: 'First Ad',
-                        description: 'Hello I am a desc for the first image',
-                        promo: false,
-                        imageSrc: 'https://149366088.v2.pressablecdn.com/' +
-                            'wp-content/uploads/2019/03/fedora-30-wallpaper.jpg',
-                        id: '123'
-                    },
-                    {
-                        title: 'Second Ad',
-                        description: 'Description for the second image',
-                        promo: true,
-                        // imageSrc: 'https://i.ibb.co/VjrK66B/ava.png',
-                        imageSrc: 'https://data.whicdn.com/images/304947669/original.jpg',
-                        id: '1234'
-                    },
-                    {
-                        title: 'Third Ad',
-                        description: 'Babbles',
-                        promo: true,
-                        imageSrc: 'https://livewallpaperhd.com/wp-content/' +
-                            'uploads/2017/05/Blue-Wallpaper-For-Computer.jpg',
-                        id: '12345'
-                    }
-                ]
+                // ads: [
+                //     {
+                //         title: 'First Ad',
+                //         description: 'Hello I am a desc for the first image',
+                //         promo: false,
+                //         imageSrc: 'https://149366088.v2.pressablecdn.com/' +
+                //             'wp-content/uploads/2019/03/fedora-30-wallpaper.jpg',
+                //         id: '123'
+                //     },
+                //     {
+                //         title: 'Second Ad',
+                //         description: 'Description for the second image',
+                //         promo: true,
+                //         // imageSrc: 'https://i.ibb.co/VjrK66B/ava.png',
+                //         imageSrc: 'https://data.whicdn.com/images/304947669/original.jpg',
+                //         id: '1234'
+                //     },
+                //     {
+                //         title: 'Third Ad',
+                //         description: 'Babbles',
+                //         promo: true,
+                //         imageSrc: 'https://livewallpaperhd.com/wp-content/' +
+                //             'uploads/2017/05/Blue-Wallpaper-For-Computer.jpg',
+                //         id: '12345'
+                //     }
+                // ]
             }
         },
     }
