@@ -36,6 +36,37 @@
                         </v-btn>
                     </v-flex>
                 </v-layout>
+
+                <v-layout row>
+                    <v-flex xs12>
+                        <img
+                                src="https://data.whicdn.com/images/304947669/original.jpg"
+                                height="300px"
+                                class="ma-2"
+                                alt=""
+                        >
+                    </v-flex>
+                </v-layout>
+
+                <v-layout row>
+                    <v-flex xs12>
+                        <v-switch
+                                label="Добавить в промо?"
+                                v-model="promo"
+                        ></v-switch>
+                    </v-flex>
+                </v-layout>
+
+                <v-layout row>
+                    <v-flex xs12>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                                :disabled="!valid"
+                                class="success"
+                                @click="createAd"
+                        >Создать объявление</v-btn>
+                    </v-flex>
+                </v-layout>
             </v-flex>
         </v-layout>
     </v-container>
@@ -44,7 +75,23 @@
 <script>
     export default {
         data () {
-            return {}
+            return {
+                title: '',
+                promo: false,
+                description: '',
+                valid: false
+            }
+        },
+        methods: {
+            // createAd(){
+            //     if(this.$refs.form.validate()){
+            //         const ad = {
+            //             title: this.title,
+            //             description: this.description,
+            //             promo: this.promo
+            //         }
+            //     }
+            // }
         }
     }
 </script>

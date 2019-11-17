@@ -114,7 +114,8 @@
                         title: 'Second Ad',
                         description: 'Description for the second image',
                         promo: true,
-                        imageSrc: 'https://i.ibb.co/VjrK66B/ava.png',
+                        // imageSrc: 'https://i.ibb.co/VjrK66B/ava.png',
+                        imageSrc: 'https://data.whicdn.com/images/304947669/original.jpg',
                         id: '1234'
                     },
                     {
