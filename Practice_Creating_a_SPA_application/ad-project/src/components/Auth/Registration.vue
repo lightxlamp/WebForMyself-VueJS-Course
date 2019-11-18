@@ -57,7 +57,8 @@
                         <v-spacer />
                         <v-btn
                                 @click="onSubmit"
-                                :disabled="!valid"
+                                :disabled="!valid || loading === true"
+                                :loading="loading"
                                 color="primary">
                             Зарегестрироваться
                         </v-btn>
@@ -91,6 +92,11 @@
                 ]
             }
         },
+        computed: {
+          loading(){
+              return this.$store.getters.loading
+          }
+        },
         methods: {
             onSubmit(){
                 if(this.$refs.form.validate()){
@@ -99,6 +105,10 @@
                         password: this.password
                     }
                     this.$store.dispatch('registration', user)
+                        .then(() => {
+                            this.$router.push('/')
+                        }) // eslint-disable-next-line no-console
+                        .catch(err => console.log(err))
                 }
             }
         }

@@ -47,7 +47,8 @@
                         <v-spacer />
                         <v-btn
                             @click="onSubmit"
-                            :disabled="!valid"
+                            :disabled="!valid || loading"
+                            :loading="loading"
                             color="primary">
                                 Войти
                         </v-btn>
@@ -60,8 +61,7 @@
 
 <script>
     export default {
-        data ()
-        {
+        data() {
             return {
                 valid: false,
                 email: '',
@@ -76,16 +76,24 @@
                 ],
             }
         },
+        computed: {
+            loading(){
+                return this.$store.getters.loading
+            }
+        },
         methods: {
-            onSubmit(){
-                if(this.$refs.form.validate()){
+            onSubmit() {
+                if (this.$refs.form.validate()) {
                     const user = {
                         email: this.email,
                         password: this.password
                     }
 
-                    // eslint-disable-next-line no-console
-                    console.log(user)
+                    this.$store.dispatch('login', user)
+                        .then(() => {
+                            this.$router.push('/')
+                        }) // eslint-disable-next-line no-console
+                        .catch(err => console.log(err))
                 }
             }
         }
