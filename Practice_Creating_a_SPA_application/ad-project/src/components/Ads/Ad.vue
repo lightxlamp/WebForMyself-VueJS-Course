@@ -6,13 +6,13 @@
                 <v-card>
 
                     <v-img
-                        src="https://livewallpaperhd.com/wp-content/uploads/2017/05/Blue-Wallpaper-For-Computer.jpg"
+                        :src="ad.imageSrc"
                         height="300"
                     ></v-img>
 
                     <v-card-text>
-                        <h1 class="text--primary">H1 Заголовок</h1>
-                        <p>Тут текст объявы. И всякое описание</p>
+                        <h1 class="text--primary">{{ad.title}}</h1>
+                        <p>{{ad.description}}</p>
                     </v-card-text>
 
                     <v-card-actions>
@@ -28,8 +28,12 @@
 
 <script>
     export default {
-        data () {
-            return {}
+        props: ['id'],
+        computed: {
+            ad () {
+                const id = this.id
+                return this.$store.getters.adById(id);
+            }
         }
     }
 </script>

@@ -83,15 +83,19 @@
             }
         },
         methods: {
-            // createAd(){
-            //     if(this.$refs.form.validate()){
-            //         const ad = {
-            //             title: this.title,
-            //             description: this.description,
-            //             promo: this.promo
-            //         }
-            //     }
-            // }
+            createAd(){
+                if(this.$refs.form.validate()){
+                    const ad = {
+                        title: this.title,
+                        description: this.description,
+                        promo: this.promo,
+                        imageSrc: 'https://livewallpaperhd.com/' +
+                            'wp-content/uploads/2017/05/Blue-Wallpaper-For-Computer.jpg'
+                    }
+
+                    this.$store.dispatch('createAd', ad)
+                }
+            }
         }
     }
 </script>
