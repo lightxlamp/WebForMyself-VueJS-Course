@@ -93,7 +93,7 @@
                         .then(() => {
                             this.$router.push('/')
                         }) // eslint-disable-next-line no-console
-                        .catch(err => console.log(err))
+                        .catch(() => {})
                 }
             }
         }

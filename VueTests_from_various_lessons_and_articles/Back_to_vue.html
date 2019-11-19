@@ -22,8 +22,8 @@
 
             <h4>-- If entered name is "Stas" then display "True" - else display "False"</h4>
             <div class="wrapper" :class="[name == 'Stas' ? 'wrapper_ok' : 'wrapper_error', 'default']">
-            <h3 class="positive_result positive_negative_result_shadow" v-if="name == 'Stas'">True</h3>
-            <h3 class="negative_result positive_negative_result_shadow" v-else>False</h3>
+                <h3 class="positive_result positive_negative_result_shadow" v-if="name == 'Stas'">True</h3>
+                <h3 class="negative_result positive_negative_result_shadow" v-else>False</h3>
             </div>
             <hr>
 
@@ -101,9 +101,12 @@
             </template>
 
             <h4>Lesson #3: Dynamic class</h4>
-            <input type="checkbox" id="scales" name="scales" v-model="isRed">
-            <label for="scales">Add/Remove Class from the element below</label>
+            <input type="checkbox" id="scalesId" name="scales" v-model="isRed">
+            <label for="scalesId">Add/Remove Class from the element below</label>
             <div :class="{redBackround: isRed}" id="dynamicClassDiv"></div>
+            <h5>More complex example with two classes. Added later</h5>
+            <div :class="isRed ? 'redBackround' : 'antiquewhiteBackground'" id="dynamicClassDiv2"></div>
+            <h5>A "complex" part was different syntax. With no { } in assigning class </h5>
             <hr>
 
             <h4>Lesson #4: Visibility Scope</h4>
@@ -125,22 +128,22 @@
 
         <div class="sample" id="data_lesson">
             <h4>Lesson #5: Working with a list, array, table. Creating the first click-event</h4>
-            <p>Functions for two click events created differently</p>
-            <div id="list_of_names" @click="listOfNamesIsClicked">
+            <p>Functions for two click events declared differently</p>
+            <div id="list-of-names" @click="listOfNamesIsClicked">
                 <p>List of names</p>
                 <ol>
                     <li v-for="name in list_of_names">{{name}}</li>
                 </ol>
             </div>
 
-            <div id="list_of_users">
+            <div id="list-of-users">
                 <p>List of users</p>
                 <ul>
                     <li v-for="user in array_of_users">{{user.id}} - {{user.login}}</li>
                 </ul>
             </div>
 
-            <div id="table_of_users" @click="tableOfUsersIsClicked">
+            <div id="table-of-users" @click="tableOfUsersIsClicked">
                 <table border="1">
                     <thead>
                         <th>ID</th>
@@ -154,17 +157,17 @@
                     </tbody>
                 </table>
             </div>
-            <p>* Click at a table above to see an alert</p>
-            <p>** Click at "List of names" to see an alert</p>
+            <p>* Click at "List of names" to see an alert</p>
+            <p>** Click at a table above to see an alert</p>
         </div>
 
         <div class="sample" id="buttonLesson">
             <h4>Lesson #6: The first event and the first Lifecycle Hook: "Created"</h4>
             <p>Counter's value: {{counter}}</p>
+            <!--trying bootstrap btn -->
             <button class="btn btn-primary" @click="increase">Increase counter by 1</button>
             <p>* Initial value of the "counter" variable is 1. But using a hook "created" we assigning a new value to
                 counter - "3". Then we call "increase" function once</p>
-            <!--trying bootstrap btn -->
         </div>
 
         <div class="sample" id="axiosLesson">
@@ -191,7 +194,7 @@
         </div>
 
         <script type="text/javascript">
-            let sample = new Vue({
+            const sample = new Vue({
                 el: '.sample',
                 data: {
                     name: 'Stas',
@@ -216,7 +219,7 @@
                 }
             })
 
-            var buttonlesson = new Vue({
+            const buttonlesson = new Vue({
                 el: "#buttonLesson",
                 data: {
                     counter: 1
@@ -233,10 +236,9 @@
                 }
             })
 
-            var dataLesson = new Vue({
+            const dataLesson = new Vue({
                 el: "#data_lesson",
                 data: {
-                    name: 'Vikt',
                     list_of_names: ['Tilek', 'Dmitry', 'Vladimir', 'Chyngyz'],
                     array_of_users: [
                         {id: 0, login: 'lightxlamp'},
@@ -256,18 +258,19 @@
                     }
             })
 
-            var axiosLesson = new Vue({
+            const axiosLesson = new Vue({
                 el: '#axiosLesson',
                 data: {
                     hashtags: [],
                     cities: [],
                     url: {
                         hashtags: 'https://dka-develop.ru/api?type=hashtag',
-                        cities: 'https://dka-develop.ru/api?type=city'
+                            cities: 'https://dka-develop.ru/api?type=city'
                     }
                 },
-                created: function(){
-                  console.log('Stas test log of url: ' + this.url.hashtags)
+                created () {
+                    console.log('============= Stas test log of url: ' + this.url.hashtags)
+                    console.log('')
                 },
                 methods: {
                     getHashtags() {
@@ -316,7 +319,7 @@
 			background-color: whitesmoke;
 		}
 
-        #list_of_names
+        #list-of-names
         {
             float: left;
             width: 200px;
@@ -324,7 +327,7 @@
             border: 1px solid black;
         }
 
-        #list_of_users{
+        #list-of-users{
             height: 150px;
             width: 200px;
             margin-left: 5px;
@@ -332,7 +335,7 @@
             border: 1px solid black;
         }
 
-        #table_of_users{
+        #table-of-users{
             height: 150px;
             width: 200px;
             margin-left: 410px;
@@ -371,8 +374,18 @@
             border: 1px solid black;
         }
 
+        #dynamicClassDiv2{
+            width: 305px;
+            height: 20px;
+            border: 1px solid black;
+        }
+
         .redBackround{
             background-color: red;
+        }
+
+        .antiquewhiteBackground{
+            background-color: antiquewhite;
         }
 
 		.positive_negative_result_shadow{

@@ -46,23 +46,6 @@
                         </v-list-item-group>
                     </v-list>
                 </v-card>
-
-<!--                <v-list>-->
-<!--                    <v-list-tile-->
-<!--                        v-for="link in links"-->
-<!--                        :key="link.title"-->
-<!--                        :to="link.url"-->
-<!--                    >-->
-<!--                        <v-list-tile-action>-->
-<!--                            <v-icon>{{link.icon}}</v-icon>-->
-<!--                        </v-list-tile-action>-->
-
-<!--                        <v-list-tile-content>-->
-<!--                            <v-list-tile-title v-text="link.title"></v-list-tile-title>-->
-<!--                        </v-list-tile-content>-->
-<!--                    </v-list-tile>-->
-<!--                </v-list>-->
-
                 <v-divider></v-divider>
             </v-navigation-drawer>
 
@@ -98,6 +81,20 @@
                 <router-view></router-view>
             </v-content>
 
+            <template v-if="error">
+                    <v-snackbar
+                        :timeout=timeout
+                        multi-line
+                        color="error"
+                        @input="closeError"
+                        top
+                        :value="true"
+                >
+                    {{error}}
+                    <v-btn dark text @click="closeError">Закрыть</v-btn>
+                </v-snackbar>
+            </template>
+
             <v-footer color="rgb(14,117,189)" app>
                 <span class="white--text">&copy; 2013–2019 ОcОО «ESPIRU»</span>
             </v-footer>
@@ -120,7 +117,20 @@ export default {
             {title: 'Новое объявление', icon: 'mdi-note', url: '/new'},
             {title: 'Мои объявления', icon: 'mdi-clipboard-list', url: '/list'},
         ],
+        timeout: 5000
     }),
+    computed: {
+        error () {
+            // eslint-disable-next-line no-console
+            console.log(this.$store.getters.error)
+            return this.$store.getters.error
+        }
+    },
+    methods: {
+        closeError () {
+            this.$store.dispatch('clearError')
+        }
+    }
 }
 </script>
 

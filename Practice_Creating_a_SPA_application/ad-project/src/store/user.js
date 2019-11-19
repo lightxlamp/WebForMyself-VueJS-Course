@@ -1,7 +1,7 @@
 import * as firebase from 'firebase'
 
 class User {
-    constructor (id){
+    constructor (id) {
         this.id = id
     }
 }
