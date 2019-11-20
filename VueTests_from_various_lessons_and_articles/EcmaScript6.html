@@ -1,0 +1,32 @@
+<script>
+    ///////////////////////////////////////////////////////////////////
+    const originalFunction = function() {
+        return 100;
+    }
+
+    console.log(originalFunction())
+
+    ///////////////////////////////////////////////////////////////////
+    const arrowFunction = () => {
+        return 300
+    }
+
+    console.log(arrowFunction())
+
+    ///////////////////////////////////////////////////////////////////
+    const arrowFunctionWithParameter = (num) => {
+        return 300 + num
+    }
+
+    console.log(arrowFunctionWithParameter(300))
+
+    ///////////////////////////////////////////////////////////////////
+    const arrowFunctionWithParameterInSingleLine = (num) =>  300 + num
+
+    console.log(arrowFunctionWithParameterInSingleLine(700))
+
+    ///////////////////////////////////////////////////////////////////
+    const arrowFunctionWithParameterInSingleLine2 = num =>  300 + num
+
+    console.log(arrowFunctionWithParameterInSingleLine2(1200))
+</script>
