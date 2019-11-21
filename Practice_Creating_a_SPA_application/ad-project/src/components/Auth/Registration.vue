@@ -104,10 +104,10 @@
                         email: this.email,
                         password: this.password
                     }
-                    this.$store.dispatch('registration', user)
+                    this.$store.dispatch('registerUser', user)
                         .then(() => {
                             this.$router.push('/')
-                        }) // eslint-disable-next-line no-console
+                        })
                         .catch(() => {})
                 }
             }

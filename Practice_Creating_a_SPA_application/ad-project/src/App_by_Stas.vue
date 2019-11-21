@@ -81,7 +81,7 @@
                 <router-view></router-view>
             </v-content>
 
-            <template v-if="error">
+            <template v-if="error" >
                     <v-snackbar
                         :timeout=timeout
                         multi-line
@@ -91,7 +91,7 @@
                         :value="true"
                 >
                     {{error}}
-                    <v-btn dark text @click="closeError">Закрыть</v-btn>
+                    <v-btn dark text @click.native="closeError">Закрыть</v-btn>
                 </v-snackbar>
             </template>
 
@@ -109,7 +109,6 @@ export default {
         source: String,
     },
     data: () => ({
-        drawer: null,
         links: [
             {title: 'Вход', icon: 'mdi-lock', url: '/login'},
             {title: 'Регистрация', icon: 'mdi-face', url: '/registration'},
@@ -117,12 +116,19 @@ export default {
             {title: 'Новое объявление', icon: 'mdi-note', url: '/new'},
             {title: 'Мои объявления', icon: 'mdi-clipboard-list', url: '/list'},
         ],
+        drawer: null,
         timeout: 5000
     }),
     computed: {
         error () {
-            // eslint-disable-next-line no-console
-            console.log(this.$store.getters.error)
+            // // eslint-disable-next-line no-console
+            // console.log("Stas this", this)
+            // // eslint-disable-next-line no-console
+            // console.log("Stas store", this.$store)
+            // // eslint-disable-next-line no-console
+            // console.log("Stas getters", this.$store.getters)
+            // // eslint-disable-next-line no-console
+            // console.log("Stas error", this.$store.getters.error)
             return this.$store.getters.error
         }
     },

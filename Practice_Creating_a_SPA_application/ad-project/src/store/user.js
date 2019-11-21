@@ -16,7 +16,7 @@ export default {
         }
     },
     actions: {
-        async registration({commit}, {email, password}){
+        async registerUser({commit}, {email, password}){
             commit('clearError')
             commit('setLoading', true)
 
@@ -26,11 +26,11 @@ export default {
                 commit('setLoading', false)
             } catch (error) {
                 commit('setLoading', false)
-                commit('clearError', error.message)
+                commit('setError', error.message)
                 throw error
             }
         },
-        async login({commit}, {email, password}){
+        async loginUser({commit}, {email, password}){
             commit('clearError')
             commit('setLoading', true)
 
@@ -40,13 +40,13 @@ export default {
                 commit('setLoading', false)
             } catch (error) {
                 commit('setLoading', false)
-                commit('clearError', error.message)
+                commit('setError', error.message)
                 throw error
             }
         },
     },
     getters: {
-        user (state){
+        user(state){
             return state.user
         }
     }

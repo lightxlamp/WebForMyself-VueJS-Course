@@ -27,18 +27,31 @@ export default {
             }
         ]
     },
-    mutations: {
-        createAd(state, payload){
-            state.ads.push(payload)
-        }
-    },
-    actions: {
-        createAd ({commit}, payload){
-            payload.id = 'Math.random()'
 
-            commit('createAd', payload)
+    actions: {
+        createAd ({commit}, adObjFromForm){
+            // eslint-disable-next-line no-console
+            console.log('CreateAd Action is called')
+
+            // eslint-disable-next-line no-console
+            console.log(adObjFromForm)
+
+            adObjFromForm.id = 'Math.random()'
+
+            commit('createAd', adObjFromForm)
         }
     },
+
+    mutations: {
+        createAd(state, adObjFromForm){
+            // eslint-disable-next-line no-console
+            console.log('CreateAd mutation is called')
+            // eslint-disable-next-line no-console
+            console.log(state)
+            state.ads.push(adObjFromForm)
+        }
+    },
+
     getters: {
         ads (state) {
             return state.ads

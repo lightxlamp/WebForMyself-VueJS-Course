@@ -9,7 +9,7 @@ export default {
             state.loading = payload
         },
         setError (state, payload){
-            state.loading = payload
+            state.error = payload
         },
         clearError(state){
             state.error = null
@@ -29,10 +29,10 @@ export default {
     },
 
     getters: {
-        loading(state){
+        loading (state) {
             return state.loading
         },
-        error (state){
+        error (state) {
             return state.error
         }
     }

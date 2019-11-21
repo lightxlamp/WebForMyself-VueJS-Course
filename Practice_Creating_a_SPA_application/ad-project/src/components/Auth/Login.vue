@@ -89,10 +89,10 @@
                         password: this.password
                     }
 
-                    this.$store.dispatch('login', user)
+                    this.$store.dispatch('loginUser', user)
                         .then(() => {
                             this.$router.push('/')
-                        }) // eslint-disable-next-line no-console
+                        })
                         .catch(() => {})
                 }
             }
