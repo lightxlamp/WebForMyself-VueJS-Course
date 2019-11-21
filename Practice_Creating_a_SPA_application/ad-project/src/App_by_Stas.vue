@@ -43,6 +43,18 @@
                                     <v-list-item-title v-text="link.title"></v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
+
+                            <v-list-item
+                                    v-if="isUserLoggedIn"
+                                    @click="onLogout"
+                            >
+                                <v-list-item-icon>
+                                    <v-icon>mdi-exit-to-app</v-icon>
+                                </v-list-item-icon>
+                                <v-list-item-content>
+                                    <v-list-item-title>Выйти</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
                         </v-list-item-group>
                     </v-list>
                 </v-card>
@@ -73,6 +85,15 @@
                         </v-icon>
                         {{link.title}}
                     </v-btn>
+
+                    <v-btn
+                        v-if="isUserLoggedIn"
+                        @click="onLogout"
+                        text >
+                            <v-icon left>mdi-exit-to-app</v-icon>
+                        Выйти
+                    </v-btn>
+
                 </v-toolbar-items>
             </v-app-bar>
 
@@ -109,13 +130,6 @@ export default {
         source: String,
     },
     data: () => ({
-        links: [
-            {title: 'Вход', icon: 'mdi-lock', url: '/login'},
-            {title: 'Регистрация', icon: 'mdi-face', url: '/registration'},
-            {title: 'Заказы', icon: 'mdi-bookmark', url: '/orders'},
-            {title: 'Новое объявление', icon: 'mdi-note', url: '/new'},
-            {title: 'Мои объявления', icon: 'mdi-clipboard-list', url: '/list'},
-        ],
         drawer: null,
         timeout: 5000
     }),
@@ -130,11 +144,31 @@ export default {
             // // eslint-disable-next-line no-console
             // console.log("Stas error", this.$store.getters.error)
             return this.$store.getters.error
+        },
+        isUserLoggedIn (){
+            return this.$store.getters.isUserLoggedIn
+        },
+        links () {
+            if(this.isUserLoggedIn){
+                return [
+                    {title: 'Заказы', icon: 'mdi-bookmark', url: '/orders'},
+                    {title: 'Новое объявление', icon: 'mdi-note', url: '/new'},
+                    {title: 'Мои объявления', icon: 'mdi-clipboard-list', url: '/list'}
+                ]
+            }
+            return [
+                {title: 'Вход', icon: 'mdi-lock', url: '/login'},
+                {title: 'Регистрация', icon: 'mdi-face', url: '/registration'}
+            ]
         }
     },
     methods: {
         closeError () {
             this.$store.dispatch('clearError')
+        },
+        onLogout (){
+            this.$store.dispatch('logoutUser')
+            this.$router.push('/')
         }
     }
 }
