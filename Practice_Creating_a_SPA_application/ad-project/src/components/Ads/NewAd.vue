@@ -30,20 +30,29 @@
                         <v-btn
                                 color="blue-grey"
                                 class="ma-2 white--text"
+                                @click="triggerUpload"
                         >
                             Загрузить изображение
                             <v-icon right dark>mdi-cloud-upload</v-icon>
                         </v-btn>
+                        <input
+                                ref="fileInput"
+                                type="file"
+                                style="display: none"
+                                accept="image/*"
+                                @change="onFileChange"
+                        >
                     </v-flex>
                 </v-layout>
 
                 <v-layout row>
                     <v-flex xs12>
                         <img
-                                src="https://data.whicdn.com/images/304947669/original.jpg"
+                                :src="imageSrc"
                                 height="300px"
                                 class="ma-2"
                                 alt=""
+                                v-if="imageSrc"
                         >
                     </v-flex>
                 </v-layout>
@@ -62,7 +71,7 @@
                         <v-spacer></v-spacer>
                         <v-btn
                                 :loading="loading"
-                                :disabled="!valid || loading"
+                                :disabled="(!valid || !image) || loading"
                                 class="success"
                                 @click="createAd"
                         >Создать объявление</v-btn>
@@ -80,7 +89,9 @@
                 title: '',
                 promo: false,
                 description: '',
-                valid: false
+                valid: false,
+                image: null,
+                imageSrc: ''
             }
         },
         computed: {
@@ -90,13 +101,12 @@
         },
         methods: {
             createAd(){
-                if(this.$refs.form.validate()){
+                if(this.$refs.form.validate() && this.image){
                     const ad = {
                         title: this.title,
                         description: this.description,
                         promo: this.promo,
-                        imageSrc: 'https://livewallpaperhd.com/' +
-                            'wp-content/uploads/2017/05/Blue-Wallpaper-For-Computer.jpg'
+                        image: this.image
                     }
 
                     this.$store.dispatch('createAd', ad)
@@ -106,6 +116,18 @@
                         })
                         .catch(() => {})
                 }
+            },
+            triggerUpload () {
+                this.$refs.fileInput.click()
+            },
+            onFileChange (event) {
+                const file = event.target.files[0]
+                const reader = new FileReader()
+                reader.onload = () => {
+                    this.imageSrc = reader.result
+                }
+                reader.readAsDataURL(file)
+                this.image = file
             }
         }
     }
