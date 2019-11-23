@@ -10,7 +10,7 @@ export default {
         },
         setError ({commit}, payload){
             // eslint-disable-next-line no-console
-            console.log('SetError Action called. Payload', payload)
+            //console.log('SetError Action called. Payload', payload)
             commit('setError', payload)
         },
         clearError ({commit}) {
@@ -24,7 +24,7 @@ export default {
         },
         setError (state, payload){
             // eslint-disable-next-line no-console
-            console.log('SetError Mutation called. State + Payload', state, payload)
+            //console.log('SetError Mutation called. State + Payload', state, payload)
             state.error = payload
         },
         clearError(state){

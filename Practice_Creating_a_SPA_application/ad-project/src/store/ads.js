@@ -1,3 +1,16 @@
+import * as firebase from 'firebase'
+
+class Ad {
+    constructor(title, description, ownerId, imageSrc = '', promo = false, id = null) {
+        this.title = title
+        this.description = description
+        this.ownerId = ownerId
+        this.imageSrc = imageSrc
+        this.promo = promo
+        this.id = id
+    }
+}
+
 export default {
     state: {
         ads: [
@@ -29,26 +42,57 @@ export default {
     },
 
     actions: {
-        createAd ({commit}, adObjFromForm){
+        async createAd ({commit, getters}, adObjFromForm){
             // eslint-disable-next-line no-console
             console.log('CreateAd Action is called')
 
             // eslint-disable-next-line no-console
             console.log(adObjFromForm)
 
-            adObjFromForm.id = 'Math.random()'
+            //adObjFromForm.id = 'Math.random()'
 
-            commit('createAd', adObjFromForm)
+            commit('clearError')
+            commit('setLoading', true)
+            //commit('createAd', adObjFromForm)
+
+            // eslint-disable-next-line no-console
+            console.log("= adObjFromForm: ", adObjFromForm)
+
+            try{
+                const newAd = new Ad(
+                    adObjFromForm.title,
+                    adObjFromForm.description,
+                    getters.user.id,
+                    adObjFromForm.imageSrc,
+                    adObjFromForm.promo)
+                const fireBaseAdValue = await firebase.database().ref('ads').push(newAd)
+
+                commit('setLoading', false)
+                commit('createAd', {
+                    ...newAd,
+                    id: fireBaseAdValue.key
+                })
+
+                // eslint-disable-next-line no-console
+                console.log("= fireBaseValue (return object of push to DB operation): ", fireBaseAdValue)
+                // eslint-disable-next-line no-console
+                //console.log("= fireBaseValue (return object of push to DB operation): ", getters.user.id,)
+            }
+            catch(error) {
+                commit('setError'. error.message)
+                commit('setLoading', false)
+                throw error
+            }
         }
     },
 
     mutations: {
-        createAd(state, adObjFromForm){
+        createAd(state, adObjFromFormAndFireBase){
             // eslint-disable-next-line no-console
             console.log('CreateAd mutation is called')
             // eslint-disable-next-line no-console
             console.log(state)
-            state.ads.push(adObjFromForm)
+            state.ads.push(adObjFromFormAndFireBase)
         }
     },
 
