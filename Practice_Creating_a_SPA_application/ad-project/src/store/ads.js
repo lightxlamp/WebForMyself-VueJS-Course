@@ -13,43 +13,13 @@ class Ad {
 
 export default {
     state: {
-        ads: [
-            // {
-            //     title: 'First Ad',
-            //     description: 'Hello I am a desc for the first image',
-            //     promo: true,
-            //     imageSrc: 'https://149366088.v2.pressablecdn.com/' +
-            //         'wp-content/uploads/2019/03/fedora-30-wallpaper.jpg',
-            //     id: '123'
-            // },
-            // {
-            //     title: 'Second Ad',
-            //     description: 'Description for the second image',
-            //     promo: false,
-            //     // imageSrc: 'https://i.ibb.co/VjrK66B/ava.png',
-            //     imageSrc: 'https://data.whicdn.com/images/304947669/original.jpg',
-            //     id: '1234'
-            // },
-            // {
-            //     title: 'Third Ad',
-            //     description: 'Babbles',
-            //     promo: true,
-            //     imageSrc: 'https://livewallpaperhd.com/wp-content/' +
-            //         'uploads/2017/05/Blue-Wallpaper-For-Computer.jpg',
-            //     id: '12345'
-            // }
-        ]
+        ads: []
     },
 
     actions: {
         async createAd ({commit, getters}, adObjFromForm){
             // eslint-disable-next-line no-console
             console.log('CreateAd Action is called')
-
-            // eslint-disable-next-line no-console
-            console.log(adObjFromForm)
-
-            //adObjFromForm.id = 'Math.random()'
 
             commit('clearError')
             commit('setLoading', true)
@@ -70,33 +40,53 @@ export default {
 
                 const fireBaseAdValue = await firebase.database().ref('ads').push(newAd)
                 const imageExtension = image.name.slice(image.name.lastIndexOf('.'))
+                // eslint-disable-next-line no-console
+                console.log("ImageExtension: ", imageExtension)
 
                 const fileData =
                     await firebase.storage().ref(`ads/${fireBaseAdValue.key}.${imageExtension}`).put(image)
+                // eslint-disable-next-line no-console
+                console.log("= fileData: ", fileData)
 
-                const imageSrc = fileData.metadata.downloadURLs[0]
+                // Points to the root reference
+                // const storageRef = firebase.storage().ref();
+                // // Points to 'images'
+                // const adsImagesRef = storageRef.child('ads');
+                // const uploadedPicName = "" + fireBaseAdValue.key + '.' + imageExtension;
+                // let spaceRef = adsImagesRef.child(uploadedPicName);
+                //
+                // let imageSrc = spaceRef.fullPath
+
+                //const imageSrc = fileData.metadata.downloadURLs[0]
+                let imageSrc =
+                    firebase.storage().ref(`ads/${fireBaseAdValue.key}.${imageExtension}`).getDownloadURL()
+
+                //const imageSrc = firebase.storage().ref(`ads/${fireBaseAdValue.key}.${imageExtension}`)
+
+                //let imageSrc = fileData.ref.fullPath
+                //imageSrc = imageSrc.slice(imageSrc.lastIndexOf('-'))
+                // eslint-disable-next-line no-console
+                console.log("= imageSrc: ", imageSrc)
+                // eslint-disable-next-line no-console
+                console.log("= imageSrc: ", imageSrc.i)
 
                 await firebase.database().ref('ads').child(fireBaseAdValue.key).update({
                     imageSrc
                 })
 
-                alert(imageSrc)
-
                 commit('setLoading', false)
                 commit('createAd', {
                     ...newAd,
-                    id: fireBaseAdValue.key,
-                    imageSrc: imageSrc
+                    imageSrc,
+                    id: fireBaseAdValue.key
                 })
-
-                // eslint-disable-next-line no-console
-                console.log("= fireBaseValue (return object of push to DB operation): ", fireBaseAdValue)
-                // eslint-disable-next-line no-console
-                //console.log("= fireBaseValue (return object of push to DB operation): ", getters.user.id,)
             }
             catch(error) {
                 commit('setError'. error.message)
+                // eslint-disable-next-line no-console
+                console.log(error.message)
                 commit('setLoading', false)
+                alert('Create ad Error')
                 throw error
             }
         }
@@ -141,6 +131,8 @@ export default {
             console.log('CreateAd mutation is called')
             // eslint-disable-next-line no-console
             console.log(state)
+            // eslint-disable-next-line no-console
+            console.log('adObjFromFormAndFireBase:', adObjFromFormAndFireBase)
             state.ads.push(adObjFromFormAndFireBase)
         },
         loadAds(state, adsFromFireBase){
@@ -157,7 +149,7 @@ export default {
                 return ad.promo === true
             })
         },
-        myAds (state){
+        myAds (state) {
             return state.ads
         },
         adById (state){
