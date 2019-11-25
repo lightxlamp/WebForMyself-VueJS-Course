@@ -30,6 +30,9 @@ export default {
 
             const image = adObjFromForm.image
 
+            // eslint-disable-next-line no-console
+            console.log("= Image: ", image)
+
             try{
                 const newAd = new Ad(
                     adObjFromForm.title,
@@ -39,6 +42,8 @@ export default {
                     adObjFromForm.promo)
 
                 const fireBaseAdValue = await firebase.database().ref('ads').push(newAd)
+                // eslint-disable-next-line no-console
+                console.log("fireBaseAdValue: ", fireBaseAdValue)
                 const imageExtension = image.name.slice(image.name.lastIndexOf('.'))
                 // eslint-disable-next-line no-console
                 console.log("ImageExtension: ", imageExtension)
@@ -48,38 +53,64 @@ export default {
                 // eslint-disable-next-line no-console
                 console.log("= fileData: ", fileData)
 
-                // Points to the root reference
+                // // Points to the root reference
                 // const storageRef = firebase.storage().ref();
                 // // Points to 'images'
                 // const adsImagesRef = storageRef.child('ads');
                 // const uploadedPicName = "" + fireBaseAdValue.key + '.' + imageExtension;
                 // let spaceRef = adsImagesRef.child(uploadedPicName);
                 //
-                // let imageSrc = spaceRef.fullPath
+                // let imageSrc2 = spaceRef.fullPath
+                // //let imageSrc2 = spaceRef
+                //
+                // // eslint-disable-next-line no-console
+                // console.log('imageSrc2 - ', imageSrc2)
+
 
                 //const imageSrc = fileData.metadata.downloadURLs[0]
-                let imageSrc =
-                    firebase.storage().ref(`ads/${fireBaseAdValue.key}.${imageExtension}`).getDownloadURL()
+                // let imageSrc =
+                //     firebase.storage().ref(`ads/${fireBaseAdValue.key}.${imageExtension}`).getDownloadURL()
 
-                //const imageSrc = firebase.storage().ref(`ads/${fireBaseAdValue.key}.${imageExtension}`)
+                fileData.ref.getDownloadURL()
+                    .then(function(fullImageSrcInDb) {
+                        firebase.database().ref('ads').child(fireBaseAdValue.key).update({
+                            fullImageSrcInDb
+                        })
+                        commit('setLoading', false)
+                        commit('createAd', {
+                            ...newAd,
+                            imageSrc: fullImageSrcInDb,
+                            id: fireBaseAdValue.key
+                        })
+                        // eslint-disable-next-line no-console
+                        console.log(fullImageSrcInDb)
+                    })
+                    .then(
+                        // eslint-disable-next-line no-console
+                    )
 
-                //let imageSrc = fileData.ref.fullPath
-                //imageSrc = imageSrc.slice(imageSrc.lastIndexOf('-'))
-                // eslint-disable-next-line no-console
-                console.log("= imageSrc: ", imageSrc)
-                // eslint-disable-next-line no-console
-                console.log("= imageSrc: ", imageSrc.i)
+                // // eslint-disable-next-line no-console
+                // console.log("= imageSrc3: ", imageSrc3)
+                //
+                // //const imageSrc = firebase.storage().ref(`ads/${fireBaseAdValue.key}.${imageExtension}`)
+                //
+                // //let imageSrc = fileData.ref.fullPath
+                // //imageSrc = imageSrc.slice(imageSrc.lastIndexOf('-'))
+                // // eslint-disable-next-line no-console
+                // console.log("= imageSrc: ", imageSrc)
+                // // eslint-disable-next-line no-console
+                // console.log("= imageSrc: ", imageSrc.i)
 
-                await firebase.database().ref('ads').child(fireBaseAdValue.key).update({
-                    imageSrc
-                })
+                // await firebase.database().ref('ads').child(fireBaseAdValue.key).update({
+                //     //imageSrc
+                // })
 
-                commit('setLoading', false)
-                commit('createAd', {
-                    ...newAd,
-                    imageSrc,
-                    id: fireBaseAdValue.key
-                })
+                // commit('setLoading', false)
+                // commit('createAd', {
+                //     ...newAd,
+                //     imageSrc,
+                //     id: fireBaseAdValue.key
+                // })
             }
             catch(error) {
                 commit('setError'. error.message)
@@ -102,17 +133,20 @@ export default {
                 // eslint-disable-next-line no-console
                 console.log(fireBaseValue.val())
                 const ads = fireBaseValue.val();
-                Object.keys(ads).forEach(key => {
-                    const ad = ads[key];
-                    resultAds.push(
-                        new Ad(ad.title,
-                            ad.description,
-                            ad.ownerId,
-                            ad.imageSrc,
-                            ad.promo,
-                            key)
-                    )
-                })
+                if(ads != null)
+                {
+                    Object.keys(ads).forEach(key => {
+                        const ad = ads[key];
+                        resultAds.push(
+                            new Ad(ad.title,
+                                ad.description,
+                                ad.ownerId,
+                                ad.imageSrc,
+                                ad.promo,
+                                key)
+                        )
+                    })
+                }
 
                 commit('loadAds', resultAds)
                 commit('setLoading', false)

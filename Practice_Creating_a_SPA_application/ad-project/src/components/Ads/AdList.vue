@@ -11,10 +11,10 @@
                 >
                     <v-layout row>
                         <v-flex xs4>
-<!--                            <v-img-->
-<!--                                    height="200"-->
-<!--                                    :src="ad.imageSrc"-->
-<!--                            ></v-img>-->
+                            <v-img
+                                    height="200"
+                                    :src="ad.imageSrc"
+                            ></v-img>
                         </v-flex>
 
                         <v-flex xs8>

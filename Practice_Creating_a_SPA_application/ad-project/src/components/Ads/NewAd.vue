@@ -90,7 +90,7 @@
                 promo: false,
                 description: '',
                 valid: false,
-                image: null,
+                image: false,
                 imageSrc: ''
             }
         },
