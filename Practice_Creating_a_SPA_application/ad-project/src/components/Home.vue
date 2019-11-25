@@ -86,6 +86,8 @@
     export default {
         computed: {
             promoAds(){
+                // eslint-disable-next-line no-console
+                console.log(this.$store.getters.promoAds)
                 return this.$store.getters.promoAds
             },
             ads(){

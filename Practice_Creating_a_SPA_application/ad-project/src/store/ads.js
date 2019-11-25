@@ -38,8 +38,11 @@ export default {
                     adObjFromForm.title,
                     adObjFromForm.description,
                     getters.user.id,
-                    //adObjFromForm.imageSrc,
+                    adObjFromForm.imageSrc,
                     adObjFromForm.promo)
+
+                // eslint-disable-next-line no-console
+                console.log("= NewAd: ", newAd)
 
                 const fireBaseAdValue = await firebase.database().ref('ads').push(newAd)
                 // eslint-disable-next-line no-console
@@ -74,7 +77,7 @@ export default {
                 fileData.ref.getDownloadURL()
                     .then(function(fullImageSrcInDb) {
                         firebase.database().ref('ads').child(fireBaseAdValue.key).update({
-                            fullImageSrcInDb
+                            imageSrc: fullImageSrcInDb
                         })
                         commit('setLoading', false)
                         commit('createAd', {
@@ -180,6 +183,7 @@ export default {
         },
         promoAds (state) {
             return state.ads.filter(ad => {
+                //console.log('Add ads', state.ads)
                 return ad.promo === true
             })
         },

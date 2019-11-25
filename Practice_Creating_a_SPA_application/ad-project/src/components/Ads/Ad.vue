@@ -3,7 +3,7 @@
         <v-layout row>
             <v-flex xs12>
                 <h1>Объявление</h1>
-                <v-card>
+                <v-card v-if="!loading">
 
                     <v-img
                         :src="ad.imageSrc"
@@ -17,23 +17,44 @@
 
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn text color="primary">Редактировать</v-btn>
+                        <edit-ad-modal :ad="ad"></edit-ad-modal>
                         <v-btn class="success">Купить</v-btn>
                     </v-card-actions>
                 </v-card>
+                <div v-else>
+                    <v-container>
+                        <v-layout row>
+                            <v-flex xs12 class="text-sm-center pt-5">
+                                <v-progress-circular
+                                        :size="80"
+                                        color="primary"
+                                        indeterminate
+                                ></v-progress-circular>
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
+                </div>
             </v-flex>
         </v-layout>
     </v-container>
 </template>
 
 <script>
+    import EditAdModal from './EditAdModal'
+
     export default {
         props: ['id'],
         computed: {
             ad () {
                 const id = this.id
                 return this.$store.getters.adById(id);
+            },
+            loading (){
+                return this.$store.getters.loading
             }
+        },
+        components: {
+            EditAdModal
         }
     }
 </script>
