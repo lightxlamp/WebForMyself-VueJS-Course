@@ -159,6 +159,31 @@ export default {
                 commit('setLoading', false)
                 throw error
             }
+        },
+
+        async updateAd ({commit}, {title, description, id})
+        {
+            commit('clearError')
+            commit('setLoading', true)
+
+            // eslint-disable-next-line no-console
+            console.log('UpdateAd action is called')
+
+            try {
+                await firebase.database().ref('ads').child(id).update({
+                    title, description
+                })
+
+                commit('updateAd', {
+                    title, description, id
+                })
+                commit('setLoading', false)
+            }
+            catch (e) {
+                commit('setError', e.message)
+                commit('setLoading', false)
+                throw e
+            }
         }
     },
 
@@ -174,6 +199,35 @@ export default {
         },
         loadAds(state, adsFromFireBase){
             state.ads = adsFromFireBase;
+        },
+        updateAd(state, {title, description, id}){
+            // eslint-disable-next-line no-console
+            console.log('UpdateAd mutation is called')
+            // eslint-disable-next-line no-console
+            console.log('Id', id)
+
+            let adToEdit = null
+            // TODO find() did not worked for me. Why? Find out later
+            // const ad = state.ads.find(a => {
+            //     a.id === id
+            //     // eslint-disable-next-line no-console
+            //     console.log('Ad', a)
+            // })
+
+            for (let i = 0; i < state.ads.length; i++)
+            {
+                if(state.ads[i].id === id)
+                {
+                    adToEdit = state.ads[i];
+                    break
+                }
+            }
+
+            // eslint-disable-next-line no-console
+            console.log('Ad to edit found', adToEdit)
+
+            adToEdit.title = title
+            adToEdit.description = description
         }
     },
 
@@ -189,6 +243,8 @@ export default {
         },
         myAds (state) {
             return state.ads
+            // return state.ads.filter(ad => {
+            //     return ad.ownerId === getters.user.id
         },
         adById (state){
             return adId => {
