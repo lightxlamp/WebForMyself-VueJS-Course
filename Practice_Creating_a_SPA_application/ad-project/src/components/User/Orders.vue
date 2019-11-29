@@ -60,7 +60,10 @@
     export default {
         methods: {
             markDone(order) {
-                order.done = true
+                this.$store.dispatch('markOrderAsDone', order.id)
+                    .then(() => {
+                        order.done = true
+                    }).catch(() => {})
             }
         },
         computed: {
@@ -68,7 +71,7 @@
                 return this.$store.getters.loading
             },
             orders (){
-                return this.$store.getters.orders
+                return this.$store.getters.allOrders
             }
         },
         created (){

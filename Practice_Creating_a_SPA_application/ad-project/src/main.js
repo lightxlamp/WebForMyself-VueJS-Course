@@ -5,14 +5,16 @@ import BuyModalComponent from './components/Shared/BuyModal'
 import router from './router'
 import * as firebase from 'firebase'
 import store from './store'
+//import colors from 'vuetify/lib/util/colors'
 
 Vue.config.productionTip = false
 Vue.component('app-buy-modal', BuyModalComponent)
+Vue.use(vuetify)
 
 new Vue({
-  vuetify,
   router,
   store,
+  vuetify,
 
   created (){
     // Your web app's Firebase configuration

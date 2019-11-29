@@ -39,15 +39,17 @@ export default {
                     .once('value')
                 const orders = firebaseValue.val()
 
-                // eslint-disable-next-line no-console
-                console.log('++++ Before object keys', orders)
+                if(orders != null){
+                    // eslint-disable-next-line no-console
+                    console.log('++++ Before object keys', orders)
 
-                Object.keys(orders).forEach(key => {
-                    const order = orders[key]
-                    resultOrders.push(
-                        new Order(order.name, order.phone, order.adId, order.done, key)
-                    )
-                })
+                    Object.keys(orders).forEach(key => {
+                        const order = orders[key]
+                        resultOrders.push(
+                            new Order(order.name, order.phone, order.adId, order.done, key)
+                        )
+                    })
+                }
 
                 commit('loadOrders', resultOrders)
                 commit('setLoading', false)
@@ -55,6 +57,17 @@ export default {
             catch (e){
                 commit('setLoading', false)
                 commit('setError', e.message)
+            }
+        },
+        async markOrderAsDone ({commit, getters}, orderId){
+            commit('clearError')
+            try{
+                await firebase.database().ref(`/users/${getters.user.id}/orders`).child(orderId)
+                    .update({done: true})
+            }
+            catch (e) {
+                commit('setError', e.message) //in case of server error
+                throw e
             }
         }
     },
