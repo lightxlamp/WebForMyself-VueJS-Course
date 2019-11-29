@@ -8,19 +8,36 @@
 
 <script>
     // == Async/Await version ==
-    async function multiply(a, b) {
-        setTimeout(() => {
-            alert('Database request completed')
-            return a * b;
-        }, 3000)
-    }
+    async function multiplyValuesFromDB() {
+        let calculationResult = new Promise((resolve, reject) =>{
+            setTimeout(() => {
+                console.log('Database request completed')
+                let valueFromDB1 = 5
+                let valueFromDB2 = 11
+                resolve(valueFromDB1 * valueFromDB2)
+            }, 3000)
+        })
 
-    async function printCalculationResult(){
-        var result = await multiply(2, 5)
+        let result = await calculationResult
         console.log(result)
     }
 
-    printCalculationResult()
+    multiplyValuesFromDB().then()
+
+    // console.info(multiplyValuesFromDB().then())
+
+    // async function printCalculationResult(){
+    //     let result = await multiplyValuesFromDB()
+    //     //console.log(result)
+    // }
+
+    // multiplyValuesFromDB.then(function(x){
+    //     console.log(x)
+    // })
+
+    // printCalculationResult().then(function fnc(x){
+    //     console.log(x)
+    // })
 
 </script>
 

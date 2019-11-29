@@ -39,6 +39,9 @@ export default {
                     .once('value')
                 const orders = firebaseValue.val()
 
+                // eslint-disable-next-line no-console
+                console.log('++++ Before object keys', orders)
+
                 Object.keys(orders).forEach(key => {
                     const order = orders[key]
                     resultOrders.push(
