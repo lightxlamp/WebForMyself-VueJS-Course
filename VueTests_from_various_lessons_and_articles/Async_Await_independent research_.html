@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Async/Await</title>
+</head>
+<body>
+
+<script>
+    // == Async/Await version ==
+    async function multiply(a, b) {
+        setTimeout(() => {
+            alert('Database request completed')
+            return a * b;
+        }, 3000)
+    }
+
+    async function printCalculationResult(){
+        var result = await multiply(2, 5)
+        console.log(result)
+    }
+
+    printCalculationResult()
+
+</script>
+
+</body>
+</html>
