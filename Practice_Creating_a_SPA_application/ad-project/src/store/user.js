@@ -36,6 +36,8 @@ export default {
 
             try {
                 const user = await firebase.auth().signInWithEmailAndPassword(email, password)
+                // // eslint-disable-next-line no-console
+                // console.log('user from db', user) //user.user.email
                 commit('setUser', new User(user.uid))
                 commit('setLoading', false)
             } catch (error) {

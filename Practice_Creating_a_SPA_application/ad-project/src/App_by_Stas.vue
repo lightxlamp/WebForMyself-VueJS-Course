@@ -93,12 +93,11 @@
                             <v-icon left>mdi-exit-to-app</v-icon>
                         Выйти
                     </v-btn>
-
                 </v-toolbar-items>
             </v-app-bar>
 
-
             <v-content>
+                Current user URL : {{currentUserInfo}}
                 <router-view></router-view>
             </v-content>
 
@@ -160,6 +159,14 @@ export default {
                 {title: 'Вход', icon: 'mdi-lock', url: '/login'},
                 {title: 'Регистрация', icon: 'mdi-face', url: '/registration'}
             ]
+        },
+        currentUserInfo (){
+            // eslint-disable-next-line no-console
+            console.log('this.$store.getters.user', this.$store.getters.user)
+
+            if(this.$store.getters.user !== null)
+                return this.$store.getters.user.id
+            else return 'user is not logged in'
         }
     },
     methods: {
@@ -170,7 +177,7 @@ export default {
             this.$store.dispatch('logoutUser')
             this.$router.push('/')
         }
-    }
+    },
 }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <v-layout row>
+        <v-layout row v-if="!loading && myAds.length !== 0">
             <v-flex xs12 sm6 offset-sm3>
                 <h1 class="text--secondary mb-3">Список объявлений</h1>
 
@@ -34,6 +34,20 @@
                 </v-card>
             </v-flex>
         </v-layout>
+        <v-layout row v-else-if="!loading && myAds.length === 0">
+            <v-flex xs12 class="text-xs-center">
+                <h2 class="text--primary">У вас нет объявлений</h2>
+            </v-flex>
+        </v-layout>
+        <v-layout v-else>
+            <v-flex>
+                <v-progress-circular
+                        :size="80"
+                        color="primary"
+                        indeterminate
+                ></v-progress-circular>
+            </v-flex>
+        </v-layout>
     </v-container>
 </template>
 
@@ -42,6 +56,9 @@
         computed: {
             myAds (){
                 return this.$store.getters.myAds
+            },
+            loading (){
+                return this.$store.getters.loading
             }
         }
     }

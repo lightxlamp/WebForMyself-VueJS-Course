@@ -1,16 +1,19 @@
 import Vue from 'vue'
 import App from './App_by_Stas.vue'
 import vuetify from './plugins/vuetify';
+import BuyModalComponent from './components/Shared/BuyModal'
 import router from './router'
 import * as firebase from 'firebase'
 import store from './store'
 
 Vue.config.productionTip = false
+Vue.component('app-buy-modal', BuyModalComponent)
 
 new Vue({
   vuetify,
   router,
   store,
+
   created (){
     // Your web app's Firebase configuration
     var firebaseConfig = {

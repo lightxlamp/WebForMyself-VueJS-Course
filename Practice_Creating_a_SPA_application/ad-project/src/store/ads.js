@@ -214,12 +214,12 @@ export default {
             //     console.log('Ad', a)
             // })
 
-            for (let i = 0; i < state.ads.length; i++)
-            {
-                if(state.ads[i].id === id)
-                {
-                    adToEdit = state.ads[i];
-                    break
+            if(state.ads !== undefined) {
+                for (let i = 0; i < state.ads.length; i++) {
+                    if (state.ads[i].id === id) {
+                        adToEdit = state.ads[i];
+                        break
+                    }
                 }
             }
 
@@ -241,10 +241,10 @@ export default {
                 return ad.promo === true
             })
         },
-        myAds (state) {
-            return state.ads
-            // return state.ads.filter(ad => {
-            //     return ad.ownerId === getters.user.id
+        myAds (state, getters) {
+            return state.ads.filter(ad => {
+                return ad.ownerId === getters.user.id
+            })
         },
         adById (state){
             return adId => {
