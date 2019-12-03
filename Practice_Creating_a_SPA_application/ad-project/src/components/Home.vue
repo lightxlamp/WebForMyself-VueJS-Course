@@ -30,7 +30,6 @@
                 >
                     <v-card
                         class="mx-auto"
-                        max-width="400"
                     >
                         <v-img
                             class="white--text align-end"
@@ -40,7 +39,7 @@
                             <v-card-title>{{ad.title}}</v-card-title>
                         </v-img>
 
-                        <v-card-subtitle class="pb-0">{{ad.id}}</v-card-subtitle>
+                        <v-card-subtitle class="pb-0 price">$34.99</v-card-subtitle> <!-- {{ad.id}} -->
 
                         <v-card-text class="text--primary">
                             <div>{{ad.description}}</div>
@@ -105,5 +104,12 @@
         padding: 10px 15px;
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
+    }
+
+    .price{
+        color: #B12704 !important;
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 19px;
     }
 </style>

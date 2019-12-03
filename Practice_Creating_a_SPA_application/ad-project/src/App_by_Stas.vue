@@ -60,22 +60,33 @@
             </v-navigation-drawer>
 
             <v-app-bar app color="rgb(14,117,189)" dark>
-
                 <v-app-bar-nav-icon
                     @click.stop="drawer = ! drawer"
                     class="hidden-md-and-up">
                 </v-app-bar-nav-icon>
 
+<!--                <v-icon id="siteLogo">siteLogo</v-icon>-->
+                <router-link to="/">
+                    <v-img :src="require('@/assets/my_vss_logo_1.png')" height="40"/>
+                </router-link>
+
                 <v-toolbar-title>
-                    <router-link to="/" tag="span" class="pointer">mashina.kg</router-link>
+                    <router-link to="/" tag="span" class="pointer">vue-stas-store.com</router-link>
                 </v-toolbar-title>
+
+                <div class="userInfoDiv" v-if="isUserLoggedIn">
+                    Hello: Username<!--{{currentUserInfo}} -->
+                </div>
+                <div class="userInfoDiv" v-else>
+                    {{currentUserInfo}}
+                </div>
 
                 <v-spacer></v-spacer>
 
                 <v-toolbar-items class="hidden-sm-and-down">
                     <v-btn
                         v-for="link in links"
-                       :key="link.title"
+                        :key="link.title"
                         :to="link.url"
                         text >
                         <v-icon left>
@@ -95,12 +106,6 @@
             </v-app-bar>
 
             <v-content>
-                <div class="userInfoDiv" v-if="isUserLoggedIn">
-                    Current user ID : {{currentUserInfo}}
-                </div>
-                <div class="userInfoDiv" v-else>
-                    {{currentUserInfo}}
-                </div>
                 <router-view></router-view>
             </v-content>
 
@@ -119,7 +124,7 @@
             </template>
 
             <v-footer color="rgb(14,117,189)" app>
-                <span class="white--text">&copy; 2013–2019 ОcОО «ESPIRU»</span>
+                <span class="white--text">&copy; 2011–2020, «Lightxlamp», Inc or its affiliates</span>
             </v-footer>
         </v-app>
     </div>
@@ -155,7 +160,8 @@ export default {
                 return [
                     {title: 'Заказы', icon: 'mdi-bookmark', url: '/orders'},
                     {title: 'Новое объявление', icon: 'mdi-note', url: '/new'},
-                    {title: 'Мои объявления', icon: 'mdi-clipboard-list', url: '/list'}
+                    {title: 'Мои объявления', icon: 'mdi-clipboard-list', url: '/list'},
+                    {title: 'Мой аккаунт', icon: 'mdi-account', url: '/account'},
                 ]
             }
             return [
@@ -203,9 +209,8 @@ export default {
     }
 
     .userInfoDiv{
-        padding-top: 10px;
+        padding-top: 3px;
         padding-left: 10px;
-        color: grey;
-        font-size: 12px;
+        font-size: 16px;
     }
 </style>

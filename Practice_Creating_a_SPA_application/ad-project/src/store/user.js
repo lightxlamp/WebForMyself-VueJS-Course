@@ -50,7 +50,7 @@ export default {
 
         autoLoginUser({commit}, payload){
             commit('setUser', new User(payload.uid))
-        },
+        }, //@todo change "payload" to smth
 
         logoutUser({commit}){
             firebase.auth().signOut()

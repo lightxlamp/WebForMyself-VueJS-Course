@@ -1,7 +1,6 @@
 <template>
     <v-container>
         <v-layout row>
-
             <v-flex xs12 class="text-xl-start pt-5" v-if="loading">
                 <v-progress-circular
                         :size="80"

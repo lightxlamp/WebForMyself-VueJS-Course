@@ -8,6 +8,7 @@ import Login from '@/components/Auth/Login'
 import Registration from '@/components/Auth/Registration'
 import Orders from '@/components/User/Orders'
 import AuthGuard from './auth-guard'
+import Account from "../components/User/Account";
 
 Vue.use(Router)
 
@@ -50,6 +51,12 @@ export default new Router({
             path: '/orders',
             name: 'Orders',
             component: Orders,
+            beforeEnter: AuthGuard
+        },
+        {
+            path: '/account',
+            name: 'Account',
+            component: Account,
             beforeEnter: AuthGuard
         },
     ],
