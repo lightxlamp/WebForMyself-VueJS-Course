@@ -6,8 +6,6 @@
                 sm="6">
                 <v-img
                     :src="ad.imageSrc"
-                    height="444"
-                    width="864"
                 ></v-img>
             </v-col>
 

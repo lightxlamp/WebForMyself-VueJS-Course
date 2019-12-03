@@ -2,7 +2,7 @@
     <div>
         <v-btn class="primary mr-2" @click="dialog = true">Редактировать</v-btn>
 
-        <v-dialog v-model="dialog" persistent max-width="400">
+        <v-dialog v-model="dialog" persistent max-width="900">
             <v-card>
                 <v-container>
                     <v-layout row>
@@ -29,6 +29,7 @@
                                     name="description"
                                     type="text"
                                     v-model="editedDescription"
+                                    rows="14"
                                 />
                             </v-card-text>
                         </v-flex>
