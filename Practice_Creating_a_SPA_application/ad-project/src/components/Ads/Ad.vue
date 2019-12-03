@@ -1,41 +1,44 @@
 <template>
-    <v-container>
-        <v-layout row>
-            <v-flex xs12>
-                <h1>Объявление</h1>
-                <v-card v-if="!loading">
+    <v-container class="grey lighten-5">
+        <v-row no-gutters v-if="!loading">
+            <v-col
+                cols="12"
+                sm="6">
+                <v-img
+                    :src="ad.imageSrc"
+                    height="444"
+                    width="864"
+                ></v-img>
+            </v-col>
 
-                    <v-img
-                        :src="ad.imageSrc"
-                        height="300"
-                    ></v-img>
+            <v-col
+                cols="12"
+                sm="6">
+                <v-card-text
+                    class="AdDescription"
+                    outlined
+                    tile>
+                    <h1 class="text--primary">{{ad.title}}</h1>
+                    <p>{{ad.description}}</p>
+                </v-card-text>
 
-                    <v-card-text>
-                        <h1 class="text--primary">{{ad.title}}</h1>
-                        <p>{{ad.description}}</p>
-                    </v-card-text>
+                <v-card-actions>
+                    <edit-ad-modal :ad="ad" v-if="isOwner"></edit-ad-modal>
+                    <app-buy-modal :ad="ad" v-if="!isOwner"></app-buy-modal>
+                </v-card-actions>
+            </v-col>
+        </v-row>
 
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <edit-ad-modal :ad="ad" v-if="isOwner"></edit-ad-modal>
-                        <app-buy-modal :ad="ad"></app-buy-modal>
-                    </v-card-actions>
-                </v-card>
-                <div v-else>
-                    <v-container>
-                        <v-layout row>
-                            <v-flex xs12 class="text-sm-center pt-5">
-                                <v-progress-circular
-                                        :size="80"
-                                        color="primary"
-                                        indeterminate
-                                ></v-progress-circular>
-                            </v-flex>
-                        </v-layout>
-                    </v-container>
-                </div>
-            </v-flex>
-        </v-layout>
+        <v-row v-else
+               justify="center">
+            <v-col md="auto">
+                <v-progress-circular
+                    :size="80"
+                    color="primary"
+                    indeterminate
+                ></v-progress-circular>
+            </v-col>
+        </v-row>
     </v-container>
 </template>
 
@@ -66,5 +69,10 @@
 </script>
 
 <style scoped>
-
+    .AdDescription {
+        white-space: pre-wrap;
+    }
+    h1{
+        padding-bottom: 10px;
+    }
 </style>

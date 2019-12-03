@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import App from './App_by_Stas.vue'
 import vuetify from './plugins/vuetify';
-import BuyModalComponent from './components/Shared/BuyModal'
 import router from './router'
 import * as firebase from 'firebase'
 import store from './store'
+import BuyModalComponent from './components/Shared/BuyModal'
 //import colors from 'vuetify/lib/util/colors'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = true // Set this to false to prevent the production tip on Vue startup.
 Vue.component('app-buy-modal', BuyModalComponent)
 Vue.use(vuetify)
 
@@ -17,7 +17,7 @@ new Vue({
   vuetify,
 
   created (){
-    // Your web app's Firebase configuration
+    // My web app's Firebase configuration
     var firebaseConfig = {
       apiKey: "AIzaSyC-_fL99SRDOwRlcAvoDZsM58d2jTlBbNM",
       authDomain: "vue-ad-project-stas.firebaseapp.com",

@@ -1,7 +1,6 @@
 <template>
     <div id="app">
         <v-app id="inspire">
-
             <v-navigation-drawer app
                 v-model="drawer"
                 absolute
@@ -10,7 +9,6 @@
                 width="300px"
                 dark
             >
-
                 <v-card
                     class="mx-auto"
                     max-width="300"
@@ -97,7 +95,12 @@
             </v-app-bar>
 
             <v-content>
-                Current user URL : {{currentUserInfo}}
+                <div class="userInfoDiv" v-if="isUserLoggedIn">
+                    Current user ID : {{currentUserInfo}}
+                </div>
+                <div class="userInfoDiv" v-else>
+                    {{currentUserInfo}}
+                </div>
                 <router-view></router-view>
             </v-content>
 
@@ -162,11 +165,11 @@ export default {
         },
         currentUserInfo (){
             // eslint-disable-next-line no-console
-            console.log('this.$store.getters.user', this.$store.getters.user)
+            console.log('this.$store.getters.user: ', this.$store.getters.user)
 
             if(this.$store.getters.user !== null)
                 return this.$store.getters.user.id
-            else return 'user is not logged in'
+            else return "No user logged in"
         }
     },
     methods: {
@@ -197,5 +200,12 @@ export default {
 
     .pointer{
         cursor: pointer;
+    }
+
+    .userInfoDiv{
+        padding-top: 10px;
+        padding-left: 10px;
+        color: grey;
+        font-size: 12px;
     }
 </style>

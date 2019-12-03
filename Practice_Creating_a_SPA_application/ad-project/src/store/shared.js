@@ -5,13 +5,13 @@ export default {
     },
 
     actions: {
-        setLoading ({commit}, payload){
-            commit('setLoading', payload)
+        setLoading ({commit}, trueOrFalse){
+            commit('setLoading', trueOrFalse)
         },
-        setError ({commit}, payload){
+        setError ({commit}, trueOrFalse){
             // eslint-disable-next-line no-console
             //console.log('SetError Action called. Payload', payload)
-            commit('setError', payload)
+            commit('setError', trueOrFalse)
         },
         clearError ({commit}) {
             commit('clearError')
@@ -19,13 +19,13 @@ export default {
     },
 
     mutations: {
-        setLoading (state, payload){
-            state.loading = payload
+        setLoading (state, trueOrFalse){
+            state.loading = trueOrFalse
         },
-        setError (state, payload){
+        setError (state, trueOrFalse){
             // eslint-disable-next-line no-console
             //console.log('SetError Mutation called. State + Payload', state, payload)
-            state.error = payload
+            state.error = trueOrFalse
         },
         clearError(state){
             state.error = null

@@ -11,8 +11,8 @@ export default {
         user: null
     },
     mutations: {
-        setUser (state, payload){
-            state.user = payload
+        setUser (state, user){
+            state.user = user
         }
     },
     actions: {
@@ -30,6 +30,7 @@ export default {
                 throw error
             }
         },
+
         async loginUser({commit}, {email, password}){
             commit('clearError')
             commit('setLoading', true)
