@@ -243,8 +243,7 @@ export default {
         },
         myAds (state, getters) {
             return state.ads.filter(ad => {
-                return ad.ownerId === getters.user.id
-            })
+                    return ad.ownerId === getters.user.id})
         },
         adById (state){
             return adId => {

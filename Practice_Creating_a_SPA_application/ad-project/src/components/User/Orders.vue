@@ -1,15 +1,16 @@
 <template>
     <v-container>
-        <v-layout row>
-            <v-flex xs12 class="text-xl-start pt-5" v-if="loading">
+        <v-layout row v-if="loading" justify-center id="loading">
+            <div class="ma-12">
                 <v-progress-circular
                         :size="80"
                         color="primary"
                         indeterminate
                 ></v-progress-circular>
-            </v-flex>
-
-            <v-flex xs12 sm6 offset-sm3 v-else-if="!loading && orders.length !== 0">
+            </div>
+        </v-layout>
+        <v-layout row v-else-if="!loading && orders.length !== 0">
+            <v-flex xs12 sm6 offset-sm3 >
                 <h1 class="text--secondary mb-3"> Заказы </h1>
                 <v-list
                         subheader
@@ -48,7 +49,9 @@
                     </v-list-item-group>
                 </v-list>
             </v-flex>
-            <v-flex xs12 class="text-xl-start" v-else>
+        </v-layout>
+        <v-layout row v-else>
+            <v-flex xs12 class="text-xl-start" >
                 <h1 class="text--secondary">У Вас нет заказов</h1>
             </v-flex>
         </v-layout>
