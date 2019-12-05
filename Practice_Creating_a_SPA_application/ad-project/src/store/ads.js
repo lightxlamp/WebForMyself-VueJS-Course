@@ -242,6 +242,10 @@ export default {
             })
         },
         myAds (state, getters) {
+            // eslint-disable-next-line no-console
+            console.log('state ads', state.ads)
+            // eslint-disable-next-line no-console
+            console.log('getters user id', getters.user.id)
             return state.ads.filter(ad => {
                     return ad.ownerId === getters.user.id})
         },

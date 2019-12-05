@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-layout row>
-            <v-flex xs12 sm6 offset-sm3>
+            <v-flex xs10 sm8 md8 lg8 xl6 offset-xs1 offset-sm2 offset-md2 offset-lg2 offset-xl3>
                 <h1 class="text--secondary mb-3">Добавить объявление</h1>
 
                 <v-form v-model="valid" ref="form" lazy-validation>
@@ -60,6 +60,7 @@
                 <v-layout row>
                     <v-flex xs12>
                         <v-switch
+                                class="pl-2"
                                 label="Добавить в промо?"
                                 v-model="promo"
                         ></v-switch>
@@ -72,7 +73,7 @@
                         <v-btn
                                 :loading="loading"
                                 :disabled="(!valid || !image) || loading"
-                                class="success"
+                                class="success ml-2"
                                 @click="createAd"
                         >Создать объявление</v-btn>
                     </v-flex>

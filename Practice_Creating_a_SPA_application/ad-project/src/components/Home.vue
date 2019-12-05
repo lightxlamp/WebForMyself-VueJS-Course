@@ -3,11 +3,16 @@
         <v-container fluid>
             <v-layout row>
                 <v-flex xs12>
-                    <v-carousel>
+                    <v-carousel
+                            cycle
+                            interval="4000"
+                    >
                         <v-carousel-item
-                                v-for="ad in promoAds"
-                                :key="ad.id"
-                                :src="ad.imageSrc"
+                            v-for="ad in promoAds"
+                            :key="ad.id"
+                            :src="ad.imageSrc"
+                            contain
+                            dark
                         >
                         <div class="car-link">
                             <v-btn class="error" :to="'/ad/' + ad.id">{{ad.title}}</v-btn>
@@ -29,17 +34,18 @@
                     :key="ad.id"
                 >
                     <v-card
-                        class="mx-auto"
+                        class="mx-auto pt-5"
                     >
                         <v-img
                             class="white--text align-end"
                             height="200px"
                             :src="ad.imageSrc"
+                            contain
                         >
                             <v-card-title>{{ad.title}}</v-card-title>
                         </v-img>
 
-                        <v-card-subtitle class="pb-0 price">$34.99</v-card-subtitle> <!-- {{ad.id}} -->
+                        <v-card-subtitle class="pb-1 price">$34.99</v-card-subtitle> <!-- {{ad.id}} -->
 
                         <v-card-text class="text--primary">
                             <div>{{ad.description}}</div>
@@ -105,11 +111,13 @@
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
     }
-
     .price{
         color: #B12704 !important;
-        font-weight: 400;
-        font-size: 13px;
+        font-weight: 500;
         line-height: 19px;
+    }
+
+    .v-card__title{
+        text-shadow: 0px 0px 5px #000000;
     }
 </style>

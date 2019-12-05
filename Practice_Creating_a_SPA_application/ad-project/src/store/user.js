@@ -35,11 +35,18 @@ export default {
             commit('clearError')
             commit('setLoading', true)
 
+            // // eslint-disable-next-line no-console
+            // console.log('email', email)
+            // // eslint-disable-next-line no-console
+            // console.log('password', password)
+
             try {
                 const user = await firebase.auth().signInWithEmailAndPassword(email, password)
-                // // eslint-disable-next-line no-console
-                // console.log('user from db', user) //user.user.email
-                commit('setUser', new User(user.uid))
+                // eslint-disable-next-line no-console
+                console.log('userFromFireBase', user)
+                // eslint-disable-next-line no-console
+                console.log('userFromFireBase.UID', user.user.uid)
+                commit('setUser', new User(user.user.uid))
                 commit('setLoading', false)
             } catch (error) {
                 commit('setLoading', false)
