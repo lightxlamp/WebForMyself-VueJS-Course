@@ -6,13 +6,13 @@
                     <v-carousel
                             cycle
                             interval="4000"
+                            show-arrows-on-hover
                     >
                         <v-carousel-item
                             v-for="ad in promoAds"
                             :key="ad.id"
                             :src="ad.imageSrc"
                             contain
-                            dark
                         >
                         <div class="car-link">
                             <v-btn class="error" :to="'/ad/' + ad.id">{{ad.title}}</v-btn>

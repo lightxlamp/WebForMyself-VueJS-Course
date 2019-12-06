@@ -46,6 +46,8 @@ export default {
                 console.log('userFromFireBase', user)
                 // eslint-disable-next-line no-console
                 console.log('userFromFireBase.UID', user.user.uid)
+                // eslint-disable-next-line no-console
+                console.log('userFromFireBase.Name', user.user.displayName)
                 commit('setUser', new User(user.user.uid))
                 commit('setLoading', false)
             } catch (error) {

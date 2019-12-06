@@ -74,10 +74,7 @@
                     <router-link to="/" tag="span" class="pointer">vue-stas-store.com</router-link>
                 </v-toolbar-title>
 
-                <div class="userInfoDiv" v-if="isUserLoggedIn">
-                    Hello: Username<!--{{currentUserInfo}} -->
-                </div>
-                <div class="userInfoDiv" v-else>
+                <div class="userInfoDiv">
                     {{currentUserInfo}}
                 </div>
 
@@ -174,7 +171,7 @@ export default {
             console.log('this.$store.getters.user: ', this.$store.getters.user)
 
             if(this.$store.getters.user !== null)
-                return this.$store.getters.user.id
+                return "Hello, " + this.$store.getters.user.id
             else return "No user logged in"
         }
     },
