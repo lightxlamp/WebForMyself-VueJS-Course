@@ -20,19 +20,19 @@
                             <v-list-item>
                                 <v-list-item-avatar>
                                     <v-img
-                                            src="https://i.ibb.co/VjrK66B/ava.png">
+                                        :src="currentUserAvatar">
                                     </v-img>
                                 </v-list-item-avatar>
 
                                 <v-list-item-content>
-                                    <v-list-item-title style="color: white">Stanislav Sheveliukhin</v-list-item-title>
+                                    <v-list-item-title style="color: white">{{currentUserName}}</v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
 
                             <v-list-item
-                                    v-for="link in links"
-                                    :key="link.title"
-                                    :to="link.url"
+                                v-for="link in links"
+                                :key="link.title"
+                                :to="link.url"
                             >
                                 <v-list-item-icon>
                                     <v-icon v-text="link.icon"></v-icon>
@@ -149,9 +149,18 @@ export default {
             // console.log("Stas error", this.$store.getters.error)
             return this.$store.getters.error
         },
-        isUserLoggedIn (){
-            return this.$store.getters.isUserLoggedIn
+        currentUserAvatar () {
+            return this.$store.getters.currentUserAvatar;
         },
+
+        currentUserName (){
+          return this.$store.getters.currentUserName;
+        },
+
+        isUserLoggedIn (){
+            return this.$store.getters.isUserLoggedIn;
+        },
+
         links () {
             if(this.isUserLoggedIn){
                 return [

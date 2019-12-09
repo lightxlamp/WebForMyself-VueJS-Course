@@ -14,7 +14,10 @@ export default {
     mutations: {
         setUser (state, user){
             state.user = user
-        }
+        },
+        setFireBaseUserObject (state, firebaseUserObject){
+            state.firebaseUserObject = firebaseUserObject
+        },
     },
     actions: {
         async registerUser({commit}, {email, password}){
@@ -45,7 +48,7 @@ export default {
                 console.log('userFromFireBase.UID', user.user.uid)
                 // eslint-disable-next-line no-console
                 console.log('userFromFireBase.Name', user.user.displayName)
-                this.firebaseUserObject = user;
+                commit('setFireBaseUserObject', user)
                 commit('setUser', new User(user.user.uid))
                 commit('setLoading', false)
             } catch (error) {
@@ -78,7 +81,9 @@ export default {
                 // eslint-disable-next-line no-console
                 console.log("After: this.firebaseUserObject.user.displayName", currentUser.displayName)
                 // eslint-disable-next-line no-console
-                console.log("Aftter: this.firebaseUserObject.user.photoURL", currentUser.photoURL)
+                console.log("After: this.firebaseUserObject.user.photoURL", currentUser.photoURL)
+
+                commit('setLoading', false)
             }
             catch (e) {
                 throw e
@@ -114,7 +119,21 @@ export default {
         },
 
         firebaseUserObject(state){
-            return state.firebaseUserObject()
+            return state.firebaseUserObject
+        },
+
+        currentUserAvatar(state){
+            if(state.firebaseUserObject !== null){
+                return state.firebaseUserObject.user.photoURL
+            }
+            else return 'http://bootdey.com/img/Content/avatar/avatar7.png'
+        },
+
+        currentUserName(state) {
+            if(state.firebaseUserObject !== null){
+                return state.firebaseUserObject.user.displayName
+            }
+            else return 'Unauthorized user'
         }
     }
 }
