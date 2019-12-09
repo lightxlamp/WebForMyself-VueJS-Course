@@ -8,7 +8,8 @@ class User {
 
 export default {
     state: {
-        user: null
+        user: null,
+        firebaseUserObject: null
     },
     mutations: {
         setUser (state, user){
@@ -31,14 +32,10 @@ export default {
             }
         },
 
-        async loginUser({commit}, {email, password}){
+        async loginUser({commit}, {email, password})
+        {
             commit('clearError')
             commit('setLoading', true)
-
-            // // eslint-disable-next-line no-console
-            // console.log('email', email)
-            // // eslint-disable-next-line no-console
-            // console.log('password', password)
 
             try {
                 const user = await firebase.auth().signInWithEmailAndPassword(email, password)
@@ -48,6 +45,7 @@ export default {
                 console.log('userFromFireBase.UID', user.user.uid)
                 // eslint-disable-next-line no-console
                 console.log('userFromFireBase.Name', user.user.displayName)
+                this.firebaseUserObject = user;
                 commit('setUser', new User(user.user.uid))
                 commit('setLoading', false)
             } catch (error) {
@@ -55,6 +53,37 @@ export default {
                 commit('setError', error.message)
                 throw error
             }
+        },
+
+        async updateUser({commit}, {userName, avatarSrc})
+        {
+            commit('clearError')
+            commit('setLoading', true)
+
+            // eslint-disable-next-line no-console
+            console.log("userName", userName)
+            // eslint-disable-next-line no-console
+            console.log("avatarSrc", avatarSrc)
+
+            try {
+                //const currentUser = this.$store.getters.firebaseUserObject.user;
+                const currentUser = this.firebaseUserObject.user;
+                // eslint-disable-next-line no-console
+                console.log("Before: this.firebaseUserObject.user.displayName", currentUser.displayName)
+                // eslint-disable-next-line no-console
+                console.log("Before: this.firebaseUserObject.user.photoURL", currentUser.photoURL)
+
+                await currentUser.updateProfile({displayName: userName, photoURL: avatarSrc})
+
+                // eslint-disable-next-line no-console
+                console.log("After: this.firebaseUserObject.user.displayName", currentUser.displayName)
+                // eslint-disable-next-line no-console
+                console.log("Aftter: this.firebaseUserObject.user.photoURL", currentUser.photoURL)
+            }
+            catch (e) {
+                throw e
+            }
+
         },
 
         autoLoginUser({commit}, payload){
@@ -68,10 +97,24 @@ export default {
     },
     getters: {
         user(state){
+            // const user = firebase.auth().currentUser;
+            // // eslint-disable-next-line no-console
+            // console.log('userFromFireBase.UID', user.user.uid)
+            // // eslint-disable-next-line no-console
+            // console.log('userFromFireBase.Name', user.user.displayName)
+            //
+            // // firebase.User.updateProfile({ displayName: "Jane Q. User"}).then(function () {
+            // //     // eslint-disable-next-line no-console
+            // //     console.log("firebase.User.displayName, ", firebase.User.displayName)
+            // // })
             return state.user
         },
         isUserLoggedIn(state){
             return state.user !== null
+        },
+
+        firebaseUserObject(state){
+            return state.firebaseUserObject()
         }
     }
 }

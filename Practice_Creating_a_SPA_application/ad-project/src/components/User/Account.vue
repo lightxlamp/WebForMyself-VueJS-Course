@@ -15,15 +15,15 @@
                             :rules="[(v) => v && v.length <= 15 || 'Извините. Имя не должно превышать 15 символов']"
                     />
 
-                    <v-text-field
-                            name="userPhone"
-                            label="Телефон"
-                            type="text"
-                            v-model="userPhone"
-                            :rules="[(v) => v && v.length <= 13 || 'Телефон не должен превышать 13 символов',
-                                    (v) => v && v.length >= 10 || 'Телефон должен иметь минимум 10 цифр'
-                            ]"
-                    />
+<!--                    <v-text-field-->
+<!--                            name="userPhone"-->
+<!--                            label="Телефон"-->
+<!--                            type="text"-->
+<!--                            v-model="userPhone"-->
+<!--                            :rules="[(v) => v && v.length <= 13 || 'Телефон не должен превышать 13 символов',-->
+<!--                                    (v) => v && v.length >= 10 || 'Телефон должен иметь минимум 10 цифр'-->
+<!--                            ]"-->
+<!--                    />-->
                 </v-form>
 
                 <v-layout row>
@@ -39,8 +39,8 @@
 
                         <v-btn
                                 :loading="loading"
-                                :disabled="(!valid || !image) || loading"
-                                class="success"
+                                :disabled="(!valid || !avatarSrc) || loading"
+                                class="ma-2 success"
                                 @click="updateUser"
                         >Сохранить изменения</v-btn>
 
@@ -74,19 +74,15 @@
     export default {
         data () {
             return {
-                title: '',
-                promo: false,
-                description: '',
                 valid: false,
-                image: false,
-                avatarSrc: '',
+                avatarSrc: false,
                 userName: '',
-                userPhone: ''
+                // userPhone: ''
             }
         },
         mounted() {
-            this.userName = "Анатолий";
-            this.userPhone = "+996755410078";
+            // this.userName = this.$store.getters.firebaseUserObject.user.displayName
+            // this.userPhone = "+996755410078";
         },
 
         computed: {
@@ -96,18 +92,17 @@
         },
         methods: {
             updateUser(){
-                if(this.$refs.form.validate() && this.image){
-                    const ad = {
-                        title: this.title,
-                        description: this.description,
-                        promo: this.promo,
-                        image: this.image
+                if(this.$refs.form.validate() && this.avatarSrc){
+                    const updatingUserInfo = {
+                        userName: this.userName,
+                        // userPhone: this.userPhone,
+                        // avatarSrc: this.avatarSrc
+                        avatarSrc: "https://www.w3schools.com/howto/img_avatar.png"
                     }
 
-                    this.$store.dispatch('updateUser', ad)
+                    this.$store.dispatch('updateUser', updatingUserInfo)
                         .then(() => {
-                            //alert('we are here')
-                            this.$router.push('/list')
+                            alert('Аккаунт обновлен')
                         })
                         .catch(() => {})
                 }
@@ -122,7 +117,7 @@
                     this.avatarSrc = reader.result
                 }
                 reader.readAsDataURL(file)
-                this.image = file
+                this.avatarSrc = file
             }
         }
     }
