@@ -76,7 +76,7 @@
             return {
                 valid: false,
                 avatarSrc: false,
-                userName: '',
+                userName: this.$store.getters.currentUserName,
                 // userPhone: ''
             }
         },
@@ -88,6 +88,9 @@
         computed: {
             loading () {
                 return this.$store.getters.loading
+            },
+            currentUserName() {
+                return this.$store.getters.firebaseUserObject.user.displayName
             }
         },
         methods: {

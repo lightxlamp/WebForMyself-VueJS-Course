@@ -91,13 +91,15 @@ export default {
 
         },
 
-        autoLoginUser({commit}, payload){
-            commit('setUser', new User(payload.uid))
+        autoLoginUser({commit}, fireBaseUser){
+            commit('setUser', new User(fireBaseUser.uid))
+            //commit('setFireBaseUserObject', new User(fireBaseUser))
         }, //@todo change "payload" to smth
 
         logoutUser({commit}){
             firebase.auth().signOut()
             commit('setUser', null)
+            commit('setFireBaseUserObject', null)
         }
     },
     getters: {

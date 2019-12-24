@@ -180,7 +180,7 @@ export default {
             console.log('this.$store.getters.user: ', this.$store.getters.user)
 
             if(this.$store.getters.user !== null)
-                return "Hello, " + this.$store.getters.user.id
+                return "Здравствуйте, " + this.$store.getters.currentUserName
             else return "No user logged in"
         }
     },
