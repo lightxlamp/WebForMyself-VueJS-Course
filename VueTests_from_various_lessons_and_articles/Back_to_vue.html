@@ -204,13 +204,13 @@
                 }
             });
 
-                var watchLesson = new Vue({
+            const watchLesson = new Vue({
                 el: '#watchLesson',
                 data: {
                     textSearch: ''
                 },
                 watch: {
-                    //If value of 'textSearch' variable changes then this function activates
+                    // If value of 'textSearch' variable changes then this function activates
                     textSearch: function(){
                         if(this.textSearch.length > 3){
                             this.textSearch = "Value of this field was changed with code"
