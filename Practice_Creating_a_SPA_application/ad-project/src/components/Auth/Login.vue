@@ -9,7 +9,7 @@
           <v-card-text>
             <v-form v-model="valid" ref="form" lazy-validation>
               <v-text-field
-                label="Email"
+                :label="$t('text.email')"
                 name="email"
                 prepend-icon="mdi-account"
                 type="email"
@@ -19,7 +19,7 @@
 
               <v-text-field
                 id="password"
-                label="Пароль"
+                :label="$t('text.password')"
                 name="password"
                 prepend-icon="mdi-lock"
                 type="password"
@@ -37,7 +37,7 @@
               :loading="loading"
               color="primary"
             >
-              Войти
+              {{ $t("text.loginBtn") }}
             </v-btn>
           </v-card-actions>
         </v-card>

@@ -4,6 +4,9 @@ export const RUSSIAN_TRANSLATIONS = {
         home: 'Accueil',
         search: 'Chercher',
         date: 'Rendez-vous amoureux', 
-        loginForm: 'Форма входа'
+        loginForm: 'Форма входа',
+        password: 'Пароль',
+        email: 'Почта',
+        loginBtn: 'Войти'
     }
 };

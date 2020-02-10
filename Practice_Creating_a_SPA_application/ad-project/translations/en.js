@@ -4,6 +4,9 @@ export const ENGLISH_TRANSLATIONS = {
         home: 'Home',
         search: 'Search',
         date: 'Date', 
-        loginForm: 'Sign-In'
+        loginForm: 'Sign-In', 
+        password: 'Password', 
+        email: 'Email', 
+        loginBtn: 'Sign-in'
     }
 };
