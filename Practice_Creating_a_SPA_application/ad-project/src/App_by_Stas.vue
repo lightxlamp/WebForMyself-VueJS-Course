@@ -74,6 +74,17 @@
           {{ currentUserInfo }}
         </div>
 
+        <div class="locale-changer">
+          <select v-model="$i18n.locale">
+            <option
+              v-for="(lang, i) in langs"
+              :key="`Lang${i}`"
+              :value="lang"
+              >{{ lang }}</option
+            >
+          </select>
+        </div>
+
         <v-spacer></v-spacer>
 
         <v-toolbar-items class="hidden-sm-and-down">
@@ -120,12 +131,14 @@
 
 <script>
 export default {
+  name: 'locale-changer',
   props: {
     source: String
   },
   data: () => ({
     drawer: null,
-    timeout: 5000
+    timeout: 5000,
+    langs: ['ru', 'en']
   }),
   computed: {
     error() {
@@ -208,5 +221,15 @@ html {
   padding-top: 3px;
   padding-left: 10px;
   font-size: 16px;
+}
+
+.locale-changer {
+    border: 1px solid;
+    margin-left: 10px;
+    padding: 4px;
+}
+
+.locale-changer select {
+  background-color: #0E75BD;
 }
 </style>
