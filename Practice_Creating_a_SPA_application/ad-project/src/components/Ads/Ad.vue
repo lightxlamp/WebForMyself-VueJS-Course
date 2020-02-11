@@ -9,6 +9,7 @@
         <v-card-text class="AdDescription" outlined tile>
           <h1 class="text--primary">{{ ad.title }}</h1>
           <p>{{ ad.description }}</p>
+          <p class="price">${{ ad.price }}</p>
         </v-card-text>
 
         <v-card-actions>

@@ -41,7 +41,7 @@
               </v-card-text>
 
               <v-card-subtitle class="price pa-0 pl-4">
-                $34.99
+                {{ ad.price }}
               </v-card-subtitle>
               <!-- {{ad.id}} -->
 
@@ -49,6 +49,9 @@
                 <v-spacer></v-spacer>
                 <v-btn class="info" :to="'/ad/' + ad.id">{{
                   $t("text.open")
+                }}</v-btn>         
+                <v-btn class="error" :to="'/ad/' + ad.id">{{
+                  $t("text.delete")
                 }}</v-btn>
               </v-card-actions>
             </v-flex>
@@ -87,6 +90,7 @@ export default {
 .price {
   color: #b12704 !important;
   font-weight: 500;
+  line-height: 19px;
 }
 
 .adDescription {

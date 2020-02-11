@@ -19,6 +19,7 @@ export const RUSSIAN_TRANSLATIONS = {
         buy: 'Купить',
         cancel: 'Отмена',
         open: 'Открыть',
+        delete: 'Удалить',
         yourName: 'Ваше имя',
         yourPhone: 'Ваш телефон',
         youDoNotHaveOrders: 'У Вас нет заказов',
@@ -31,6 +32,11 @@ export const RUSSIAN_TRANSLATIONS = {
         description: 'Описание',
         titleIsMandatoryField: 'Название товара - обязательное поле',
         descIsMandatoryField: 'Описание товара - обязательное поле', 
-        listOfYourAds: 'Список ваших объявлений'
+        priceIsMandatoryField: 'Цена товара - обязательное поле', 
+        listOfYourAds: 'Список ваших объявлений',
+        price: 'Цена',
+        edit: 'Редактировать',
+        editAd: 'Редактировать объявление',
+        save: 'Сохранить'
     }
 };

@@ -19,6 +19,7 @@ export const ENGLISH_TRANSLATIONS = {
         buy: 'Buy', 
         cancel: 'Cancel', 
         open: 'Open',
+        delete: 'Delete',
         yourName: 'Your name',
         yourPhone: 'Your phone',
         youDoNotHaveOrders: 'You do not have any order yet',
@@ -31,6 +32,11 @@ export const ENGLISH_TRANSLATIONS = {
         description: 'Description',
         titleIsMandatoryField: 'Title is a mandatory field',
         descIsMandatoryField: 'Description is a mandatory field',
-        listOfYourAds: 'List of  your ads'
+        priceIsMandatoryField: 'Price is a mandatory field',
+        listOfYourAds: 'List of  your ads', 
+        price: 'Price',
+        edit: 'Edit',
+        editAd: 'Edit ad',
+        save: 'Save'
     }
 };

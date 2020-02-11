@@ -11,7 +11,7 @@
               contain
             >
               <div class="car-link">
-                <v-btn class="error" :to="'/ad/' + ad.id">{{ ad.title }}</v-btn>
+                <v-btn class="positiveBtn" :to="'/ad/' + ad.id">{{ ad.title }}</v-btn>
               </div>
             </v-carousel-item>
           </v-carousel>
@@ -32,7 +32,8 @@
               <v-card-title>{{ ad.title }}</v-card-title>
             </v-img>
 
-            <v-card-subtitle class="pb-1 price">$34.99</v-card-subtitle>
+            <!-- <v-card-subtitle class="pb-1 price">$34.99</v-card-subtitle> -->
+            <v-card-subtitle class="pb-1 price">${{ad.price}}</v-card-subtitle>
             <!-- {{ad.id}} -->
 
             <v-card-text class="text--primary">
@@ -40,7 +41,7 @@
             </v-card-text>
 
             <v-card-actions>
-              <v-btn text :to="'/ad/' + ad.id">
+              <v-btn class="openBtn openButton" text :to="'/ad/' + ad.id">
                 {{ $t("text.open") }}
               </v-btn>
 
@@ -103,5 +104,9 @@ export default {
 
 .v-card__title {
   text-shadow: 0px 0px 5px #000000;
+}
+
+.openBtn{
+  margin-right: 5px;
 }
 </style>

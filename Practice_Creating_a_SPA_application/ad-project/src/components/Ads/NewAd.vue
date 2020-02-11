@@ -34,6 +34,14 @@
             multiline
             :rules="descRules"
           />
+
+          <v-text-field
+            name="price"
+            :label="$t('text.price')"
+            type="number"
+            v-model="price"
+            required
+          />
         </v-form>
 
         <v-layout row>
@@ -104,7 +112,8 @@ export default {
       description: "",
       valid: false,
       image: false,
-      imageSrc: ""
+      imageSrc: "",
+      price: ""
     };
   },
   computed: {
@@ -117,7 +126,10 @@ export default {
     },
     descRules() {
       return [v => !!v || this.$t("text.descIsMandatoryField")];
-    }
+    },
+    // priceRules() {
+    //   return [v => !!v || this.$t("text.priceIsMandatoryField")];
+    // }
   },
   methods: {
     createAd() {
@@ -126,7 +138,8 @@ export default {
           title: this.title,
           description: this.description,
           promo: this.promo,
-          image: this.image
+          image: this.image,
+          price: this.price
         };
 
         this.$store

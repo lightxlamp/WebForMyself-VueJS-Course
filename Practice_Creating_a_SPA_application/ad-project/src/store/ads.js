@@ -1,12 +1,13 @@
 import * as firebase from 'firebase'
 
 class Ad {
-    constructor(title, description, ownerId, imageSrc = '', promo = false, id = null) {
+    constructor(title, description, ownerId, imageSrc = '', promo = false, id = null, price) {
         this.title = title
         this.description = description
         this.ownerId = ownerId
         this.imageSrc = imageSrc
         this.promo = promo
+        this.price = price
         this.id = id
     }
 }
@@ -39,7 +40,8 @@ export default {
                     adObjFromForm.description,
                     getters.user.id,
                     adObjFromForm.imageSrc,
-                    adObjFromForm.promo)
+                    adObjFromForm.promo,
+                    adObjFromForm.price)
 
                 // eslint-disable-next-line no-console
                 console.log("= NewAd: ", newAd)
@@ -146,7 +148,8 @@ export default {
                                 ad.ownerId,
                                 ad.imageSrc,
                                 ad.promo,
-                                key)
+                                key,
+                                ad.price)
                         )
                     })
                 }
