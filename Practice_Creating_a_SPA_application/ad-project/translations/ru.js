@@ -22,11 +22,15 @@ export const RUSSIAN_TRANSLATIONS = {
         yourName: 'Ваше имя',
         yourPhone: 'Ваш телефон',
         youDoNotHaveOrders: 'У Вас нет заказов',
+        youDoNotHaveAds: 'У Вас пока нет объявлений',
         addAd: 'Добавить объявление',
         uploadImage: 'Загрузить изображение',
         addToPromo: 'Добавить в промо?',
         createAd: 'Создать объявление',
         title: 'Название',
-        description: 'Описание'
+        description: 'Описание',
+        titleIsMandatoryField: 'Название товара - обязательное поле',
+        descIsMandatoryField: 'Описание товара - обязательное поле', 
+        listOfYourAds: 'Список ваших объявлений'
     }
 };

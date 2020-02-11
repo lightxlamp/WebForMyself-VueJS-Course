@@ -21,13 +21,16 @@ export const ENGLISH_TRANSLATIONS = {
         open: 'Open',
         yourName: 'Your name',
         yourPhone: 'Your phone',
-        youDoNotHaveOrders: 'You do not have any order',
+        youDoNotHaveOrders: 'You do not have any order yet',
+        youDoNotHaveAds: 'You do not have any AD yet',
         addAd: 'Create new Ad',
         uploadImage: 'Upload Image',
         addToPromo: 'Add to promo?', 
         createAd: 'Create ad',
         title: 'Title',
-        description: 'Description'
-
+        description: 'Description',
+        titleIsMandatoryField: 'Title is a mandatory field',
+        descIsMandatoryField: 'Description is a mandatory field',
+        listOfYourAds: 'List of  your ads'
     }
 };

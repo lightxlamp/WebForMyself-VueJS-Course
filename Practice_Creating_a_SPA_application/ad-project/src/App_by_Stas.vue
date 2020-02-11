@@ -97,7 +97,7 @@
 
           <v-btn v-if="isUserLoggedIn" @click="onLogout" text>
             <v-icon left>mdi-exit-to-app</v-icon>
-            Выйти
+            {{$t('text.signOut')}}
           </v-btn>
         </v-toolbar-items>
       </v-app-bar>

@@ -21,7 +21,9 @@
         offset-lg1
         offset-xl2
       >
-        <h1 class="text--secondary mb-3 ml-5">Список ваших объявлений</h1>
+        <h1 class="text--secondary mb-3 ml-5">
+          {{ $t("text.listOfYourAds") }}
+        </h1>
 
         <v-card
           class="elevation-10 mb-5 pl-7 pt-5 pb-5"
@@ -45,7 +47,9 @@
 
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn class="info" :to="'/ad/' + ad.id">Открыть</v-btn>
+                <v-btn class="info" :to="'/ad/' + ad.id">{{
+                  $t("text.open")
+                }}</v-btn>
               </v-card-actions>
             </v-flex>
           </v-layout>
@@ -54,7 +58,7 @@
     </v-layout>
     <v-layout row v-else-if="!loading && myAds.length === 0">
       <v-flex xs12 class="text-xs-center">
-        <h2 class="text--primary">У вас нет объявлений</h2>
+        <h1 class="text--secondary">{{ $t("text.youDoNotHaveAds") }}</h1>
       </v-flex>
     </v-layout>
   </v-container>

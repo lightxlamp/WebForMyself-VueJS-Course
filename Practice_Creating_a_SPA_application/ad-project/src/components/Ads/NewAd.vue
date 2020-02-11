@@ -22,7 +22,7 @@
             type="text"
             v-model="title"
             required
-            :rules="[v => !!v || 'Название - обязательное поле']"
+            :rules="titleRules"
           />
 
           <v-textarea
@@ -32,7 +32,7 @@
             type="text"
             v-model="description"
             multiline
-            :rules="[v => !!v || 'Описание - обязательное поле']"
+            :rules="descRules"
           />
         </v-form>
 
@@ -110,6 +110,13 @@ export default {
   computed: {
     loading() {
       return this.$store.getters.loading;
+    },
+    //https://stackoverflow.com/questions/57883281/i18n-vue-is-not-working-when-changing-locale-using-rules-in-text-field-of-vueti
+    titleRules() {
+      return [v => !!v || this.$t("text.titleIsMandatoryField")];
+    },
+    descRules() {
+      return [v => !!v || this.$t("text.descIsMandatoryField")];
     }
   },
   methods: {
