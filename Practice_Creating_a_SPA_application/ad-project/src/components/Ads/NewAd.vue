@@ -13,12 +13,12 @@
         offset-lg2
         offset-xl3
       >
-        <h1 class="text--secondary mb-3">Добавить объявление</h1>
+        <h1 class="text--secondary mb-3">{{ $t("text.addAd") }}</h1>
 
         <v-form v-model="valid" ref="form" lazy-validation>
           <v-text-field
             name="title"
-            label="Название"
+            :label="$t('text.title')"
             type="text"
             v-model="title"
             required
@@ -28,7 +28,7 @@
           <v-textarea
             id="password"
             name="desctiption"
-            label="Описание"
+            :label="$t('text.description')"
             type="text"
             v-model="description"
             multiline
@@ -43,7 +43,7 @@
               class="ma-2 white--text"
               @click="triggerUpload"
             >
-              Загрузить изображение
+              {{ $t("text.uploadImage") }}
               <v-icon right dark>mdi-cloud-upload</v-icon>
             </v-btn>
             <input
@@ -72,7 +72,7 @@
           <v-flex xs12>
             <v-switch
               class="pl-2"
-              label="Добавить в промо?"
+              :label="$t('text.addToPromo')"
               v-model="promo"
             ></v-switch>
           </v-flex>
@@ -86,7 +86,7 @@
               :disabled="!valid || !image || loading"
               class="success ml-2"
               @click="createAd"
-              >Создать объявление</v-btn
+              >{{ $t("text.createAd") }}</v-btn
             >
           </v-flex>
         </v-layout>

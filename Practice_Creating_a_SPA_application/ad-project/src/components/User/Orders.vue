@@ -41,7 +41,7 @@
     </v-layout>
     <v-layout row v-else>
       <v-flex xs12 class="text-xl-start">
-        <h1 class="text--secondary">У Вас нет заказов</h1>
+        <h1 class="text--secondary">{{ $t("text.youDoNotHaveOrders") }}</h1>
       </v-flex>
     </v-layout>
   </v-container>

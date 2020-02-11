@@ -41,7 +41,7 @@
 
             <v-card-actions>
               <v-btn text :to="'/ad/' + ad.id">
-                Открыть
+                {{ $t("text.open") }}
               </v-btn>
 
               <app-buy-modal :ad="ad"></app-buy-modal>

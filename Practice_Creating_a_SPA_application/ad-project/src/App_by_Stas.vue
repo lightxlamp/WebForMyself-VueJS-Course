@@ -167,15 +167,15 @@ export default {
     links() {
       if (this.isUserLoggedIn) {
         return [
-          { title: "Заказы", icon: "mdi-bookmark", url: "/orders" },
-          { title: "Новое объявление", icon: "mdi-note", url: "/new" },
-          { title: "Мои объявления", icon: "mdi-clipboard-list", url: "/list" },
-          { title: "Мой аккаунт", icon: "mdi-account", url: "/account" }
+          { title: this.$t('text.orders'), icon: "mdi-bookmark", url: "/orders" },
+          { title: this.$t('text.newAd'), icon: "mdi-note", url: "/new" },
+          { title: this.$t('text.myAds'), icon: "mdi-clipboard-list", url: "/list" },
+          { title: this.$t('text.myAccount'), icon: "mdi-account", url: "/account" }
         ];
       }
       return [
-        { title: "Вход", icon: "mdi-lock", url: "/login" },
-        { title: "Регистрация", icon: "mdi-face", url: "/registration" }
+        { title: this.$t('text.signIn'), icon: "mdi-lock", url: "/login" },
+        { title: this.$t('text.registration'), icon: "mdi-face", url: "/registration" }
       ];
     },
     currentUserInfo() {

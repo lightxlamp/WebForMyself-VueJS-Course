@@ -1,6 +1,8 @@
 <template>
   <div>
-    <v-btn class="primary mr-2" @click="dialog = true">Купить</v-btn>
+    <v-btn class="primary mr-2" @click="dialog = true">{{
+      $t("text.buy")
+    }}</v-btn>
 
     <v-dialog v-model="dialog" persistent max-width="400">
       <v-card>
@@ -8,7 +10,7 @@
           <v-layout row>
             <v-flex xs12>
               <v-card-title class="text--primary">
-                Вы хотите купить этот товар?
+                {{ $t("text.doYouWannaBuyThis") }}
               </v-card-title>
             </v-flex>
           </v-layout>
@@ -19,14 +21,14 @@
               <v-card-text>
                 <v-text-field
                   name="name"
-                  label="Your name"
+                  :label="$t('text.yourName')"
                   type="text"
                   v-model="name"
                 ></v-text-field>
 
                 <v-text-field
                   name="phone"
-                  label="Your phone"
+                  :label="$t('text.yourPhone')"
                   type="text"
                   v-model="phone"
                 ></v-text-field>
@@ -43,12 +45,13 @@
                   :loading="localLoading"
                   class="success"
                   @click="onMyBuy"
-                  >Купить</v-btn
                 >
+                  {{ $t("text.buy") }}
+                </v-btn>
 
-                <v-btn :aria-disabled="localLoading" text @click="onMyCancel"
-                  >Отмена</v-btn
-                >
+                <v-btn :aria-disabled="localLoading" text @click="onMyCancel">
+                  {{ $t("text.cancel") }}
+                </v-btn>
               </v-card-actions>
             </v-flex>
           </v-layout>

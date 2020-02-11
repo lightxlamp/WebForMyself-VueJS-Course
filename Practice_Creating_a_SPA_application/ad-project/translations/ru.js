@@ -1,12 +1,32 @@
 export const RUSSIAN_TRANSLATIONS = {
     text: {
-        nyt_app: 'New York Times App avec des traductions',
-        home: 'Accueil',
-        search: 'Chercher',
-        date: 'Rendez-vous amoureux', 
+        // nyt_app: 'New York Times App avec des traductions',
+        // home: 'Accueil',
+        // search: 'Chercher',
+        // date: 'Rendez-vous amoureux', 
         loginForm: 'Форма входа',
         password: 'Пароль',
         email: 'Почта',
-        loginBtn: 'Войти'
+        loginBtn: 'Войти',
+        orders: 'Заказы', 
+        newAd: 'Новое объявление', 
+        myAds: 'Мои объявления', 
+        myAccount: 'Мой аккаунт', 
+        signOut: 'Выйти', 
+        signIn: 'Войти',
+        registration: 'Регистрация',
+        doYouWannaBuyThis: 'Вы хотите купить этот товар?',
+        buy: 'Купить',
+        cancel: 'Отмена',
+        open: 'Открыть',
+        yourName: 'Ваше имя',
+        yourPhone: 'Ваш телефон',
+        youDoNotHaveOrders: 'У Вас нет заказов',
+        addAd: 'Добавить объявление',
+        uploadImage: 'Загрузить изображение',
+        addToPromo: 'Добавить в промо?',
+        createAd: 'Создать объявление',
+        title: 'Название',
+        description: 'Описание'
     }
 };
