@@ -41,7 +41,7 @@
               </v-card-text>
 
               <v-card-subtitle class="price pa-0 pl-4">
-                {{ ad.price }}
+                ${{ ad.price }}
               </v-card-subtitle>
               <!-- {{ad.id}} -->
 
@@ -49,10 +49,12 @@
                 <v-spacer></v-spacer>
                 <v-btn class="info" :to="'/ad/' + ad.id">{{
                   $t("text.open")
-                }}</v-btn>         
-                <v-btn class="error" :to="'/ad/' + ad.id">{{
-                  $t("text.delete")
                 }}</v-btn>
+              </v-card-actions>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <app-delete-modal :ad="ad"></app-delete-modal>
               </v-card-actions>
             </v-flex>
           </v-layout>

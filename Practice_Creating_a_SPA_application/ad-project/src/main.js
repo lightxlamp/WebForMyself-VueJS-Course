@@ -5,6 +5,7 @@ import router from "./router";
 import * as firebase from "firebase";
 import store from "./store";
 import BuyModalComponent from "./components/Shared/BuyModal";
+import DeleteModalComponent from "./Ads/../components/Ads/DeleteAdModal.vue";
 import firebaseConfig from "./keys";
 import VueI18n from "vue-i18n";
 import { ENGLISH_TRANSLATIONS } from "./../translations/en";
@@ -13,6 +14,7 @@ import { RUSSIAN_TRANSLATIONS } from "./../translations/ru";
 
 Vue.config.productionTip = false; // Set this to false to prevent the production tip on Vue startup.
 Vue.component("app-buy-modal", BuyModalComponent);
+Vue.component("app-delete-modal", DeleteModalComponent);
 Vue.use(vuetify);
 Vue.use(VueI18n);
 

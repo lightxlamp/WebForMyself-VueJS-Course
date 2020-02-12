@@ -41,6 +41,7 @@
             type="number"
             v-model="price"
             required
+            :rules="priceRules"
           />
         </v-form>
 
@@ -127,9 +128,9 @@ export default {
     descRules() {
       return [v => !!v || this.$t("text.descIsMandatoryField")];
     },
-    // priceRules() {
-    //   return [v => !!v || this.$t("text.priceIsMandatoryField")];
-    // }
+    priceRules() {
+      return [v => !!v || this.$t("text.priceIsMandatoryField")];
+    }
   },
   methods: {
     createAd() {

@@ -1,7 +1,7 @@
 import * as firebase from 'firebase'
 
 class Ad {
-    constructor(title, description, ownerId, imageSrc = '', promo = false, id = null, price) {
+    constructor(title, description, ownerId, imageSrc = '', promo = false, price, id = null) {
         this.title = title
         this.description = description
         this.ownerId = ownerId
@@ -148,8 +148,9 @@ export default {
                                 ad.ownerId,
                                 ad.imageSrc,
                                 ad.promo,
-                                key,
-                                ad.price)
+                                ad.price,
+                                key
+                                )
                         )
                     })
                 }
@@ -164,7 +165,7 @@ export default {
             }
         },
 
-        async updateAd ({commit}, {title, description, id})
+        async updateAd ({commit}, {title, description, price, id})
         {
             commit('clearError')
             commit('setLoading', true)
@@ -174,11 +175,46 @@ export default {
 
             try {
                 await firebase.database().ref('ads').child(id).update({
-                    title, description
+                    title, description, price
                 })
 
                 commit('updateAd', {
-                    title, description, id
+                    title, description, price, id
+                })
+                commit('setLoading', false)
+            }
+            catch (e) {
+                commit('setError', e.message)
+                commit('setLoading', false)
+                throw e
+            }
+        },
+
+        async deleteAd({commit}, {id, imageSrc})
+        {
+            commit('clearError');
+            commit('setLoading', true);
+            // eslint-disable-next-line no-console
+            console.log('DeleteAd action is called')      
+            // eslint-disable-next-line no-console
+            console.log('ImageSrc', imageSrc)
+
+            try {
+                // Removing record of AD
+                // https://firebase.google.com/docs/database/web/read-and-write
+                //let adToDelete = await firebase.database().ref('ads').child(id);
+                //await firebase.database().ref('ads').child(id).remove();
+                
+                // Removing Image of Ad from STorage
+                // eslint-disable-next-line no-console
+                // https://medium.com/@650egor/react-30-day-challenge-day-4-firebase-photo-upload-delete-f7c59d73ae36
+                let imageLinkInDB = await firebase.storage().ref('ads').child(id);
+                // eslint-disable-next-line no-console
+                console.log('Image in DB', imageLinkInDB);
+                await firebase.storage().ref('ads').child(id).delete();
+
+                commit('deleteAd', {
+                    id
                 })
                 commit('setLoading', false)
             }
@@ -203,7 +239,7 @@ export default {
         loadAds(state, adsFromFireBase){
             state.ads = adsFromFireBase;
         },
-        updateAd(state, {title, description, id}){
+        updateAd(state, {title, description, price, id}){
             // eslint-disable-next-line no-console
             console.log('UpdateAd mutation is called')
             // eslint-disable-next-line no-console
@@ -231,6 +267,27 @@ export default {
 
             adToEdit.title = title
             adToEdit.description = description
+            adToEdit.price = price;
+        },
+        deleteAd(state, {id}){
+            // eslint-disable-next-line no-console
+            console.log('deleteAd mutation is called')
+            // eslint-disable-next-line no-console
+            console.log('Id', id)
+
+            if(state.ads !== undefined) {
+                for (let i = 0; i < state.ads.length; i++) {
+                    if (state.ads[i].id === id) {
+                         // eslint-disable-next-line no-console
+                        //console.log('Before Slicing', state.ads);
+                        
+                        state.ads.splice(i, 1); 
+                         // eslint-disable-next-line no-console
+                        //console.log('After Slicing', state.ads);
+                        break
+                    }
+                }
+            }
         }
     },
 

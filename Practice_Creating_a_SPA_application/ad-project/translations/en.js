@@ -23,7 +23,7 @@ export const ENGLISH_TRANSLATIONS = {
         yourName: 'Your name',
         yourPhone: 'Your phone',
         youDoNotHaveOrders: 'You do not have any order yet',
-        youDoNotHaveAds: 'You do not have any AD yet',
+        youDoNotHaveAds: 'You have no any ad yet',
         addAd: 'Create new Ad',
         uploadImage: 'Upload Image',
         addToPromo: 'Add to promo?', 
@@ -37,6 +37,7 @@ export const ENGLISH_TRANSLATIONS = {
         price: 'Price',
         edit: 'Edit',
         editAd: 'Edit ad',
-        save: 'Save'
+        save: 'Save', 
+        deleteThisAd: 'Delete this ad?'
     }
 };

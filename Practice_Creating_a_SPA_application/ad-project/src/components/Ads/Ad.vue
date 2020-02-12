@@ -9,7 +9,7 @@
         <v-card-text class="AdDescription" outlined tile>
           <h1 class="text--primary">{{ ad.title }}</h1>
           <p>{{ ad.description }}</p>
-          <p class="price">${{ ad.price }}</p>
+          <div class="price">${{ ad.price }}</div>
         </v-card-text>
 
         <v-card-actions>
@@ -66,5 +66,10 @@ h1 {
 
 h1.text--primary {
   line-height: 2rem;
+}
+.price {
+  color: #b12704 !important;
+  font-weight: 500;
+  line-height: 19px;
 }
 </style>

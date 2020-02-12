@@ -37,6 +37,7 @@ export const RUSSIAN_TRANSLATIONS = {
         price: 'Цена',
         edit: 'Редактировать',
         editAd: 'Редактировать объявление',
-        save: 'Сохранить'
+        save: 'Сохранить',
+        deleteThisAd: 'Удалить это объявление?'
     }
 };

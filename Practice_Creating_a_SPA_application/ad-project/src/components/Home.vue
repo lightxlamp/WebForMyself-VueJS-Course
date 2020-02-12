@@ -72,10 +72,12 @@ export default {
   computed: {
     promoAds() {
       // eslint-disable-next-line no-console
-      //console.log(this.$store.getters.promoAds)
+      console.log("this.$store.getters.promoAds", this.$store.getters.promoAds)
       return this.$store.getters.promoAds;
     },
     ads() {
+      // eslint-disable-next-line no-console
+      console.log("this.$store.getters.ads", this.$store.getters.ads)
       return this.$store.getters.ads;
     },
     loading() {
