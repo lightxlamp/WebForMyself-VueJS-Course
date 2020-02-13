@@ -202,17 +202,41 @@ export default {
             try {
                 // Removing record of AD
                 // https://firebase.google.com/docs/database/web/read-and-write
-                //let adToDelete = await firebase.database().ref('ads').child(id);
-                //await firebase.database().ref('ads').child(id).remove();
+                // let adToDelete = await firebase.database().ref('ads').child(id);
+                await firebase.database().ref('ads').child(id).remove();
                 
                 // Removing Image of Ad from STorage
-                // eslint-disable-next-line no-console
                 // https://medium.com/@650egor/react-30-day-challenge-day-4-firebase-photo-upload-delete-f7c59d73ae36
-                let imageLinkInDB = await firebase.storage().ref('ads').child(id);
-                // eslint-disable-next-line no-console
-                console.log('Image in DB', imageLinkInDB);
-                await firebase.storage().ref('ads').child(id).delete();
+                // https://www.youtube.com/watch?v=6Q55NlRwNnw
+                // https://firebase.google.com/docs/storage/web/file-metadata
+                // Get metadata properties
 
+                let imagePathInStorageWithExtension = '';
+
+                // bad code below... 
+                let extArray = ['..png', '..bmp', '..jpg'];
+                for(let i = 0; i < extArray.length; i++){
+                    let imageLinkInDB = await firebase.storage().ref('ads').child(id + extArray[i]);
+                    // eslint-disable-next-line no-console
+                    console.log('Image in DB', imageLinkInDB);
+
+                    await imageLinkInDB.getMetadata().then(function(metadata) {
+                        // eslint-disable-next-line no-console
+                        console.log('Image METADATA:', metadata.name);
+                        imagePathInStorageWithExtension = metadata.name;
+                        // eslint-disable-next-line no-console
+                        console.log('imagePathInStorageWithExtension', imagePathInStorageWithExtension);
+                        i = extArray.length; // instead of break
+                    }).catch(function() {
+                        // eslint-disable-next-line no-console
+                        //console.log(error); 
+                        // eslint-disable-next-line no-console
+                        console.log('Not extemsion:', extArray[i]);
+                    });
+                }
+
+                await await firebase.storage().ref('ads').child(imagePathInStorageWithExtension).delete();
+            
                 commit('deleteAd', {
                     id
                 })
