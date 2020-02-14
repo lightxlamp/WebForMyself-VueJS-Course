@@ -195,15 +195,17 @@ export default {
             commit('clearError');
             commit('setLoading', true);
             // eslint-disable-next-line no-console
-            console.log('DeleteAd action is called')      
+            console.log('DeleteAd action is called');      
             // eslint-disable-next-line no-console
-            console.log('ImageSrc', imageSrc)
+            console.log('ImageSrc', imageSrc);
+
+            let imageNameWithExtension = id + '.';
 
             try {
                 // Removing record of AD
                 // https://firebase.google.com/docs/database/web/read-and-write
                 // let adToDelete = await firebase.database().ref('ads').child(id);
-                await firebase.database().ref('ads').child(id).remove();
+                await firebase.database().ref('ads').child(id).remove(); // delete Ad Obj
                 
                 // Removing Image of Ad from STorage
                 // https://medium.com/@650egor/react-30-day-challenge-day-4-firebase-photo-upload-delete-f7c59d73ae36
@@ -211,31 +213,50 @@ export default {
                 // https://firebase.google.com/docs/storage/web/file-metadata
                 // Get metadata properties
 
-                let imagePathInStorageWithExtension = '';
+                // + let imagePathInStorageWithExtension = '';
+                
+                // // bad code below... 
+                // let extArray = ['..png', '..bmp', '..jpg'];
+                // for(let i = 0; i < extArray.length; i++){
+                //     let imageLinkInDB = await firebase.storage().ref('ads').child(id + extArray[i]);
+                //     // eslint-disable-next-line no-console
+                //     console.log('Image in DB', imageLinkInDB);
 
-                // bad code below... 
-                let extArray = ['..png', '..bmp', '..jpg'];
+                //     await imageLinkInDB.getMetadata().then(function(metadata) {
+                //         // eslint-disable-next-line no-console
+                //         console.log('Image METADATA:', metadata.name);
+                //         imagePathInStorageWithExtension = metadata.name;
+                //         // eslint-disable-next-line no-console
+                //         console.log('imagePathInStorageWithExtension', imagePathInStorageWithExtension);
+                //         i = extArray.length; // instead of break
+                //     }).catch(function() {
+                //         // eslint-disable-next-line no-console
+                //         //console.log(error); 
+                //         // eslint-disable-next-line no-console
+                //         console.log('Not extemsion:', extArray[i]);
+                //     });
+                // }   
+                
+                // Still not perfect. But better version. Without 404 error, during requests to inexistent files
+                let extArray = ['.png', '.bmp', '.jpg'];
                 for(let i = 0; i < extArray.length; i++){
-                    let imageLinkInDB = await firebase.storage().ref('ads').child(id + extArray[i]);
-                    // eslint-disable-next-line no-console
-                    console.log('Image in DB', imageLinkInDB);
+                    // let imageLinkInDB = await firebase.storage().ref('ads').child(id + extArray[i]);
+                    // // eslint-disable-next-line no-console
+                    // console.log('Image in DB', imageLinkInDB);
 
-                    await imageLinkInDB.getMetadata().then(function(metadata) {
+                    let isExtesnionFound = imageSrc.search(extArray[i]);
+                    if(isExtesnionFound != -1){
                         // eslint-disable-next-line no-console
-                        console.log('Image METADATA:', metadata.name);
-                        imagePathInStorageWithExtension = metadata.name;
+                        console.log('Image extension is', extArray[i]);
+                        imageNameWithExtension += extArray[i];
                         // eslint-disable-next-line no-console
-                        console.log('imagePathInStorageWithExtension', imagePathInStorageWithExtension);
-                        i = extArray.length; // instead of break
-                    }).catch(function() {
-                        // eslint-disable-next-line no-console
-                        //console.log(error); 
-                        // eslint-disable-next-line no-console
-                        console.log('Not extemsion:', extArray[i]);
-                    });
+                        console.log('Image name with Ext', imageNameWithExtension);
+                        break;
+                    }
                 }
 
-                await await firebase.storage().ref('ads').child(imagePathInStorageWithExtension).delete();
+                // + await await firebase.storage().ref('ads').child(imagePathInStorageWithExtension).delete();
+                await await firebase.storage().ref('ads').child(imageNameWithExtension).delete(); // delete Image
             
                 commit('deleteAd', {
                     id
