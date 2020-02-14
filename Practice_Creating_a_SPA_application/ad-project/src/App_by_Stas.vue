@@ -264,7 +264,7 @@ select#language-selector {
     /* border: 1px solid red; */
     /* height: 100%; */
     height: 64px;
-    padding-top: 21px;
+    padding-top: 20px;
     margin-right: 10px;
 }
 
@@ -274,5 +274,9 @@ select#language-selector {
 
 .locale-changer:hover select{
   background-color: #2180C2;
+}
+
+.locale-changer i {
+    margin-top: -2px;
 }
 </style>
