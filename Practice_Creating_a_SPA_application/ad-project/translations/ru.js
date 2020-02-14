@@ -38,6 +38,10 @@ export const RUSSIAN_TRANSLATIONS = {
         edit: 'Редактировать',
         editAd: 'Редактировать объявление',
         save: 'Сохранить',
-        deleteThisAd: 'Удалить это объявление?'
+        deleteThisAd: 'Удалить это объявление?',
+        hello: "Здравствуйте",
+        uploadNewAvatar: 'Загрузить новый аватар',
+        saveChanges: 'Сохранить изменения',
+        nameShouldBelessThan: 'Извините. Имя не должно превышать 20 символов'
     }
 };

@@ -8,8 +8,8 @@ import BuyModalComponent from "./components/Shared/BuyModal";
 import DeleteModalComponent from "./Ads/../components/Ads/DeleteAdModal.vue";
 import firebaseConfig from "./keys";
 import VueI18n from "vue-i18n";
-import { ENGLISH_TRANSLATIONS } from "./../translations/en";
-import { RUSSIAN_TRANSLATIONS } from "./../translations/ru";
+import { ENGLISH_TRANSLATIONS } from "../translations/en";
+import { RUSSIAN_TRANSLATIONS } from "../translations/ru";
 //import colors from 'vuetify/lib/util/colors'
 
 Vue.config.productionTip = false; // Set this to false to prevent the production tip on Vue startup.
@@ -19,11 +19,11 @@ Vue.use(vuetify);
 Vue.use(VueI18n);
 
 const TRANSLATIONS = {
-  en: ENGLISH_TRANSLATIONS,
-  ru: RUSSIAN_TRANSLATIONS
+  EN: ENGLISH_TRANSLATIONS,
+  RU: RUSSIAN_TRANSLATIONS
 };
 const i18n = new VueI18n({
-  locale: "en",
+  locale: "EN",
   messages: TRANSLATIONS
 });
 

@@ -38,6 +38,10 @@ export const ENGLISH_TRANSLATIONS = {
         edit: 'Edit',
         editAd: 'Edit ad',
         save: 'Save', 
-        deleteThisAd: 'Delete this ad?'
+        deleteThisAd: 'Delete this ad?',
+        hello: "Hello",
+        uploadNewAvatar: 'Upload new avatar image',
+        saveChanges: 'Save changes',
+        nameShouldBelessThan: 'We are sorry, name should be less than 20 symbols'
     }
 };

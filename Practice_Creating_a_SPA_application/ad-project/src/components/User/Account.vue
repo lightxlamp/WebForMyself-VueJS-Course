@@ -3,31 +3,36 @@
   <v-container>
     <v-layout row>
       <v-flex xs12 sm4 offset-sm4>
-        <h1 class="text--secondary mb-3">Аккаунт</h1>
+        <h1 class="text--secondary mb-3">{{$t('text.myAccount')}}</h1>
 
         <v-form v-model="valid" ref="form" lazy-validation>
           <v-text-field
             name="userName"
-            label="Имя"
+            :label="$t('text.yourName')"
             type="text"
             v-model="userName"
             required
             :rules="[
               v =>
-                (v && v.length <= 15) ||
-                'Извините. Имя не должно превышать 15 символов'
+                (v && v.length <= 20) ||
+                $t('text.nameShouldBelessThan')
             ]"
           />
 
-          <!--                    <v-text-field-->
-          <!--                            name="userPhone"-->
-          <!--                            label="Телефон"-->
-          <!--                            type="text"-->
-          <!--                            v-model="userPhone"-->
-          <!--                            :rules="[(v) => v && v.length <= 13 || 'Телефон не должен превышать 13 символов',-->
-          <!--                                    (v) => v && v.length >= 10 || 'Телефон должен иметь минимум 10 цифр'-->
-          <!--                            ]"-->
-          <!--                    />-->
+         <v-img
+          height="200px"
+          :src="currentUserAvatar"
+        >
+        </v-img>
+                                    <!-- <v-text-field-->
+        <!--                            name="userPhone"-->
+        <!--                            label="Телефон"-->
+        <!--                            type="text"-->
+        <!--                            v-model="userPhone"-->
+        <!--                            :rules="[(v) => v && v.length <= 13 || 'Телефон не должен превышать 13 символов',-->
+        <!--                                    (v) => v && v.length >= 10 || 'Телефон должен иметь минимум 10 цифр'-->
+        <!--                            ]" -->
+        <!--                    /> -->
         </v-form>
 
         <v-layout row>
@@ -37,7 +42,7 @@
               class="ma-2 white--text"
               @click="triggerUpload"
             >
-              Загрузить новый аватар
+              {{$t('text.uploadNewAvatar')}}
               <v-icon right dark>mdi-cloud-upload</v-icon>
             </v-btn>
 
@@ -46,7 +51,9 @@
               :disabled="!valid || !avatarSrc || loading"
               class="ma-2 success"
               @click="updateUser"
-              >Сохранить изменения</v-btn
+              >
+                {{$t('text.saveChanges')}}
+              </v-btn
             >
 
             <input
@@ -94,9 +101,15 @@ export default {
     loading() {
       return this.$store.getters.loading;
     },
+  
+    currentUserAvatar() {
+      return this.$store.getters.currentUserAvatar;
+    },
+
     currentUserName() {
-      return this.$store.getters.firebaseUserObject.user.displayName;
-    }
+      return this.$store.getters.currentUserName;
+    },
+
   },
   methods: {
     updateUser() {

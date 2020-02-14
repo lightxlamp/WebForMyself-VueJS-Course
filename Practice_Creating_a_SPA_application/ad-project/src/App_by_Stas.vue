@@ -74,8 +74,12 @@
           {{ currentUserInfo }}
         </div>
 
+        <v-spacer></v-spacer>
+
         <div class="locale-changer">
-          <select v-model="$i18n.locale">
+          <v-icon left>mdi-earth</v-icon>
+          <select v-model="$i18n.locale" id="language-selector">
+            <!-- <option value="">&#127760;</option> -->
             <option
               v-for="(lang, i) in langs"
               :key="`Lang${i}`"
@@ -84,8 +88,6 @@
             >
           </select>
         </div>
-
-        <v-spacer></v-spacer>
 
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn v-for="link in links" :key="link.title" :to="link.url" text>
@@ -97,7 +99,7 @@
 
           <v-btn v-if="isUserLoggedIn" @click="onLogout" text>
             <v-icon left>mdi-exit-to-app</v-icon>
-            {{$t('text.signOut')}}
+            {{ $t("text.signOut") }}
           </v-btn>
         </v-toolbar-items>
       </v-app-bar>
@@ -131,14 +133,14 @@
 
 <script>
 export default {
-  name: 'locale-changer',
+  name: "locale-changer",
   props: {
     source: String
   },
   data: () => ({
     drawer: null,
     timeout: 5000,
-    langs: ['ru', 'en']
+    langs: ["RU", "EN"]
   }),
   computed: {
     error() {
@@ -167,15 +169,31 @@ export default {
     links() {
       if (this.isUserLoggedIn) {
         return [
-          { title: this.$t('text.orders'), icon: "mdi-bookmark", url: "/orders" },
-          { title: this.$t('text.newAd'), icon: "mdi-note", url: "/new" },
-          { title: this.$t('text.myAds'), icon: "mdi-clipboard-list", url: "/list" },
-          { title: this.$t('text.myAccount'), icon: "mdi-account", url: "/account" }
+          {
+            title: this.$t("text.orders"),
+            icon: "mdi-bookmark",
+            url: "/orders"
+          },
+          { title: this.$t("text.newAd"), icon: "mdi-note", url: "/new" },
+          {
+            title: this.$t("text.myAds"),
+            icon: "mdi-clipboard-list",
+            url: "/list"
+          },
+          {
+            title: this.$t("text.myAccount"),
+            icon: "mdi-account",
+            url: "/account"
+          }
         ];
       }
       return [
-        { title: this.$t('text.signIn'), icon: "mdi-lock", url: "/login" },
-        { title: this.$t('text.registration'), icon: "mdi-face", url: "/registration" }
+        { title: this.$t("text.signIn"), icon: "mdi-lock", url: "/login" },
+        {
+          title: this.$t("text.registration"),
+          icon: "mdi-face",
+          url: "/registration"
+        }
       ];
     },
     currentUserInfo() {
@@ -183,7 +201,9 @@ export default {
       console.log("this.$store.getters.user: ", this.$store.getters.user);
 
       if (this.$store.getters.user !== null)
-        return "Здравствуйте, " + this.$store.getters.currentUserName;
+        return (
+          this.$t("text.hello") + ", " + this.$store.getters.currentUserName
+        );
       else return "No user logged in";
     }
   },
@@ -195,6 +215,10 @@ export default {
       this.$store.dispatch("logoutUser");
       this.$router.push("/");
     }
+  },
+  // https://stackoverflow.com/questions/50382185/how-to-detect-page-is-refreshed-in-vue-js
+  created() {
+    window.addEventListener("beforeunload", this.onLogout);
   }
 };
 </script>
@@ -223,13 +247,32 @@ html {
   font-size: 16px;
 }
 
-.locale-changer {
-    border: 1px solid;
-    margin-left: 10px;
-    padding: 4px;
-}
 
 .locale-changer select {
-  background-color: #0E75BD;
+  background-color: #0e75bd;
+
+}
+.locale-changer select:hover {
+  background-color: #2180C2;
+}
+
+select#language-selector {
+  vertical-align: 0;
+}
+
+.locale-changer {
+    /* border: 1px solid red; */
+    /* height: 100%; */
+    height: 64px;
+    padding-top: 21px;
+    margin-right: 10px;
+}
+
+.locale-changer:hover{
+  background-color: #2180C2;
+}
+
+.locale-changer:hover select{
+  background-color: #2180C2;
 }
 </style>
