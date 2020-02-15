@@ -76,10 +76,13 @@
 
         <v-spacer></v-spacer>
 
-        <div class="locale-changer">
+        <!-- <div style="width: 50px" @click="clickOnLocaleChangeDiv">
+          XYZXYZXYZ
+        </div> -->
+        <!-- https://stackoverflow.com/questions/46652315/dynamically-open-dropdown-in-vue IMPORTANT =) Spent so much time (~2 hours on select issue)--> 
+        <!-- <div class="locale-changer" id="locale-changer">
           <v-icon left>mdi-earth</v-icon>
           <select v-model="$i18n.locale" id="language-selector">
-            <!-- <option value="">&#127760;</option> -->
             <option
               v-for="(lang, i) in langs"
               :key="`Lang${i}`"
@@ -87,6 +90,10 @@
               >{{ lang }}</option
             >
           </select>
+        </div> -->
+        
+        <div class="locale-changer">
+          <v-select :items="langs" v-model="$i18n.locale" ref="dropdown" prepend-icon="mdi-earth" ></v-select>
         </div>
 
         <v-toolbar-items class="hidden-sm-and-down">
@@ -140,7 +147,8 @@ export default {
   data: () => ({
     drawer: null,
     timeout: 5000,
-    langs: ["RU", "EN"]
+    langs: ["RU", "EN"],
+    options: ['1','2']
   }),
   computed: {
     error() {
@@ -214,11 +222,20 @@ export default {
     onLogout() {
       this.$store.dispatch("logoutUser");
       this.$router.push("/");
-    }
+    },
+    // clickOnLocaleChangeDiv() {
+    //   document.getElementById("language-selector").click();
+    //   this.$refs.langSelectField.click();
+    //   // eslint-disable-next-line no-console
+    //   console.log("HEY");
+    // }
   },
   // https://stackoverflow.com/questions/50382185/how-to-detect-page-is-refreshed-in-vue-js
   created() {
     window.addEventListener("beforeunload", this.onLogout);
+  },
+   mounted: function() {
+    this.$refs.dropdown.click();
   }
 };
 </script>
@@ -247,36 +264,35 @@ html {
   font-size: 16px;
 }
 
+.locale-changer {
+  width: 120px;
+  height: 64px;
+  padding: 15px 15px 0 15px;
+}
 
-.locale-changer select {
+/* .locale-changer select {
   background-color: #0e75bd;
-
 }
 .locale-changer select:hover {
-  background-color: #2180C2;
+  background-color: #2180c2;
 }
 
 select#language-selector {
   vertical-align: 0;
 }
 
-.locale-changer {
-    /* border: 1px solid red; */
-    /* height: 100%; */
-    height: 64px;
-    padding-top: 20px;
-    margin-right: 10px;
+
+
+.locale-changer:hover {
+  background-color: #2180c2;
 }
 
-.locale-changer:hover{
-  background-color: #2180C2;
-}
-
-.locale-changer:hover select{
-  background-color: #2180C2;
+.locale-changer:hover select {
+  background-color: #2180c2;
 }
 
 .locale-changer i {
-    margin-top: -2px;
-}
+  margin-top: -2px;
+} */
+
 </style>

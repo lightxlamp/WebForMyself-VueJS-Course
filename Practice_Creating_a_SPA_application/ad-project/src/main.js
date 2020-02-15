@@ -11,10 +11,12 @@ import VueI18n from "vue-i18n";
 import { ENGLISH_TRANSLATIONS } from "../translations/en";
 import { RUSSIAN_TRANSLATIONS } from "../translations/ru";
 //import colors from 'vuetify/lib/util/colors'
+// import vSelect from "vue-select";
 
 Vue.config.productionTip = false; // Set this to false to prevent the production tip on Vue startup.
 Vue.component("app-buy-modal", BuyModalComponent);
 Vue.component("app-delete-modal", DeleteModalComponent);
+// Vue.component("v-select", vSelect);
 Vue.use(vuetify);
 Vue.use(VueI18n);
 
