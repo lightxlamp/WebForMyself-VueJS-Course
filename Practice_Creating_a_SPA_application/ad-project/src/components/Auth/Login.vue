@@ -10,6 +10,7 @@
             <v-form v-model="valid" ref="form" lazy-validation>
               <v-text-field
                 :label="$t('text.email')"
+                :placeholder="$t('text.yourEmail')"
                 name="email"
                 prepend-icon="mdi-account"
                 type="email"
@@ -20,6 +21,7 @@
               <v-text-field
                 id="password"
                 :label="$t('text.password')"
+                :placeholder="$t('text.yourPassword')"
                 name="password"
                 prepend-icon="mdi-lock"
                 type="password"

@@ -43,7 +43,7 @@
                   <v-icon>mdi-exit-to-app</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
-                  <v-list-item-title>Выйти</v-list-item-title>
+                  <v-list-item-title> {{ $t("text.signOut") }}</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </v-list-item-group>
@@ -70,16 +70,12 @@
           >
         </v-toolbar-title>
 
-        <div class="userInfoDiv">
-          {{ currentUserInfo }}
-        </div>
-
         <v-spacer></v-spacer>
 
         <!-- <div style="width: 50px" @click="clickOnLocaleChangeDiv">
           XYZXYZXYZ
         </div> -->
-        <!-- https://stackoverflow.com/questions/46652315/dynamically-open-dropdown-in-vue IMPORTANT =) Spent so much time (~2 hours on select issue)--> 
+        <!-- https://stackoverflow.com/questions/46652315/dynamically-open-dropdown-in-vue IMPORTANT =) Spent so much time (~2 hours on select issue)-->
         <!-- <div class="locale-changer" id="locale-changer">
           <v-icon left>mdi-earth</v-icon>
           <select v-model="$i18n.locale" id="language-selector">
@@ -91,12 +87,20 @@
             >
           </select>
         </div> -->
-        
-        <div class="locale-changer">
-          <v-select :items="langs" v-model="$i18n.locale" ref="dropdown" prepend-icon="mdi-earth" ></v-select>
-        </div>
 
         <v-toolbar-items class="hidden-sm-and-down">
+          <div class="userInfoDiv">
+            <p>{{ currentUserInfo }}</p>
+          </div>
+
+          <div class="locale-changer" @click="showSelect()">
+            <v-select
+              :items="langs"
+              v-model="$i18n.locale"
+              prepend-icon="mdi-earth"
+            ></v-select>
+          </div>
+
           <v-btn v-for="link in links" :key="link.title" :to="link.url" text>
             <v-icon left>
               {{ link.icon }}
@@ -147,8 +151,7 @@ export default {
   data: () => ({
     drawer: null,
     timeout: 5000,
-    langs: ["RU", "EN"],
-    options: ['1','2']
+    langs: ["RU", "EN"]
   }),
   computed: {
     error() {
@@ -212,7 +215,8 @@ export default {
         return (
           this.$t("text.hello") + ", " + this.$store.getters.currentUserName
         );
-      else return "No user logged in";
+      //else return "No user logged in";
+      else return "";
     }
   },
   methods: {
@@ -223,6 +227,9 @@ export default {
       this.$store.dispatch("logoutUser");
       this.$router.push("/");
     },
+    showSelect() {
+      this.$refs.selectLanguage.click();
+    }
     // clickOnLocaleChangeDiv() {
     //   document.getElementById("language-selector").click();
     //   this.$refs.langSelectField.click();
@@ -233,9 +240,6 @@ export default {
   // https://stackoverflow.com/questions/50382185/how-to-detect-page-is-refreshed-in-vue-js
   created() {
     window.addEventListener("beforeunload", this.onLogout);
-  },
-   mounted: function() {
-    this.$refs.dropdown.click();
   }
 };
 </script>
@@ -259,15 +263,21 @@ html {
 }
 
 .userInfoDiv {
-  padding-top: 3px;
-  padding-left: 10px;
-  font-size: 16px;
+  padding-top: 18px;
+  margin-right: 15px;
+  margin-left: 15px;
+  color: #ccc;
+  font-size: 18px;
 }
 
 .locale-changer {
   width: 120px;
   height: 64px;
-  padding: 15px 15px 0 15px;
+  padding: 15px 10px 0 10px;
+}
+
+.locale-changer:hover {
+  background-color: #2180c2;
 }
 
 /* .locale-changer select {
@@ -281,12 +291,6 @@ select#language-selector {
   vertical-align: 0;
 }
 
-
-
-.locale-changer:hover {
-  background-color: #2180c2;
-}
-
 .locale-changer:hover select {
   background-color: #2180c2;
 }
@@ -294,5 +298,4 @@ select#language-selector {
 .locale-changer i {
   margin-top: -2px;
 } */
-
 </style>

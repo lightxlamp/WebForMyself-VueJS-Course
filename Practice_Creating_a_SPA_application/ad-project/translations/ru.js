@@ -42,6 +42,8 @@ export const RUSSIAN_TRANSLATIONS = {
         hello: "Здравствуйте",
         uploadNewAvatar: 'Загрузить новый аватар',
         saveChanges: 'Сохранить изменения',
-        nameShouldBelessThan: 'Извините. Имя не должно превышать 20 символов'
+        nameShouldBelessThan: 'Извините. Имя не должно превышать 20 символов', 
+        yourEmail: 'Ваш email адрес',
+        yourPassword: 'Ваш пароль',
     }
 };

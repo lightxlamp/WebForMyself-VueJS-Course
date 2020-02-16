@@ -42,6 +42,9 @@ export const ENGLISH_TRANSLATIONS = {
         hello: "Hello",
         uploadNewAvatar: 'Upload new avatar image',
         saveChanges: 'Save changes',
-        nameShouldBelessThan: 'We are sorry, name should be less than 20 symbols'
+        nameShouldBelessThan: 'We are sorry, name should be less than 20 symbols', 
+        yourEmail: 'Your email address',
+        yourPassword: 'Your password',
+
     }
 };
