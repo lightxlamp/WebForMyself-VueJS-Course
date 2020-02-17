@@ -38,11 +38,11 @@ new Vue({
   created() {
     firebase.initializeApp(firebaseConfig);
 
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.$store.dispatch("autoLoginUser", user);
-      }
-    });
+    // firebase.auth().onAuthStateChanged(user => {
+    //   if (user) {
+    //     this.$store.dispatch("autoLoginUser", user);
+    //   }
+    // });
 
     this.$store.dispatch("fetchAds");
   },

@@ -18,6 +18,13 @@ export default {
         setFireBaseUserObject (state, firebaseUserObject){
             state.firebaseUserObject = firebaseUserObject
         },
+        printUserInfo(state) {
+            const currentUser = state.firebaseUserObject.user;
+            // eslint-disable-next-line no-console
+            console.log("Before: this.firebaseUserObject.user.displayName", currentUser.displayName)
+            // eslint-disable-next-line no-console
+            console.log("Before: this.firebaseUserObject.user.photoURL", currentUser.photoURL)
+        }
     },
     actions: {
         async registerUser({commit}, {email, password}){
@@ -27,6 +34,7 @@ export default {
             try {
                 const user = await firebase.auth().createUserWithEmailAndPassword(email, password)
                 commit('setUser', new User(user.uid))
+                commit('setFireBaseUserObject', user)
                 commit('setLoading', false)
             } catch (error) {
                 commit('setLoading', false)
@@ -48,8 +56,8 @@ export default {
                 console.log('userFromFireBase.UID', user.user.uid)
                 // eslint-disable-next-line no-console
                 console.log('userFromFireBase.Name', user.user.displayName)
-                commit('setFireBaseUserObject', user)
                 commit('setUser', new User(user.user.uid))
+                commit('setFireBaseUserObject', user)
                 commit('setLoading', false)
             } catch (error) {
                 commit('setLoading', false)
@@ -58,7 +66,7 @@ export default {
             }
         },
 
-        async updateUser({commit}, {userName, avatarSrc})
+        async updateUser({commit}, {userName, avatarSrc}, currentUserFirebaseObject)
         {
             commit('clearError')
             commit('setLoading', true)
@@ -66,35 +74,46 @@ export default {
             // eslint-disable-next-line no-console
             console.log("New User Name", userName)
             // eslint-disable-next-line no-console
-            console.log("New avatarSrc", avatarSrc)
+            console.log("New avatarSrc", avatarSrc) 
+            // eslint-disable-next-line no-console
+            console.log("this", this)
+            // eslint-disable-next-line no-console
+            console.log("this.state.user.firebaseUserObject", this.state.user.firebaseUserObject)
+            // eslint-disable-next-line no-console
+            console.log('currentUserFirebaseObject', currentUserFirebaseObject);
 
-            try {
+            const updatedUser = await firebase.auth().currentUser.updateProfile({
+                displayName: userName,
+                photoURL: avatarSrc
+              })
+
+            // eslint-disable-next-line no-console
+              console.log('Updated user', updatedUser);
+
+            // try {
                 //const currentUser = this.$store.getters.firebaseUserObject.user;
-                const currentUser = this.firebaseUserObject.user;
-                // eslint-disable-next-line no-console
-                console.log("Before: this.firebaseUserObject.user.displayName", currentUser.displayName)
-                // eslint-disable-next-line no-console
-                console.log("Before: this.firebaseUserObject.user.photoURL", currentUser.photoURL)
+            commit('printUserInfo');
 
-                await currentUser.updateProfile({displayName: userName, photoURL: avatarSrc})
+
+                //await currentUser.updateProfile({displayName: userName, photoURL: avatarSrc})
 
                 // eslint-disable-next-line no-console
-                console.log("After: this.firebaseUserObject.user.displayName", currentUser.displayName)
-                // eslint-disable-next-line no-console
-                console.log("After: this.firebaseUserObject.user.photoURL", currentUser.photoURL)
+                // console.log("After: this.firebaseUserObject.user.displayName", currentUser.displayName)
+                // // eslint-disable-next-line no-console
+                // console.log("After: this.firebaseUserObject.user.photoURL", currentUser.photoURL)
 
                 commit('setLoading', false)
-            }
-            catch (e) {
-                throw e
-            }
+            // }
+            // catch (e) {
+            //     throw e
+            // }
 
         },
 
-        autoLoginUser({commit}, fireBaseUser){
-            commit('setUser', new User(fireBaseUser.uid))
-            //commit('setFireBaseUserObject', new User(fireBaseUser))
-        }, //@todo change "payload" to smth
+        // autoLoginUser({commit}, fireBaseUser){
+        //     commit('setUser', new User(fireBaseUser.uid))
+        //     //commit('setFireBaseUserObject', new User(fireBaseUser))
+        // }, //@todo change "payload" to smth
 
         logoutUser({commit}){
             firebase.auth().signOut()

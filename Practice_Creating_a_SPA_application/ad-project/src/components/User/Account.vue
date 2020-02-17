@@ -110,6 +110,10 @@ export default {
       return this.$store.getters.currentUserName;
     },
 
+    currentUserFirebaseObject(){
+      return this.$store.getters.firebaseUserObject;
+    }
+
   },
   methods: {
     updateUser() {
@@ -121,8 +125,10 @@ export default {
           avatarSrc: "https://www.w3schools.com/howto/img_avatar.png"
         };
 
+        this.$store.d
+
         this.$store
-          .dispatch("updateUser", updatedUserInfo)
+          .dispatch("updateUser", updatedUserInfo, this.currentUserFirebaseObject)
           .then(() => {
             // eslint-disable-next-line no-console
             console.log('- Account UPDATED');
