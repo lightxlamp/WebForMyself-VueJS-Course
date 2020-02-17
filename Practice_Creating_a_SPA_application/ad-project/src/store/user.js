@@ -64,9 +64,9 @@ export default {
             commit('setLoading', true)
 
             // eslint-disable-next-line no-console
-            console.log("userName", userName)
+            console.log("New User Name", userName)
             // eslint-disable-next-line no-console
-            console.log("avatarSrc", avatarSrc)
+            console.log("New avatarSrc", avatarSrc)
 
             try {
                 //const currentUser = this.$store.getters.firebaseUserObject.user;

@@ -114,7 +114,7 @@ export default {
   methods: {
     updateUser() {
       if (this.$refs.form.validate() && this.avatarSrc) {
-        const updatingUserInfo = {
+        const updatedUserInfo = {
           userName: this.userName,
           // userPhone: this.userPhone,
           // avatarSrc: this.avatarSrc
@@ -122,9 +122,10 @@ export default {
         };
 
         this.$store
-          .dispatch("updateUser", updatingUserInfo)
+          .dispatch("updateUser", updatedUserInfo)
           .then(() => {
-            alert("Аккаунт обновлен");
+            // eslint-disable-next-line no-console
+            console.log('- Account UPDATED');
           })
           .catch(() => {});
       }

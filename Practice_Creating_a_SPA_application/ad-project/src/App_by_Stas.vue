@@ -211,7 +211,7 @@ export default {
       // eslint-disable-next-line no-console
       console.log("this.$store.getters.user: ", this.$store.getters.user);
 
-      if (this.$store.getters.user !== null)
+      if (this.$store.getters.user !== null && this.$store.getters.currentUserName != 'Unauthorized user')
         return (
           this.$t("text.hello") + ", " + this.$store.getters.currentUserName
         );
