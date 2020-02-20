@@ -125,10 +125,11 @@ export default {
         };
 
         this.$store
-          .dispatch("updateUser", updatedUserInfo)
+          .dispatch("updateUserInFireBaseStore", updatedUserInfo)
           .then(() => {
             // eslint-disable-next-line no-console
             console.log('- Account UPDATED');
+            this.$router.push("/");
           })
           .catch(() => {});
       }

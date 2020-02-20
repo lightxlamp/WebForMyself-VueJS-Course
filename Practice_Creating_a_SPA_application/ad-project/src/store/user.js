@@ -18,19 +18,6 @@ export default {
     setFireBaseUserObject(state, firebaseUserObject) {
       state.firebaseUserObject = firebaseUserObject;
     },
-    updateUserInStore(state) {
-      const currentUser = state.firebaseUserObject.user;
-      // eslint-disable-next-line no-console
-      console.log(
-        "Before: this.firebaseUserObject.user.displayName",
-        currentUser.displayName
-      );
-      // eslint-disable-next-line no-console
-      console.log(
-        "Before: this.firebaseUserObject.user.photoURL",
-        currentUser.photoURL
-      );
-    }
   },
   actions: {
     async registerUser({ commit }, { email, password }) {
@@ -75,7 +62,7 @@ export default {
       }
     },
 
-    async updateUser({ commit }, { newUserName, newAvatar }) {
+    async updateUserInFireBaseStore({ commit }, { newUserName, newAvatar }) {
       commit("clearError");
       commit("setLoading", true);
 
@@ -86,7 +73,7 @@ export default {
 
       const justACurrentUser = await firebase.auth().currentUser;
       //eslint-disable-next-line no-console
-      console.log("justACurrentUser", justACurrentUser);
+      console.log("justACurrentUser.displayName", justACurrentUser.displayName);
 
       // Uploading new avatar to storage
       const imageExtension = newAvatar.name.slice(
@@ -103,20 +90,18 @@ export default {
         .put(newAvatar);
       // eslint-disable-next-line no-console
       console.log("= fileData: ", fileData);
-
-      await fileData.ref.getDownloadURL()
-      .then(function(fullImageSrcInDb) {
-          firebase.auth().currentUser.updateProfile({
-            displayName: newUserName,
-            photoURL: fullImageSrcInDb
-          })
-          .then(function(updatedFireBaseUser)
-          {
-            commit("setFireBaseUserObject", updatedFireBaseUser);
-          })
-          // eslint-disable-next-line no-console
-          console.log('fullImageSrcInDb', fullImageSrcInDb)
+      const fullImageSrcInDb = await fileData.ref.getDownloadURL();
+      await justACurrentUser.updateProfile({
+        displayName: newUserName,
+        photoURL: fullImageSrcInDb
+      }).then(() => {
+        // eslint-disable-next-line no-console
+        console.log('justACurrentUser.displayName', justACurrentUser.displayName);        
+        // eslint-disable-next-line no-console
+        console.log('justACurrentUser.Avatar', justACurrentUser.photoURL);  
+        
       })
+      await commit("setFireBaseUserObject", justACurrentUser);
       commit("setLoading", false);
     },
 
@@ -154,13 +139,14 @@ export default {
     },
 
     currentUserAvatar(state) {
-      if (state.firebaseUserObject !== null) {
+      if (state.firebaseUserObject !== null && typeof state.firebaseUserObject !== "undefined") {
         return state.firebaseUserObject.user.photoURL;
-      } else return "https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482930.jpg";
+      } else
+       return "https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482930.jpg";
     },
 
     currentUserName(state) {
-      if (state.firebaseUserObject !== null) {
+      if (state.firebaseUserObject !== null && typeof state.firebaseUserObject !== "undefined") {
         return state.firebaseUserObject.user.displayName;
       } else return "Unauthorized user";
     }
