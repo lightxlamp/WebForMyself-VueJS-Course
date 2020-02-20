@@ -207,6 +207,9 @@ export default {
         }
       ];
     },
+    // currentUserInfo() {
+    //   return ' '
+    // },
     currentUserInfo() {
       // eslint-disable-next-line no-console
       console.log("this.$store.getters.user: ", this.$store.getters.user);

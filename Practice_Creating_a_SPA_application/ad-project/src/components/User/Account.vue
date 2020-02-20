@@ -88,6 +88,7 @@ export default {
     return {
       valid: false,
       avatarSrc: false,
+      image: false,
       userName: this.$store.getters.currentUserName
       // userPhone: ''
     };
@@ -119,16 +120,12 @@ export default {
     updateUser() {
       if (this.$refs.form.validate() && this.avatarSrc) {
         const updatedUserInfo = {
-          userName: this.userName,
-          // userPhone: this.userPhone,
-          // avatarSrc: this.avatarSrc
-          avatarSrc: "https://www.w3schools.com/howto/img_avatar.png"
+          newUserName: this.userName,
+          newAvatar: this.image
         };
 
-        this.$store.d
-
         this.$store
-          .dispatch("updateUser", updatedUserInfo, this.currentUserFirebaseObject)
+          .dispatch("updateUser", updatedUserInfo)
           .then(() => {
             // eslint-disable-next-line no-console
             console.log('- Account UPDATED');
@@ -146,10 +143,9 @@ export default {
         this.avatarSrc = reader.result;
       };
       reader.readAsDataURL(file);
-      this.avatarSrc = file;
+      this.image = file;
     }
   }
 };
 </script>
 
-<style scoped></style>
