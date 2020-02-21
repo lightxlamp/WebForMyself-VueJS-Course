@@ -59,7 +59,7 @@
         >
         </v-app-bar-nav-icon>
 
-        <!--                <v-icon id="siteLogo">siteLogo</v-icon>-->
+        <!-- <v-icon id="siteLogo">siteLogo</v-icon>-->
         <router-link to="/">
           <v-img :src="require('@/assets/my_vss_logo_1.png')" height="40" />
         </router-link>
@@ -72,9 +72,6 @@
 
         <v-spacer></v-spacer>
 
-        <!-- <div style="width: 50px" @click="clickOnLocaleChangeDiv">
-          XYZXYZXYZ
-        </div> -->
         <!-- https://stackoverflow.com/questions/46652315/dynamically-open-dropdown-in-vue IMPORTANT =) Spent so much time (~2 hours on select issue)-->
         <!-- <div class="locale-changer" id="locale-changer">
           <v-icon left>mdi-earth</v-icon>
@@ -207,12 +204,10 @@ export default {
         }
       ];
     },
-    // currentUserInfo() {
-    //   return ' '
-    // },
+
     currentUserInfo() {
       // eslint-disable-next-line no-console
-      console.log("this.$store.getters.user: ", this.$store.getters.user);
+      console.log("CurrentUserInfo - this.$store.getters.user: ", this.$store.getters.user);
 
       if (this.$store.getters.user !== null && this.$store.getters.currentUserName != 'Unauthorized user')
         return (
@@ -233,12 +228,6 @@ export default {
     showSelect() {
       this.$refs.selectLanguage.click();
     }
-    // clickOnLocaleChangeDiv() {
-    //   document.getElementById("language-selector").click();
-    //   this.$refs.langSelectField.click();
-    //   // eslint-disable-next-line no-console
-    //   console.log("HEY");
-    // }
   },
   // https://stackoverflow.com/questions/50382185/how-to-detect-page-is-refreshed-in-vue-js
   created() {
