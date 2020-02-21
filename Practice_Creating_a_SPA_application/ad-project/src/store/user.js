@@ -16,8 +16,10 @@ export default {
       state.user = user;
     },
     setFireBaseUserObject(state, firebaseUserObject) {
+      // eslint-disable-next-line no-console
+      console.log("firebaseUserObject", firebaseUserObject);
       state.firebaseUserObject = firebaseUserObject;
-    },
+    }
   },
   actions: {
     async registerUser({ commit }, { email, password }) {
@@ -91,16 +93,22 @@ export default {
       // eslint-disable-next-line no-console
       console.log("= fileData: ", fileData);
       const fullImageSrcInDb = await fileData.ref.getDownloadURL();
-      await justACurrentUser.updateProfile({
-        displayName: newUserName,
-        photoURL: fullImageSrcInDb
-      }).then(() => {
-        // eslint-disable-next-line no-console
-        console.log('justACurrentUser.displayName', justACurrentUser.displayName);        
-        // eslint-disable-next-line no-console
-        console.log('justACurrentUser.Avatar', justACurrentUser.photoURL);  
-        
-      })
+      await justACurrentUser
+        .updateProfile({
+          displayName: newUserName,
+          photoURL: fullImageSrcInDb
+        })
+        .then(() => {
+          // eslint-disable-next-line no-console
+          console.log(
+            "justACurrentUser.displayName",
+            justACurrentUser.displayName
+          );
+          // eslint-disable-next-line no-console
+          console.log("justACurrentUser.Avatar", justACurrentUser.photoURL);
+          // eslint-disable-next-line no-console
+          console.log("justACurrentUser", justACurrentUser);
+        });
       await commit("setFireBaseUserObject", justACurrentUser);
       commit("setLoading", false);
     },
@@ -138,17 +146,36 @@ export default {
       return state.firebaseUserObject;
     },
 
+    // very bad approach based on idea, that different kind of objects can be in "firebaseUserObject"
     currentUserAvatar(state) {
-      if (state.firebaseUserObject !== null && typeof state.firebaseUserObject !== "undefined") {
-        return state.firebaseUserObject.user.photoURL;
-      } else
-       return "https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482930.jpg";
+      if (state.firebaseUserObject !== null && typeof state.firebaseUserObject !== "undefined") 
+      {
+        if (state.firebaseUserObject.user !== "undefined")
+        {
+          return state.firebaseUserObject.user.photoURL;
+        }
+        else if (state.firebaseUserObject.photoURL !== "undefined") 
+        {
+          return state.firebaseUserObject.photoURL 
+        }
+      } else 
+        return "https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482930.jpg";
     },
-
+    
+    // very bad approach based on idea, that different kind of objects can be in "firebaseUserObject"
     currentUserName(state) {
-      if (state.firebaseUserObject !== null && typeof state.firebaseUserObject !== "undefined") {
-        return state.firebaseUserObject.user.displayName;
-      } else return "Unauthorized user";
+      if (state.firebaseUserObject !== null && typeof state.firebaseUserObject !== "undefined") 
+      {
+        if (state.firebaseUserObject.user !== "undefined")
+        {
+          return state.firebaseUserObject.user.displayName;
+        }
+        else if (state.firebaseUserObject.displayName !== "undefined") 
+        {
+          return state.firebaseUserObject.displayName 
+        }
+      }
+      else return "Unauthorized user";
     }
   }
 };
