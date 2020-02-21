@@ -18,6 +18,7 @@ export default {
     setFireBaseUserObject(state, firebaseUserObject) {
       // eslint-disable-next-line no-console
       console.log("firebaseUserObject", firebaseUserObject);
+      state.firebaseUserObject = null;
       state.firebaseUserObject = firebaseUserObject;
     }
   },
@@ -150,27 +151,36 @@ export default {
     currentUserAvatar(state) {
       if (state.firebaseUserObject !== null && typeof state.firebaseUserObject !== "undefined") 
       {
-        if (state.firebaseUserObject.user !== "undefined")
+       // eslint-disable-next-line no-console
+        console.log('state.firebaseUserObject.user', state.firebaseUserObject.user);        
+        // eslint-disable-next-line no-console
+        console.log('state.firebaseUserObject.photoURL', state.firebaseUserObject.photoURL);
+
+        if (state.firebaseUserObject.user)
         {
+          // eslint-disable-next-line no-console
+          console.log('state.firebaseUserObject.user !== "undefined"');
           return state.firebaseUserObject.user.photoURL;
         }
-        else if (state.firebaseUserObject.photoURL !== "undefined") 
+        else if (state.firebaseUserObject.photoURL) 
         {
+          // eslint-disable-next-line no-console
+          console.log('state.firebaseUserObject.photoURL !== "undefined"');
           return state.firebaseUserObject.photoURL 
         }
       } else 
         return "https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482930.jpg";
     },
-    
+
     // very bad approach based on idea, that different kind of objects can be in "firebaseUserObject"
     currentUserName(state) {
       if (state.firebaseUserObject !== null && typeof state.firebaseUserObject !== "undefined") 
       {
-        if (state.firebaseUserObject.user !== "undefined")
+        if (state.firebaseUserObject.user)
         {
           return state.firebaseUserObject.user.displayName;
         }
-        else if (state.firebaseUserObject.displayName !== "undefined") 
+        else if (state.firebaseUserObject.displayName) 
         {
           return state.firebaseUserObject.displayName 
         }

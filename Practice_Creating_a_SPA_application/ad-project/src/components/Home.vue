@@ -37,7 +37,7 @@
             <!-- {{ad.id}} -->
 
             <v-card-text class="text--primary">
-              <div>{{ ad.description }}</div>
+              <div>{{ ad.description }} </div>
             </v-card-text>
 
             <v-card-actions>
