@@ -160,7 +160,12 @@ export default {
         {
           // eslint-disable-next-line no-console
           console.log('state.firebaseUserObject.user !== "undefined"');
-          return state.firebaseUserObject.user.photoURL;
+          if(state.firebaseUserObject.user.photoURL === null){ // newly created user has no photoURL and nickname when he enters the store for the first time
+            return "https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482930.jpg";
+          }
+          else {
+            return state.firebaseUserObject.user.photoURL;
+          }
         }
         else if (state.firebaseUserObject.photoURL) 
         {
@@ -178,7 +183,14 @@ export default {
       {
         if (state.firebaseUserObject.user)
         {
-          return state.firebaseUserObject.user.displayName;
+          if(state.firebaseUserObject.user.displayName === null) // just registered user. Who has not changed his profile name and pic
+          {
+            return "newcomer"
+          }
+          else
+          { 
+            return state.firebaseUserObject.user.displayName;
+          }
         }
         else if (state.firebaseUserObject.displayName) 
         {

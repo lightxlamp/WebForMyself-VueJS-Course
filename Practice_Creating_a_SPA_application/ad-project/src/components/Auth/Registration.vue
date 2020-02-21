@@ -83,7 +83,7 @@ export default {
       },
       confirmPasswordRules: [
         v => !!v || this.$t("text.passwordConfirmationIsRequired"),
-        v => v === this.password || this.$t("text.passwordConfirmationIsRequired"),
+        v => v === this.password || this.$t("text.passwordsShouldMatch"),
       ]
     };
   },
@@ -102,7 +102,10 @@ export default {
         this.$store
           .dispatch("registerUser", user)
           .then(() => {
-            this.$router.push("/");
+            // to avoid - Uncaught (in promise) NavigationDuplicated
+            if (this.$router.path !== '/') {
+                this.$router.push('/')
+            }
           })
           .catch(() => {});
       }

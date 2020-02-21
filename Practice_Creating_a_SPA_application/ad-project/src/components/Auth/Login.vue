@@ -25,8 +25,8 @@
                 name="password"
                 prepend-icon="mdi-lock"
                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                :type="show1 ? 'text' : 'password'"
-                v-model="showPassword"
+                :type="showPassword ? 'text' : 'password'"
+                v-model="password"
                 counter
                 :rules="passwordRules"
                 @click:append="showPassword = !showPassword"
@@ -57,6 +57,7 @@ export default {
       valid: false,
       email: "",
       password: "",
+      showPassword: false,
       emailRules: [
         v => !!v || this.$t("text.emailIsRequiredField"),
         v => /.+@.+/.test(v) || this.$t("text.emailIncorrectFormat")
@@ -83,7 +84,10 @@ export default {
         this.$store
           .dispatch("loginUser", user)
           .then(() => {
-            this.$router.push("/");
+            // to avoid - Uncaught (in promise) NavigationDuplicated
+            if (this.$router.path !== '/') {
+                this.$router.push('/')
+            }
           })
           .catch(() => {});
       }
