@@ -4,12 +4,13 @@
       <v-col cols="12" sm="8" md="4">
         <v-card class="elevation-12">
           <v-toolbar color="primary" dark flat>
-            <v-toolbar-title>Форма регистрации</v-toolbar-title>
+            <v-toolbar-title>{{$t('text.registrationForm')}}</v-toolbar-title>
           </v-toolbar>
           <v-card-text>
             <v-form v-model="valid" ref="form" lazy-validation>
               <v-text-field
                 label="Email"
+                :placeholder="$t('text.yourEmail')"
                 name="email"
                 prepend-icon="mdi-account"
                 type="email"
@@ -19,7 +20,8 @@
 
               <v-text-field
                 id="password"
-                label="Пароль"
+                :label="$t('text.password')"
+                :placeholder="$t('text.yourPassword')"
                 name="password"
                 prepend-icon="mdi-lock"
                 type="password"
@@ -29,7 +31,7 @@
               />
               <v-text-field
                 id="confirm-password"
-                label="Пароль повторно"
+                :label="$t('text.passwordAgain')"
                 name="confirm-password"
                 prepend-icon="mdi-lock"
                 type="password"
@@ -47,7 +49,8 @@
               :loading="loading"
               color="primary"
             >
-              Зарегестрироваться
+            {{ $t("text.register") }}
+              
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -65,16 +68,16 @@ export default {
       password: "",
       confirmPassword: "",
       emailRules: [
-        v => !!v || "Электронный адрес - обязательное поле",
-        v => /.+@.+/.test(v) || "Некоректный формат адреса"
+        v => !!v || this.$t("text.emailIsRequiredField"),
+        v => /.+@.+/.test(v) || this.$t("text.emailIncorrectFormat")
       ],
       passwordRules: [
-        v => !!v || "Пароль - обязательное поле",
-        v => v.length >= 6 || "Пароль должен быть не меньше 6ти символов"
+        v => !!v || this.$t("text.passwordIsRequiredField"),
+        v => v.length >= 6 || this.$t("text.passwordShouldBeAtLeast") 
       ],
       confirmPasswordRules: [
-        v => !!v || "Подтверждающий пароль - обязательное поле",
-        v => v === this.password || "Пароли должны совпадать"
+        v => !!v || this.$t("text.passwordConfirmationIsRequired"),
+        v => v === this.password || this.$t("text.passwordConfirmationIsRequired"),
       ]
     };
   },

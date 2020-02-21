@@ -56,13 +56,13 @@ export default {
       email: "",
       password: "",
       emailRules: [
-        v => !!v || "Электронный адрес - обязательное поле",
-        v => /.+@.+/.test(v) || "Некоректный формат адреса"
+        v => !!v || this.$t("text.emailIsRequiredField"),
+        v => /.+@.+/.test(v) || this.$t("text.emailIncorrectFormat")
       ],
       passwordRules: [
-        v => !!v || "Пароль - обязательное поле",
-        v => v.length >= 6 || "Пароль должен быть не меньше 6ти символов"
-      ]
+        v => !!v || this.$t("text.passwordIsRequiredField"),
+        v => v.length >= 6 || this.$t("text.passwordShouldBeAtLeast") 
+      ],
     };
   },
   computed: {
