@@ -24,20 +24,24 @@
                 :placeholder="$t('text.yourPassword')"
                 name="password"
                 prepend-icon="mdi-lock"
-                type="password"
+                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="showPassword ? 'text' : 'password'"
                 v-model="password"
-                :counter="6"
-                :rules="passwordRules"
+                counter
+                :rules="[passwordRules.required, passwordRules.min]"
+                @click:append="showPassword = !showPassword"
               />
               <v-text-field
                 id="confirm-password"
                 :label="$t('text.passwordAgain')"
                 name="confirm-password"
                 prepend-icon="mdi-lock"
-                type="password"
+                :append-icon="showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="showConfirmPassword ? 'text' : 'password'"
                 v-model="confirmPassword"
-                :counter="6"
+                counter
                 :rules="confirmPasswordRules"
+                @click:append="showConfirmPassword = !showConfirmPassword"
               />
             </v-form>
           </v-card-text>
@@ -67,14 +71,16 @@ export default {
       email: "",
       password: "",
       confirmPassword: "",
+      showPassword: false, 
+      showConfirmPassword: false,
       emailRules: [
         v => !!v || this.$t("text.emailIsRequiredField"),
         v => /.+@.+/.test(v) || this.$t("text.emailIncorrectFormat")
       ],
-      passwordRules: [
-        v => !!v || this.$t("text.passwordIsRequiredField"),
-        v => v.length >= 6 || this.$t("text.passwordShouldBeAtLeast") 
-      ],
+      passwordRules: {
+        required: v => !!v || this.$t("text.passwordIsRequiredField"),
+        min: v => v.length >= 6 || this.$t("text.passwordShouldBeAtLeast") 
+      },
       confirmPasswordRules: [
         v => !!v || this.$t("text.passwordConfirmationIsRequired"),
         v => v === this.password || this.$t("text.passwordConfirmationIsRequired"),

@@ -50,7 +50,7 @@ export const ENGLISH_TRANSLATIONS = {
     emailIsRequiredField: "Email is required",
     passwordIsRequiredField: "Password is required",
     emailIncorrectFormat: "Incorrect email format",
-    passwordShouldBeAtLeastField: "Password should contain at least 6 symbols",
+    passwordShouldBeAtLeast: "Password should contain at least 6 symbols",
     passwordConfirmationIsRequired: "Password confirmation is required",
     passwordsShouldMatch: "Password and confirmation password should match",
     registrationForm: "Registration Form"

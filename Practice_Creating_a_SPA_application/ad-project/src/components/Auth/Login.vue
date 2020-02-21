@@ -24,10 +24,12 @@
                 :placeholder="$t('text.yourPassword')"
                 name="password"
                 prepend-icon="mdi-lock"
-                type="password"
-                v-model="password"
-                :counter="6"
+                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="show1 ? 'text' : 'password'"
+                v-model="showPassword"
+                counter
                 :rules="passwordRules"
+                @click:append="showPassword = !showPassword"
               />
             </v-form>
           </v-card-text>
