@@ -59,7 +59,6 @@
         >
         </v-app-bar-nav-icon>
 
-        <!-- <v-icon id="siteLogo">siteLogo</v-icon>-->
         <router-link to="/">
           <v-img :src="require('@/assets/my_vss_logo_1.png')" height="40" />
         </router-link>
@@ -85,7 +84,7 @@
           </select>
         </div> -->
 
-        <v-toolbar-items class="hidden-sm-and-down">
+        <v-toolbar-items class="hidden-md-and-down">
           <div class="userInfoDiv">
             <p>{{ currentUserInfo }}</p>
           </div>
